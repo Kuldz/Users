@@ -5,7 +5,7 @@ export default function login() {
 	const sendData = (data) => {
 		console.log("saadan data", data)
 
-		fetch("http://localhost:3000/login", {
+		fetch("http://localhost:3000/api/v1/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
