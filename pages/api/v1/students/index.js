@@ -25,6 +25,6 @@ export default function studentEmailHandler(req, res) {
         case "GET":
             var result = students[email];
             res.status(200).json(result);
-      break
+        break
     }
 }
