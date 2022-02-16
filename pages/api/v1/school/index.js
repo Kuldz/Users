@@ -1,17 +1,17 @@
 const schools = [
     {
         "id": 1,
-        "name": "Tallinna Polütehnikum",
-        "address": "Pärnu mnt 57a, 10135 Tallinn"
+        "name": "Tallinna Polutehnikum",
+        "address": "Parnu mnt 57a, 10135 Tallinn"
     },
     {
         "id": 2,
-        "name": "Gustav Adolfi Gümnaasium",
+        "name": "Gustav Adolfi Gumnaasium",
         "address": "Suur-Kloostri 16, 10133 Tallinn"
     },
     {
         "id": 3,
-        "name": "Jüri Gümnaasium",
+        "name": "Juri Gumnaasium",
         "address": "Laste 3, Rae, 75301 Harju maakond"
     }
 ]
