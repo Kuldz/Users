@@ -17,9 +17,7 @@ const schools = [
 ]
 
 export default function schoolIDHandler(req, res) {
-    const {
-        query: method
-    } = req
+    const method = req.method;
 
     switch (method) {
         case "GET":
