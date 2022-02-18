@@ -1,6 +1,7 @@
 {
   "name": "users",
   "private": true,
+
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,6 +16,13 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
+  
+    
+    "version": "1.0.0",
+    "prisma": {
+      "seed": "node prisma/seed.js"
+    },
+  
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "eslint": "^7.32.0",

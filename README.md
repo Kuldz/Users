@@ -28,6 +28,10 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
     npx prisma migrate deploy
 
+* create new user by running seed
+
+    npx prisma db seed
+
 we use prisma.io as ORM read more https://www.prisma.io/docs/concepts
 
 ## Deploy on Vercel
