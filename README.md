@@ -27,14 +27,14 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 * Run migrations with commands:
 
 ```bash
-    npx prisma migrate deploy
-    npx prisma migrate dev
+npx prisma migrate deploy
+npx prisma migrate dev
 ```
 
 * Create new user by seeding:
 
 ```bash
-    npx prisma db seed
+npx prisma db seed
 ```
 
 We use prisma.io as ORM, read more at https://www.prisma.io/docs/concepts
@@ -42,7 +42,7 @@ We use prisma.io as ORM, read more at https://www.prisma.io/docs/concepts
 * To see the table in Prisma Studio, run:
 
 ```bash
-    npx prisma studio
+npx prisma studio
 ```
 
 ## Deploy on Vercel
