@@ -18,14 +18,17 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## HOW to start
 
-To learn more about Next.js, take a look at the following resources:
+### SET up database
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* install mysql 8.0
+* go make copy of .env and fill you database passwords
+* run migrations with command
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    npx prisma migrate deploy
+
+we use prisma.io as ORM read more https://www.prisma.io/docs/concepts
 
 ## Deploy on Vercel
 
