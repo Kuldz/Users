@@ -1,6 +1,6 @@
 import { Menu } from "antd"
 import React from "react"
-import { MailOutlined, AppstoreOutlined, SettingOutlined, ArrowRightOutlined, QuestionOutlined, BellOutlined, InfoCircleOutlined, UserOutlined } from "@ant-design/icons"
+import { MailOutlined, SettingOutlined, QuestionOutlined, BellOutlined, InfoCircleOutlined, UserOutlined } from "@ant-design/icons"
 
 const { SubMenu } = Menu
 
@@ -22,7 +22,6 @@ class NavbarAdmin extends React.Component {
   };
 
   render () {
-    const { current } = this.state
     return (
       <>
         <Menu theme={this.state.theme} onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
