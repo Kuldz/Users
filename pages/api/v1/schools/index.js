@@ -17,13 +17,15 @@ const schools = [
 ]
 
 export default function schoolIDHandler (req, res) {
-  const method = req.method
+  const {
+    query: method
+  } = req
 
   switch (method) {
-    case "GET": {
+    case "GET":
+      // eslint-disable-next-line no-case-declarations
       const result = schools // or schools[schools], I haven't gotten to check
       res.status(200).json(result)
       break
-    }
   }
 }
