@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import NavbarAdmin from '../components/navbar.js';
+import React, { Component } from "react"
+import NavbarAdmin from "../components/navbar.js"
 
 class componentUsage extends Component {
-  render() {
+  render () {
     return (
         <NavbarAdmin />
-    );
+    )
   }
 }
 
-export default componentUsage;
+export default componentUsage

@@ -1,28 +1,28 @@
-import { Menu } from 'antd';
-import React from 'react';
-import { MailOutlined, AppstoreOutlined, SettingOutlined, ArrowRightOutlined, QuestionOutlined, BellOutlined, InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { Menu } from "antd"
+import React from "react"
+import { MailOutlined, AppstoreOutlined, SettingOutlined, ArrowRightOutlined, QuestionOutlined, BellOutlined, InfoCircleOutlined, UserOutlined } from "@ant-design/icons"
 
-const { SubMenu } = Menu;
+const { SubMenu } = Menu
 
 class NavbarAdmin extends React.Component {
   state = {
-    theme: 'dark',
-    current: 'mail'
+    theme: "dark",
+    current: "mail"
   };
 
   handleClick = e => {
-    console.log('click ', e);
-    this.setState({ current: e.key });
+    console.log("click ", e)
+    this.setState({ current: e.key })
   };
 
   changeTheme = value => {
     this.setState({
-      theme: value ? 'dark' : 'light',
-    });
+      theme: value ? "dark" : "light"
+    })
   };
 
-  render() {
-    const { current } = this.state;
+  render () {
+    const { current } = this.state
     return (
       <>
         <Menu theme={this.state.theme} onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
@@ -48,7 +48,7 @@ class NavbarAdmin extends React.Component {
           <Menu.Item icon={<QuestionOutlined />}>
             Placeholer
           </Menu.Item>
-          <Menu.Item icon={<InfoCircleOutlined />}style={{ marginLeft: 'auto' }}>
+          <Menu.Item icon={<InfoCircleOutlined />}style={{ marginLeft: "auto" }}>
             Information
           </Menu.Item>
           <Menu.Item icon={<BellOutlined />}>
@@ -59,8 +59,8 @@ class NavbarAdmin extends React.Component {
           </Menu.Item>
         </Menu>
       </>
-    );
+    )
   }
 }
 
-export default NavbarAdmin;
+export default NavbarAdmin
