@@ -10,10 +10,10 @@ export default function handler (req, res) {
 
   if (!user) {
     // Wrong username or password message
-    res.status(400).json({ success: false, message: "invalid credentials" })
+    res.status(400).json({ status: "400 Bad Request", success: false, message: "invalid credentials" })
     return
   }
 
   // Success
-  res.status(200).json({ success: true, user: user })
+  res.status(200).json({ status: "200 OK", success: true, user: user })
 }
