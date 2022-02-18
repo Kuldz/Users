@@ -34,6 +34,9 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 we use prisma.io as ORM read more https://www.prisma.io/docs/concepts
 
+* see table
+
+    npx prisma studio
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
