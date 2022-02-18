@@ -1,4 +1,4 @@
-import { Menu } from "antd"
+import { Menu, Image } from "antd"
 import React from "react"
 import { MailOutlined, SettingOutlined, QuestionOutlined, BellOutlined, InfoCircleOutlined, UserOutlined } from "@ant-design/icons"
 
@@ -25,7 +25,7 @@ class NavbarAdmin extends React.Component {
     return (
       <>
         <Menu theme={this.state.theme} onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-          <Menu.Item key="icon"><img src='favicon.ico' width="25" height="25"></img>
+          <Menu.Item key="icon"><Image src='favicon.ico' width={25} height={25} alt="Back" />
             <a href="/"></a>
           </Menu.Item>
           <Menu.Item key="mail" icon={<MailOutlined />}>
