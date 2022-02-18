@@ -14,14 +14,9 @@ const students = {
   }
 }
 
-export default function studentHandler(req, res) {
+export default function handler(req, res) {
   const {
-    query: {},
-    method,
+    // query: { param },
+    method
   } = req;
-
-  switch (method) {
-    case "GET":
-      students.find(s => s.school_id ===)
-  }
 }
