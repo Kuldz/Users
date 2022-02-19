@@ -18,17 +18,32 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## HOW to start
+## How To Set Up The Environment
 
-### SET up database
+### Set Up Database
 
-* install mysql 8.0
-* go make copy of .env and fill you database passwords
-* run migrations with command
+* Install MySQL 8.0
+* Go make a copy of .env.example, paste it as .env and fill it with your credentials
+* Run migrations with commands:
 
-    npx prisma migrate deploy
+```bash
+npx prisma migrate deploy
+npx prisma migrate dev
+```
 
-we use prisma.io as ORM read more https://www.prisma.io/docs/concepts
+* Create new user by seeding:
+
+```bash
+npx prisma db seed
+```
+
+We use prisma.io as ORM, read more at https://www.prisma.io/docs/concepts
+
+* To see the table in Prisma Studio, run:
+
+```bash
+npx prisma studio
+```
 
 ## Deploy on Vercel
 

@@ -1,4 +1,4 @@
-import { Menu } from "antd"
+import { Menu, Image } from "antd"
 import React from "react"
 import Image from "next/image"
 import { MailOutlined, SettingOutlined, QuestionOutlined, BellOutlined, InfoCircleOutlined, UserOutlined } from "@ant-design/icons"
