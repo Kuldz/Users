@@ -1,30 +1,28 @@
-import { Form, Input, InputNumber, Button, Space, Checkbox} from 'antd';
+import { Form, Input, InputNumber, Button, Checkbox } from "antd"
 import React from "react"
-
-const { Search } = Input
 
 class ClassEditAdd extends React.Component {
   render () {
     return (
       <div>
         <Form name="nest-messages" layout="horizontal" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
-          <Form.Item name={['class', 'name']} label="Name">
+          <Form.Item name={["class", "name"]} label="Name">
             <Input />
           </Form.Item>
 
-          <Form.Item name={['class', 'year']} label="Year">
+          <Form.Item name={["class", "year"]} label="Year">
             <Input />
           </Form.Item>
 
-          <Form.Item name={['class', 'leader']} label="Group Leader">
+          <Form.Item name={["class", "leader"]} label="Group Leader">
             <InputNumber />
           </Form.Item>
 
-          <Form.Item name={['class', 'school']} label="School">
+          <Form.Item name={["class", "school"]} label="School">
             <Input />
           </Form.Item>
 
-          <Form.Item name={['class', 'students']} label="Student">
+          <Form.Item name={["class", "students"]} label="Student">
             <Input placeholder="Search Student"/>
             <Checkbox>John Brown</Checkbox>
             <Checkbox>Jim Green</Checkbox>
