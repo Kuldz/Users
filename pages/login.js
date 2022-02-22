@@ -3,9 +3,9 @@ import { Form, Input, Button } from "antd"
 
 export default function login () {
   const sendData = (data) => {
-    console.log("saadan data", data)
+    console.log("sending data", data)
 
-    fetch("http://localhost:3000/login", {
+    fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -14,7 +14,7 @@ export default function login () {
     })
       .then(res => res.json())
       .then((json) => {
-        console.log("login vastus", json)
+        console.log("login response", json)
         if (json.success) {
           // redirect("/users")
         }
@@ -24,8 +24,8 @@ export default function login () {
   return (
     <div className="site-layout-background" style={{ padding: 24, textAlign: "center" }}>
       <Form name="basic" onFinish={sendData} labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} initialValues={{ remember: true }} autoComplete="off">
-        <Form.Item label="Username" name="username"
-          rules={[{ required: true, message: "Input username" }]}>
+        <Form.Item label="Email" name="email"
+          rules={[{ required: true, message: "Input email" }]}>
           <Input />
         </Form.Item>
 
