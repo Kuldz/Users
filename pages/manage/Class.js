@@ -16,7 +16,16 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
-    render: text => <a>{text}</a>
+  },
+  {
+    title: "Year",
+    dataIndex: "year",
+    key: "year"
+  },
+  {
+    title: "Group Leader",
+    dataIndex: "groupleader",
+    key: "groupleader"
   },
   {
     title: "School",
@@ -37,16 +46,22 @@ const columns = [
 
 const data = [
   {
-    name: "John Brown",
-    school: "Tallinna Polütehnikum"
+    name: "Class 1",
+    year: "2021",
+    groupleader: "Juan White",
+    school: "Tallinn Polytechnic School"
   },
   {
-    name: "Jim Green",
-    school: "Tallinna Polütehnikum"
+    name: "Class 2",
+    year: "2020",
+    groupleader: "Juan Black",
+    school: "Tallinn Polytechnic School"
   },
   {
-    name: "Joe Black",
-    school: "Tallinna Polütehnikum"
+    name: "Class 3",
+    year: "2019",
+    groupleader: "Juan Green",
+    school: "Tallinn Polytechnic School"
   }
 ]
 

@@ -13,15 +13,29 @@ const { Option } = Select
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: text => <a>{text}</a>
+    title: "Registry Code",
+    dataIndex: "regcode",
+    key: "regcode"
   },
   {
     title: "School",
     dataIndex: "school",
     key: "school"
+  },
+  {
+    title: "Type",
+    dataIndex: "type",
+    key: "type"
+  },
+  {
+    title: "County",
+    dataIndex: "county",
+    key: "county"
+  },
+  {
+    title: "City",
+    dataIndex: "city",
+    key: "city"
   },
   {
     title: "Action",
@@ -37,16 +51,25 @@ const columns = [
 
 const data = [
   {
-    name: "John Brown",
-    school: "Tallinna Polütehnikum"
+    regcode: "70003974",
+    school: "Tallinn Polytechnic School",
+    type: "Vocational School",
+    county: "Harjumaa",
+    city: "Tallinn"
   },
   {
-    name: "Jim Green",
-    school: "Tallinna Polütehnikum"
+    regcode: "70004092",
+    school: "Tallinn Art School",
+    type: "Vocational School",
+    county: "Tartumaa",
+    city: "Tartu"
   },
   {
-    name: "Joe Black",
-    school: "Tallinna Polütehnikum"
+    regcode: "70003744",
+    school: "Kuressaare Vocational School",
+    type: "Vocational School",
+    county: "Saaremaa",
+    city: "Kuressaare"
   }
 ]
 
@@ -76,7 +99,9 @@ export default function manageClass () {
         <Button type="primary" shape="round" size="large" style={{ float: "right" }}>
           Add
         </Button>
-        <Pag style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}></Pag>
+        <div className={styles.pagination}>
+          <Pag></Pag>
+        </div>
       </div>
     </body>
   )
