@@ -36,11 +36,11 @@ export default function handler (req, res) {
       const students = studentArray.filter(s => s.school_id.toString() === id)
 
       // Return OK status and students array
-      res.status(200).json({ students, status: 200 })
+      res.status(200).json({ status: "200 OK", students })
       break
 
     default:
-      res.status(405).json({ error: "Method not allowed", status: 405 })
+      res.status(405).json({ status: "405 Method Not Allowed" })
       break
   }
 }

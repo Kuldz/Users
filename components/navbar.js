@@ -1,5 +1,6 @@
 import { Menu } from "antd"
 import React from "react"
+import Image from "next/image"
 import { MailOutlined, SettingOutlined, QuestionOutlined, BellOutlined, InfoCircleOutlined, UserOutlined } from "@ant-design/icons"
 
 const { SubMenu } = Menu
@@ -25,7 +26,7 @@ class NavbarAdmin extends React.Component {
     return (
       <>
         <Menu theme={this.state.theme} onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-          <Menu.Item key="icon"><img src='favicon.ico' width="25" height="25"></img>
+          <Menu.Item key="icon"><Image src='/favicon.ico' alt="Placeholder Logo" width="25" height="25"></Image>
             <a href="/"></a>
           </Menu.Item>
           <Menu.Item key="mail" icon={<MailOutlined />}>
