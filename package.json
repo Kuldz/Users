@@ -1,7 +1,6 @@
 {
   "name": "users",
   "private": true,
-
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,20 +8,17 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^3.9.2",
     "@ant-design/icons": "^4.7.0",
+    "@prisma/client": "^3.9.2",
     "antd": "^4.18.6",
     "next": "^12.0.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  
-    
-    "version": "1.0.0",
-    "prisma": {
-      "seed": "node prisma/seed.js"
-    },
-  
+  "version": "1.0.0",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "eslint": "^7.32.0",
