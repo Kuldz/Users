@@ -15,7 +15,7 @@ const columns = [
   {
     title: "Name",
     dataIndex: "name",
-    key: "name",
+    key: "name"
   },
   {
     title: "Year",
