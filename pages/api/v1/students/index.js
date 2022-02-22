@@ -1,5 +1,6 @@
 const students = {
   "artur.kaasik@tptlive.ee": {
+    id: 1,
     firstname: "Artur",
     lastname: "Kaasik",
     school_id: 123,
@@ -7,10 +8,11 @@ const students = {
   },
 
   "harri.sink@tptlive.ee": {
+    id: 2,
     firstname: "Harri",
     lastname: "Sink",
-    school_id: 456,
-    class_id: 654
+    class_id: 654,
+    school_id: 456
   }
 }
 
