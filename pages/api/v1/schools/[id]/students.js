@@ -35,7 +35,7 @@ export default function handler (req, res) {
       const students = studentArray.filter(s => s.school_id.toString() === id)
 
       // Return OK status and students array
-      res.status(200).json({ status: "200 OK", students })
+      res.status(200).json({ students })
       break
     }
 
