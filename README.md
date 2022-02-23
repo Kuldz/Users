@@ -20,6 +20,40 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ## How To Set Up The Environment
 
+### Requirements
+
+#### Recommended:
+
+Node: >14.0.0
+
+npm: >5.6
+
+#### Minimum:
+
+Node: >12.22.0
+
+### Installation instructions
+
+* Clone the repo: https://github.com/Kuldz/Users.git 
+
+* Open the repo folder on the command line and run:
+
+```bash
+npm install
+```
+
+After that, you are ready to develop!
+
+### Build instructions:
+
+To run the build:
+
+```bash
+npm run dev
+```
+
+Build will be accessible at http://localhost:3000
+
 ### Set Up Database
 
 * Install MySQL 8.0
