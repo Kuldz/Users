@@ -22,6 +22,7 @@
     ],
     "rules": {
         "@next/next/no-html-link-for-pages": "off",
+        "react/prop-types": "off",
         "quotes": [
             "warn",
             "double"

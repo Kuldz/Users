@@ -1,8 +1,9 @@
 import React from "react"
 import NavbarAdmin from "../../components/navbar"
+import SchoolEditAdd from "../../components/managing/SchoolEditAdd"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
-import { Input, Table, Space, Button, Select } from "antd"
+import { Input, Table, Space, Select } from "antd"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
@@ -75,30 +76,33 @@ const data = [
 
 export default function manageClass () {
   return (
-    <body className={styles.body}>
-      <NavbarAdmin></NavbarAdmin>
-      <Space split>
-        <Select defaultValue="Year" size="large" onChange={handleChange}>
-          <Option value="Year">Filter by</Option>
-          <Option value="School Name">Filter by</Option>
-          <Option value="Yiminghe">Filter by</Option>
-        </Select>
-        <Search
-          placeholder="input search text"
-          allowClear
-          enterButton="Search"
-          size="large"
-          style={{ width: 500 }}
-        />
-      </Space>
+    <body>
+      <div className={styles.body}>
+        <NavbarAdmin></NavbarAdmin>
+        <Space split>
+          <Select defaultValue="Year" size="large" onChange={handleChange}>
+            <Option value="Year">Filter by</Option>
+            <Option value="School Name">Filter by</Option>
+            <Option value="Yiminghe">Filter by</Option>
+          </Select>
+          <Search
+            placeholder="input search text"
+            allowClear
+            enterButton="Search"
+            size="large"
+            style={{ width: 500 }}
+          />
+        </Space>
+      </div>
 
       <div className={styles.container}>
 
         <Table columns={columns} pagination={false} dataSource={data}/>
 
-        <Button type="primary" shape="round" size="large" style={{ float: "right" }}>
-          Add
-        </Button>
+        <div style={{ float: "right" }}>
+        <SchoolEditAdd></SchoolEditAdd>
+        </div>
+
         <div className={styles.pagination}>
           <Pag></Pag>
         </div>
