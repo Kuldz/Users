@@ -30,11 +30,6 @@ export default async function schoolIDHandler (req, res) {
   } = req
 
   switch (method) {
-    case "GET": {
-      const result = schools // or schools[schools], I haven't gotten to check
-      res.status(200).json(result)
-      break
-    }
     case "POST": {
       const prisma = new PrismaClient()
       console.log(req.body)
@@ -42,6 +37,11 @@ export default async function schoolIDHandler (req, res) {
         data: req.body.school
       })
       res.status(201).json(school)
+      break
+    }
+    case "GET": {
+      const result = schools // or schools[schools], I haven't gotten to check
+      res.status(200).json(result)
       break
     }
     case "DELETE": {
