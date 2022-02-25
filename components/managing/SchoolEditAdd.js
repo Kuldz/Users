@@ -5,6 +5,7 @@ const { Option } = Select
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm()
+
   return (
     <Modal
       visible={visible}
@@ -16,8 +17,8 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         form
           .validateFields()
           .then((values) => {
+            onCreate(values)
             form.resetFields()
-              .onCreate(values)
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
@@ -39,8 +40,9 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 
         <Form.Item name={["school", "school"]} label="Type">
           <Select placeholder="Select school type">
+            <Option value="primary">Primary School</Option>
+            <Option value="high">High School</Option>
             <Option value="vocational">Vocational School</Option>
-            <Option value="basic">Basic School</Option>
             <Option value="uni">University</Option>
           </Select>
         </Form.Item>
@@ -63,6 +65,20 @@ const CollectionsPage = () => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     setVisible(false)
+    fetch("http://localhost:3000/api/v1/schools", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+    })
+      .then(res => res.json())
+      .then((json) => {
+        console.log("login response", json)
+        if (json.success) {
+          // redirect("/users")
+        }
+      })
   }
 
   return (

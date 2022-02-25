@@ -1,3 +1,5 @@
+import { PrismaClient } from "@prisma/client"
+
 const schools = [
   {
     id: 1,
@@ -22,9 +24,7 @@ const schools = [
   }
 ]
 
-
-
-export default function schoolIDHandler (req, res) {
+export default async function schoolIDHandler (req, res) {
   const {
     method, id
   } = req
@@ -35,16 +35,24 @@ export default function schoolIDHandler (req, res) {
       res.status(200).json(result)
       break
     }
+    case "POST": {
+      const prisma = new PrismaClient()
+      console.log(req.body)
+      const school = await prisma.school.create({
+        data: req.body.school
+      })
+      res.status(201).json(school)
+      break
+    }
     case "DELETE": {
-      await prisma.schools.delete({
+      const prisma = new PrismaClient()
+      await prisma.school.delete({
         where: {
-          id: id,
-        },
+          id: id
+        }
       })
       res.status(204)
       break
     }
-
-
   }
 }
