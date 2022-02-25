@@ -39,7 +39,7 @@ model Class {
   id       Int    @id @default(autoincrement())
   name     String
   schoolId Int
-  School   School @relation(fields: [schoolId], references: [id])
+  school   School @relation(fields: [schoolId], references: [id])
 }
 
 model Teacher {
@@ -47,5 +47,5 @@ model Teacher {
   firstName String
   lastName  String
   schoolId  Int
-  School    School @relation(fields: [schoolId], references: [id])
+  school    School @relation(fields: [schoolId], references: [id])
 }
