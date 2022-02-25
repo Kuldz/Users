@@ -11,8 +11,41 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   email    String @unique
   password String
+}
 
+model School {
+  id       Int       @id @default(autoincrement())
+  name     String
+  address  String
+  students Student[]
+  classes  Class[]
+  teachers Teacher[]
+}
+
+model Student {
+  id        Int    @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  schoolId  Int
+  classId   Int
+  school    School @relation(fields: [schoolId], references: [id])
+}
+
+model Class {
+  id       Int    @id @default(autoincrement())
+  name     String
+  schoolId Int
+  School   School @relation(fields: [schoolId], references: [id])
+}
+
+model Teacher {
+  id        Int    @id @default(autoincrement())
+  firstName String
+  lastName  String
+  schoolId  Int
+  School    School @relation(fields: [schoolId], references: [id])
 }

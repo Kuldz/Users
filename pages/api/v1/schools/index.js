@@ -22,9 +22,11 @@ const schools = [
   }
 ]
 
+
+
 export default function schoolIDHandler (req, res) {
   const {
-    method
+    method, id
   } = req
 
   switch (method) {
@@ -33,5 +35,16 @@ export default function schoolIDHandler (req, res) {
       res.status(200).json(result)
       break
     }
+    case "DELETE": {
+      await prisma.schools.delete({
+        where: {
+          id: id,
+        },
+      })
+      res.status(204)
+      break
+    }
+
+
   }
 }
