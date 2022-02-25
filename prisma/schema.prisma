@@ -18,7 +18,9 @@ model User {
 
 model School {
   id       Int       @id @default(autoincrement())
+  regcode  Int
   name     String
+  type     String
   address  String
   students Student[]
   classes  Class[]

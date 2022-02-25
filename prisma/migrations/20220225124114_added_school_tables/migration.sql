@@ -1,7 +1,9 @@
 -- CreateTable
 CREATE TABLE `School` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `regcode` INTEGER NOT NULL,
     `name` VARCHAR(191) NOT NULL,
+    `type` VARCHAR(191) NOT NULL,
     `address` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)

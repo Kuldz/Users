@@ -30,15 +30,15 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="school_add"
       >
-        <Form.Item name={["school", "regcode"]} label="Registry Code">
+        <Form.Item name={["school", "regcode"]} label="Registry Code" rules={[{ required: true, message: "Please input the registry code!" }]}>
           <InputNumber style={{ width: 472 }}/>
         </Form.Item>
 
-        <Form.Item name={["school", "name"]} label="School Name">
+        <Form.Item name={["school", "name"]} label="Name" rules={[{ required: true, message: "Please input the name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["school", "school"]} label="Type">
+        <Form.Item name={["school", "type"]} label="Type" rules={[{ required: true, message: "Please input the type!" }]}>
           <Select placeholder="Select school type">
             <Option value="primary">Primary School</Option>
             <Option value="high">High School</Option>
@@ -47,11 +47,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           </Select>
         </Form.Item>
 
-        <Form.Item name={["school", "county"]} label="County">
-          <Input />
-        </Form.Item>
-
-        <Form.Item name={["school", "city"]} label="City">
+        <Form.Item name={["school", "address"]} label="Address" rules={[{ required: true, message: "Please input the address!" }]}>
           <Input />
         </Form.Item>
       </Form>
@@ -74,10 +70,7 @@ const CollectionsPage = () => {
     })
       .then(res => res.json())
       .then((json) => {
-        console.log("login response", json)
-        if (json.success) {
-          // redirect("/users")
-        }
+        console.log("Create school response: ", json)
       })
   }
 
