@@ -30,14 +30,14 @@ export default function handler (req, res) {
   } = req
 
   switch (method) {
-    case "GET":
+    case "GET": {
       // Filter studentArray by school ID
-      // eslint-disable-next-line no-case-declarations
       const students = studentArray.filter(s => s.school_id.toString() === id)
 
       // Return OK status and students array
-      res.status(200).json({ status: "200 OK", students })
+      res.status(200).json({ students })
       break
+    }
 
     default:
       res.status(405).json({ status: "405 Method Not Allowed" })
