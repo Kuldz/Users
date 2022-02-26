@@ -27,26 +27,32 @@ class NavbarAdmin extends React.Component {
       <>
         <Menu theme={this.state.theme} onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
           <Menu.Item key="icon"><Image src='/favicon.ico' alt="Placeholder Logo" width="25" height="25"></Image>
-            <a href="/"></a>
+            <a href="/"/>
           </Menu.Item>
           <Menu.Item key="mail" icon={<MailOutlined />}>
             Empty
           </Menu.Item>
           <SubMenu key="SubMenu" icon={<SettingOutlined />} title="Manage - Submenu">
             <Menu.ItemGroup>
-              <Menu.Item key="option:1">Manage Schools</Menu.Item>
-              <Menu.Item key="option:2">Manage Students</Menu.Item>
-              <Menu.Item key="option:3">Manage Classes</Menu.Item>
+              <Menu.Item key="option:1">Manage Schools
+                <a href="/manage/School"/>
+              </Menu.Item>
+              <Menu.Item key="option:2">Manage Students
+                <a href="/manage/Student"/>
+              </Menu.Item>
+              <Menu.Item key="option:3">Manage Classes
+                <a href="/manage/Class"/>
+              </Menu.Item>
             </Menu.ItemGroup>
           </SubMenu>
           <Menu.Item icon={<QuestionOutlined />}>
-            Placeholer
+            Placeholder
           </Menu.Item>
           <Menu.Item icon={<QuestionOutlined />}>
-            Placeholer
+            Placeholder
           </Menu.Item>
           <Menu.Item icon={<QuestionOutlined />}>
-            Placeholer
+            Placeholder
           </Menu.Item>
           <Menu.Item icon={<InfoCircleOutlined />}style={{ marginLeft: "auto" }}>
             Information

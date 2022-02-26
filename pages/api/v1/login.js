@@ -1,12 +1,16 @@
-// Andmebaas
-const users = [
-  { username: "Timmi", password: "qwe123" },
-  { username: "Miki", password: "youshallnotpass" }
-]
+import { PrismaClient } from "@prisma/client"
 
-export default function handler (req, res) {
-  // Adnembaasi päring
-  const user = users.find(u => u.username === req.body.username && u.password === req.body.password)
+const prisma = new PrismaClient()
+// use `prisma` in your application to read and write data in your DB
+
+export default async function handler (req, res) {
+  console.log()
+  // By unique identifier
+  const user = await prisma.user.findUnique({
+    where: {
+      email: "bob@prisma.io"
+    }
+  })
 
   if (!user) {
     // Wrong username or password message
@@ -15,5 +19,7 @@ export default function handler (req, res) {
   }
 
   // Success
-  res.status(200).json({ status: "200 OK", success: true, user: user })
+  if (req.body.password === user.password) {
+    res.status(200).json({ status: "200 OK", success: true, user: user })
+  }
 }

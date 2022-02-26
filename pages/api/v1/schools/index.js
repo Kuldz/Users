@@ -1,31 +1,58 @@
+import { PrismaClient } from "@prisma/client"
+
 const schools = [
   {
     id: 1,
-    name: "Tallinna Polutehnikum",
-    address: "Parnu mnt 57a, 10135 Tallinn"
+    name: "Tallinna Polütehnikum",
+    address: "Pärnu mnt 57a, 10135 Tallinn",
+    student_id: [1, 2],
+    class_id: [5, 6]
   },
   {
     id: 2,
-    name: "Gustav Adolfi Gumnaasium",
-    address: "Suur-Kloostri 16, 10133 Tallinn"
+    name: "Gustav Adolfi Gümnaasium",
+    address: "Suur-Kloostri 16, 10133 Tallinn",
+    student_id: [3, 4],
+    class_id: [3, 4]
   },
   {
     id: 3,
-    name: "Juri Gumnaasium",
-    address: "Laste 3, Rae, 75301 Harju maakond"
+    name: "Jüri Gumnaasium",
+    address: "Laste 3, Rae, 75301 Harju maakond",
+    student_id: [5, 6],
+    class_id: [1, 2]
   }
 ]
 
-export default function schoolIDHandler (req, res) {
+export default async function schoolIDHandler (req, res) {
   const {
-    query: method
+    method, id
   } = req
 
   switch (method) {
-    case "GET":
-      // eslint-disable-next-line no-case-declarations
+    case "POST": {
+      const prisma = new PrismaClient()
+      console.log(req.body)
+      const school = await prisma.school.create({
+        data: req.body.school
+      })
+      res.status(201).json(school)
+      break
+    }
+    case "GET": {
       const result = schools // or schools[schools], I haven't gotten to check
       res.status(200).json(result)
       break
+    }
+    case "DELETE": {
+      const prisma = new PrismaClient()
+      await prisma.school.delete({
+        where: {
+          id: id
+        }
+      })
+      res.status(204)
+      break
+    }
   }
 }

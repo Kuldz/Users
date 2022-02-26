@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 import NavbarAdmin from "../components/navbar.js"
-import ClassEditAdd from "../components/managing/ClassEditAdd.js"
+import SchoolEditAdd from "../components/managing/SchoolEditAdd.js"
 
 class componentUsage extends Component {
   render () {
     return (
       <div>
         <NavbarAdmin />
-        <ClassEditAdd></ClassEditAdd>
+        <SchoolEditAdd></SchoolEditAdd>
       </div>
     )
   }
