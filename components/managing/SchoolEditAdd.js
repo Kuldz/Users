@@ -5,6 +5,7 @@ const { Option } = Select
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm()
+
   return (
     <Modal
       visible={visible}
@@ -16,8 +17,8 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         form
           .validateFields()
           .then((values) => {
-            form.resetFields()
             onCreate(values)
+            form.resetFields()
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
@@ -29,27 +30,24 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="school_add"
       >
-        <Form.Item name={["school", "regcode"]} label="Registry Code">
+        <Form.Item name={["school", "regcode"]} label="Registry Code" rules={[{ required: true, message: "Please input the registry code!" }]}>
           <InputNumber style={{ width: 472 }}/>
         </Form.Item>
 
-        <Form.Item name={["school", "name"]} label="School Name">
+        <Form.Item name={["school", "name"]} label="Name" rules={[{ required: true, message: "Please input the name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["school", "school"]} label="Type">
+        <Form.Item name={["school", "type"]} label="Type" rules={[{ required: true, message: "Please input the type!" }]}>
           <Select placeholder="Select school type">
+            <Option value="primary">Primary School</Option>
+            <Option value="high">High School</Option>
             <Option value="vocational">Vocational School</Option>
-            <Option value="basic">Basic School</Option>
             <Option value="uni">University</Option>
           </Select>
         </Form.Item>
 
-        <Form.Item name={["school", "county"]} label="County">
-          <Input />
-        </Form.Item>
-
-        <Form.Item name={["school", "city"]} label="City">
+        <Form.Item name={["school", "address"]} label="Address" rules={[{ required: true, message: "Please input the address!" }]}>
           <Input />
         </Form.Item>
       </Form>
@@ -63,6 +61,17 @@ const CollectionsPage = () => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     setVisible(false)
+    fetch("http://localhost:3000/api/v1/schools", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+    })
+      .then(res => res.json())
+      .then((json) => {
+        console.log("Create school response: ", json)
+      })
   }
 
   return (
