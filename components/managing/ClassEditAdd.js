@@ -1,42 +1,96 @@
-import { Form, Input, InputNumber, Button, Checkbox } from "antd"
-import React from "react"
+import React, { useState } from "react"
+import { Button, Modal, Form, Input, Select } from "antd"
+
+const { Option } = Select
+
+const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+  const [form] = Form.useForm()
+  return (
+    <Modal
+      visible={visible}
+      title="Add a new Class"
+      okText="Create"
+      cancelText="Cancel"
+      onCancel={onCancel}
+      onOk={() => {
+        form
+          .validateFields()
+          .then((values) => {
+            form.resetFields()
+            onCreate(values)
+          })
+          .catch((info) => {
+            console.log("Validate Failed:", info)
+          })
+      }}
+    >
+      <Form
+        form={form}
+        layout="vertical"
+        name="school_add"
+      >
+        <Form.Item name={["class", "name"]} label="Class Name">
+          <Input />
+        </Form.Item>
+
+        <Form.Item name={["class", "year"]} label="Year">
+          <Select placeholder="Select starting year">
+            <Option value="y2021">2021</Option>
+            <Option value="y2020">2020</Option>
+            <Option value="y2019">2019</Option>
+            <Option value="y2018">2018</Option>
+            <Option value="y2017">2017</Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item name={["class", "grouplead"]} label="Group Leader">
+          <Input />
+        </Form.Item>
+
+        <Form.Item name={["class", "school"]} label="School">
+          <Select placeholder="Select school">
+            <Option value="tps">Tallinn Polytechnic School</Option>
+            <Option value="tas">Tallinn Art School</Option>
+            <Option value="kvs">Kuressaare Vocational School</Option>
+          </Select>
+        </Form.Item>
+      </Form>
+    </Modal>
+  )
+}
+
+const CollectionsPage = () => {
+  const [visible, setVisible] = useState(false)
+
+  const onCreate = (values) => {
+    console.log("Received values of form: ", values)
+    setVisible(false)
+  }
+
+  return (
+    <div>
+      <Button
+        type="primary"
+        onClick={() => {
+          setVisible(true)
+        }}
+      >
+        Add
+      </Button>
+      <CollectionCreateForm
+        visible={visible}
+        onCreate={onCreate}
+        onCancel={() => {
+          setVisible(false)
+        }}
+      />
+    </div>
+  )
+}
 
 class ClassEditAdd extends React.Component {
   render () {
-    return (
-      <div>
-        <Form name="nest-messages" layout="horizontal" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
-          <Form.Item name={["class", "name"]} label="Name">
-            <Input />
-          </Form.Item>
-
-          <Form.Item name={["class", "year"]} label="Year">
-            <Input />
-          </Form.Item>
-
-          <Form.Item name={["class", "leader"]} label="Group Leader">
-            <InputNumber />
-          </Form.Item>
-
-          <Form.Item name={["class", "school"]} label="School">
-            <Input />
-          </Form.Item>
-
-          <Form.Item name={["class", "students"]} label="Student">
-            <Input placeholder="Search Student"/>
-            <Checkbox>John Brown</Checkbox>
-            <Checkbox>Jim Green</Checkbox>
-            <Checkbox>Joe Black</Checkbox>
-          </Form.Item>
-
-          <Form.Item wrapperCol={{ span: 16, offset: 8 }}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
-    )
+    return <CollectionsPage />
   }
 }
 

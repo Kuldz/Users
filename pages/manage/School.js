@@ -74,7 +74,7 @@ const data = [
   }
 ]
 
-export default function manageClass () {
+export default function manageSchool () {
   return (
     <body>
       <div className={styles.body}>

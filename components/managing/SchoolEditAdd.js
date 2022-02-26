@@ -17,7 +17,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           .validateFields()
           .then((values) => {
             form.resetFields()
-              .onCreate(values)
+            onCreate(values)
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
