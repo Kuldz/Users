@@ -40,7 +40,7 @@ export default function handler (req, res) {
     }
 
     default:
-      res.status(405).json({ status: "405 Method Not Allowed" })
+      res.status(405)
       break
   }
 }
