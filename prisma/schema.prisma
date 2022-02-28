@@ -21,7 +21,8 @@ model School {
   regcode  Int
   name     String
   type     String
-  address  String
+  county   String
+  city     String
   students Student[]
   classes  Class[]
   teachers Teacher[]

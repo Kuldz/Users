@@ -4,7 +4,8 @@ CREATE TABLE `School` (
     `regcode` INTEGER NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `type` VARCHAR(191) NOT NULL,
-    `address` VARCHAR(191) NOT NULL,
+    `county` VARCHAR(191) NOT NULL,
+    `city` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
