@@ -42,7 +42,7 @@ export default async function schoolIDHandler (req, res) {
       break
     }
     case "GET": {
-      const schools = prisma.school.findMany()
+      const schools = await prisma.school.findMany()
       res.status(200).json(schools)
       break
     }
