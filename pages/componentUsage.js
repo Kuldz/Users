@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import Head from 'next/head';
+import Head from "next/head"
 import NavbarAdmin from "../components/navbar.js"
 import SchoolEditAdd from "../components/managing/SchoolEditAdd.js"
 
