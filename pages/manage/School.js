@@ -101,7 +101,7 @@ export default function manageSchool () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} dataSource={data}/>
+        <Table columns={columns} pagination={false} rowKey="school" dataSource={data}/>
 
         <div style={{ float: "right" }}>
         <SchoolEditAdd></SchoolEditAdd>

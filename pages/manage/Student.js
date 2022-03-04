@@ -85,7 +85,7 @@ export default function manageStudent () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} dataSource={data}/>
+        <Table columns={columns} pagination={false} rowKey="name" dataSource={data}/>
 
         <div style={{ float: "right" }}>
         <StudentEditAdd></StudentEditAdd>
