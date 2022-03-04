@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Head from "next/head"
 import { Form, Input, Button } from "antd"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/router"
@@ -21,6 +22,9 @@ export default function Login () {
 
   return (
     <div className="site-layout-background" style={{ padding: 24, textAlign: "center" }}>
+      <Head>
+        <title>Login</title>
+      </Head>
       <Form name="basic" onFinish={sendCredentials} labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} initialValues={{ remember: true }} autoComplete="off">
         <Form.Item label="Email" name="email" type="email"
           rules={[{ required: true, message: "Input email" }]}>

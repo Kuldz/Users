@@ -1,4 +1,5 @@
 import React from "react"
+import Head from "next/head"
 import NavbarAdmin from "../../components/navbar"
 import StudentEditAdd from "../../components/managing/StudentEditAdd"
 import Pag from "../../components/pagination"
@@ -62,6 +63,9 @@ export default function manageStudent () {
   return (
     <body>
       <div className={styles.body}>
+        <Head>
+          <title>Manage Students</title>
+        </Head>
         <NavbarAdmin></NavbarAdmin>
         <Space split>
           <Select defaultValue="Year" size="large" onChange={handleChange}>
