@@ -53,19 +53,6 @@ const columns = [
 ]
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
-const API = "http://localhost:3000/api/v1/schools"
-
-export async function getStaticProps () {
-  // `getStaticProps` is executed on the server side.
-  const school = await fetcher(API)
-  return {
-    props: {
-      fallback: {
-        "/api/v1/schools": school
-      }
-    }
-  }
-}
 
 export default function ManageSchool () {
   const { data } = useSWR("/api/v1/schools", fetcher)
