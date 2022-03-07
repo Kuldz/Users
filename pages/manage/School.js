@@ -5,6 +5,7 @@ import SchoolEditAdd from "../../components/managing/SchoolEditAdd"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
+import useSWR from "swr"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
@@ -51,31 +52,23 @@ const columns = [
   }
 ]
 
-const data = [
-  {
-    regcode: "70003974",
-    school: "Tallinn Polytechnic School",
-    type: "Vocational School",
-    county: "Harjumaa",
-    city: "Tallinn"
-  },
-  {
-    regcode: "70004092",
-    school: "Tallinn Art School",
-    type: "Vocational School",
-    county: "Tartumaa",
-    city: "Tartu"
-  },
-  {
-    regcode: "70003744",
-    school: "Kuressaare Vocational School",
-    type: "Vocational School",
-    county: "Saaremaa",
-    city: "Kuressaare"
-  }
-]
+const fetcher = (...args) => fetch(...args).then(res => res.json())
+const API = "http://localhost:3000/api/v1/schools"
 
-export default function manageSchool () {
+export async function getStaticProps () {
+  // `getStaticProps` is executed on the server side.
+  const school = await fetcher(API)
+  return {
+    props: {
+      fallback: {
+        "/api/v1/schools": school
+      }
+    }
+  }
+}
+
+export default function ManageSchool () {
+  const { data } = useSWR("/api/v1/schools", fetcher)
   return (
     <body>
       <div className={styles.body}>
