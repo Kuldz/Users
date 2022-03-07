@@ -21,9 +21,9 @@ const columns = [
     key: "regcode"
   },
   {
-    title: "School",
-    dataIndex: "school",
-    key: "school"
+    title: "Name",
+    dataIndex: "name",
+    key: "name"
   },
   {
     title: "Type",
