@@ -65,7 +65,7 @@ const CollectionsPage = () => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     setVisible(false)
-    fetch("http://localhost:3000/api/v1/schools", {
+    fetch("/api/v1/schools", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
