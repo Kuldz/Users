@@ -40,10 +40,10 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 
         <Form.Item name={["school", "type"]} label="Type" rules={[{ required: true, message: "Please input the type!" }]}>
           <Select placeholder="Select school type">
-            <Option value="primary">Primary School</Option>
-            <Option value="high">High School</Option>
-            <Option value="vocational">Vocational School</Option>
-            <Option value="uni">University</Option>
+            <Option value="Primary School">Primary School</Option>
+            <Option value="High School">High School</Option>
+            <Option value="Vocational School">Vocational School</Option>
+            <Option value="University">University</Option>
           </Select>
         </Form.Item>
 
