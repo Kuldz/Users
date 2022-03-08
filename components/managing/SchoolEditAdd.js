@@ -47,7 +47,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           </Select>
         </Form.Item>
 
-        <Form.Item name={["school", "address"]} label="Address" rules={[{ required: true, message: "Please input the address!" }]}>
+        <Form.Item name={["school", "county"]} label="County" rules={[{ required: true, message: "Please input the county!" }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item name={["school", "city"]} label="City" rules={[{ required: true, message: "Please input the city!" }]}>
           <Input />
         </Form.Item>
       </Form>

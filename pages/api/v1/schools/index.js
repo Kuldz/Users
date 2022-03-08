@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 
+/*
 const schools = [
   {
     id: 1,
@@ -22,16 +23,17 @@ const schools = [
     student_id: [5, 6],
     class_id: [1, 2]
   }
-]
+] */
 
 export default async function schoolIDHandler (req, res) {
   const {
     method, id
   } = req
 
+  const prisma = new PrismaClient()
+
   switch (method) {
     case "POST": {
-      const prisma = new PrismaClient()
       console.log(req.body)
       const school = await prisma.school.create({
         data: req.body.school
@@ -40,12 +42,11 @@ export default async function schoolIDHandler (req, res) {
       break
     }
     case "GET": {
-      const result = schools // or schools[schools], I haven't gotten to check
-      res.status(200).json(result)
+      const schools = await prisma.school.findMany()
+      res.status(200).json(schools)
       break
     }
     case "DELETE": {
-      const prisma = new PrismaClient()
       await prisma.school.delete({
         where: {
           id: id

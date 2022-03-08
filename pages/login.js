@@ -1,35 +1,38 @@
-import React from "react"
+import React, { useState } from "react"
+import Head from "next/head"
 import { Form, Input, Button } from "antd"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/router"
 
-export default function login () {
-  const sendData = (data) => {
-    console.log("sending data", data)
+export default function Login () {
+  const [loginError, setLoginError] = useState("")
+  const router = useRouter()
 
-    fetch("http://localhost:3000/api/v1/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+  const sendCredentials = async (credentials) => {
+    console.log("credentials", credentials)
+    const res = await signIn("credentials", {
+      email: credentials.email,
+      password: credentials.password,
+      callbackUrl: "/logintest",
+      redirect: false
     })
-      .then(res => res.json())
-      .then((json) => {
-        console.log("login response", json)
-        if (json.success) {
-          // redirect("/users")
-        }
-      })
+    if (res?.error) setLoginError("Login failed: " + res.error)
+    if (res.url) router.push(res.url)
   }
 
   return (
     <div className="site-layout-background" style={{ padding: 24, textAlign: "center" }}>
-      <Form name="basic" onFinish={sendData} labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} initialValues={{ remember: true }} autoComplete="off">
-        <Form.Item label="Email" name="email"
+      <Head>
+        <title>Login</title>
+      </Head>
+      <Form name="basic" onFinish={sendCredentials} labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} initialValues={{ remember: true }} autoComplete="off">
+        <Form.Item label="Email" name="email" type="email"
           rules={[{ required: true, message: "Input email" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item label="Password" name="password"
+        <span>{loginError}</span>
+        <Form.Item label="Password" name="password" type="password"
           rules={[{ required: true, message: "Input password" }]}>
           <Input.Password />
         </Form.Item>

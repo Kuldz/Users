@@ -1,4 +1,5 @@
 import React from "react"
+import Head from "next/head"
 import NavbarAdmin from "../../components/navbar"
 import StudentEditAdd from "../../components/managing/StudentEditAdd"
 import Pag from "../../components/pagination"
@@ -62,6 +63,9 @@ export default function manageStudent () {
   return (
     <body>
       <div className={styles.body}>
+        <Head>
+          <title>Manage Students</title>
+        </Head>
         <NavbarAdmin></NavbarAdmin>
         <Space split>
           <Select defaultValue="Year" size="large" onChange={handleChange}>
@@ -81,7 +85,7 @@ export default function manageStudent () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} dataSource={data}/>
+        <Table columns={columns} pagination={false} rowKey="name" dataSource={data}/>
 
         <div style={{ float: "right" }}>
         <StudentEditAdd></StudentEditAdd>

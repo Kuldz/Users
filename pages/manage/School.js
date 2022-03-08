@@ -1,9 +1,11 @@
 import React from "react"
+import Head from "next/head"
 import NavbarAdmin from "../../components/navbar"
 import SchoolEditAdd from "../../components/managing/SchoolEditAdd"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
+import useSWR from "swr"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
@@ -19,9 +21,9 @@ const columns = [
     key: "regcode"
   },
   {
-    title: "School",
-    dataIndex: "school",
-    key: "school"
+    title: "Name",
+    dataIndex: "name",
+    key: "name"
   },
   {
     title: "Type",
@@ -50,34 +52,16 @@ const columns = [
   }
 ]
 
-const data = [
-  {
-    regcode: "70003974",
-    school: "Tallinn Polytechnic School",
-    type: "Vocational School",
-    county: "Harjumaa",
-    city: "Tallinn"
-  },
-  {
-    regcode: "70004092",
-    school: "Tallinn Art School",
-    type: "Vocational School",
-    county: "Tartumaa",
-    city: "Tartu"
-  },
-  {
-    regcode: "70003744",
-    school: "Kuressaare Vocational School",
-    type: "Vocational School",
-    county: "Saaremaa",
-    city: "Kuressaare"
-  }
-]
+const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-export default function manageSchool () {
+export default function ManageSchool () {
+  const { data } = useSWR("/api/v1/schools", fetcher)
   return (
     <body>
       <div className={styles.body}>
+        <Head>
+          <title>Manage Schools</title>
+        </Head>
         <NavbarAdmin></NavbarAdmin>
         <Space split>
           <Select defaultValue="Year" size="large" onChange={handleChange}>
@@ -97,7 +81,7 @@ export default function manageSchool () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} dataSource={data}/>
+        <Table columns={columns} pagination={false} rowKey="school" dataSource={data}/>
 
         <div style={{ float: "right" }}>
         <SchoolEditAdd></SchoolEditAdd>
