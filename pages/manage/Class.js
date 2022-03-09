@@ -31,6 +31,11 @@ const columns = [
     key: "groupleader"
   },
   {
+    title: "School",
+    dataIndex: "school",
+    key: "school"
+  },
+  {
     title: "Action",
     key: "action",
     render: (text) => (
@@ -46,6 +51,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageClass () {
   const { data } = useSWR("/api/v1/classes", fetcher)
+
   return (
     <body>
       <div className={styles.body}>
@@ -71,7 +77,7 @@ export default function ManageClass () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} rowKey="class" dataSource={data}/>
+        <Table columns={columns} pagination={false} rowKey="Class" dataSource={data}/>
 
         <div style={{ float: "right" }}>
         <ClassEditAdd></ClassEditAdd>
