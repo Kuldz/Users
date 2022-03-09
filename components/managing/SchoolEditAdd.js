@@ -17,8 +17,8 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         form
           .validateFields()
           .then((values) => {
-            onCreate(values)
             form.resetFields()
+            onCreate(values)
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
@@ -30,15 +30,15 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="school_add"
       >
-        <Form.Item name={["school", "regcode"]} label="Registry Code" rules={[{ required: true, message: "Please input the registry code!" }]}>
+        <Form.Item name={["school", "regcode"]} label="Registry Code" rules={[{ required: true, message: "Please input a registry code!" }]}>
           <InputNumber style={{ width: 472 }}/>
         </Form.Item>
 
-        <Form.Item name={["school", "name"]} label="Name" rules={[{ required: true, message: "Please input the name!" }]}>
+        <Form.Item name={["school", "name"]} label="Name" rules={[{ required: true, message: "Please input a name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["school", "type"]} label="Type" rules={[{ required: true, message: "Please input the type!" }]}>
+        <Form.Item name={["school", "type"]} label="Type" rules={[{ required: true, message: "Please input a type!" }]}>
           <Select placeholder="Select school type">
             <Option value="Primary School">Primary School</Option>
             <Option value="High School">High School</Option>
@@ -47,11 +47,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           </Select>
         </Form.Item>
 
-        <Form.Item name={["school", "county"]} label="County" rules={[{ required: true, message: "Please input the county!" }]}>
+        <Form.Item name={["school", "county"]} label="County" rules={[{ required: true, message: "Please input a county!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["school", "city"]} label="City" rules={[{ required: true, message: "Please input the city!" }]}>
+        <Form.Item name={["school", "city"]} label="City" rules={[{ required: true, message: "Please input a city!" }]}>
           <Input />
         </Form.Item>
       </Form>

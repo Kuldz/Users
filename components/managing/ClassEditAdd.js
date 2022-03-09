@@ -5,6 +5,7 @@ const { Option } = Select
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm()
+
   return (
     <Modal
       visible={visible}
@@ -29,29 +30,29 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="school_add"
       >
-        <Form.Item name={["class", "name"]} label="Class Name">
+        <Form.Item name={["class", "name"]} label="Class Name" rules={[{ message: "Please input a name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "year"]} label="Year">
+        <Form.Item name={["class", "year"]} label="Year" rules={[{ message: "Please input a starting year!" }]}>
           <Select placeholder="Select starting year">
-            <Option value="y2021">2021</Option>
-            <Option value="y2020">2020</Option>
-            <Option value="y2019">2019</Option>
-            <Option value="y2018">2018</Option>
-            <Option value="y2017">2017</Option>
+            <Option value="2021">2021</Option>
+            <Option value="2020">2020</Option>
+            <Option value="2019">2019</Option>
+            <Option value="2018">2018</Option>
+            <Option value="2017">2017</Option>
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "grouplead"]} label="Group Leader">
+        <Form.Item name={["class", "grouplead"]} label="Group Leader" rules={[{ message: "Please input a group leader!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "school"]} label="School">
+        <Form.Item name={["class", "school"]} label="School" rules={[{ message: "Please input a school!" }]}>
           <Select placeholder="Select school">
-            <Option value="tps">Tallinn Polytechnic School</Option>
-            <Option value="tas">Tallinn Art School</Option>
-            <Option value="kvs">Kuressaare Vocational School</Option>
+            <Option value="Tallinn Polytechnic School">Tallinn Polytechnic School</Option>
+            <Option value="Tartu Art School">Tartu Art School</Option>
+            <Option value="Kuressaare Vocational School">Kuressaare Vocational School</Option>
           </Select>
         </Form.Item>
       </Form>
@@ -65,6 +66,17 @@ const CollectionsPage = () => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     setVisible(false)
+    fetch("/api/v1/classes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+    })
+      .then(res => res.json())
+      .then((json) => {
+        console.log("Create class response: ", json)
+      })
   }
 
   return (
