@@ -1,13 +1,11 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
+
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
@@ -40,10 +38,12 @@ model Student {
 }
 
 model Class {
-  id       Int    @id @default(autoincrement())
-  name     String
-  schoolId Int
-  school   School @relation(fields: [schoolId], references: [id])
+  id          Int    @id @default(autoincrement())
+  name        String
+  year        String
+  groupleader String
+  schoolId    Int
+  school      School @relation(fields: [schoolId], references: [id])
 }
 
 model Teacher {

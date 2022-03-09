@@ -5,6 +5,7 @@ import ClassEditAdd from "../../components/managing/ClassEditAdd"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
+import useSWR from "swr"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
@@ -46,28 +47,11 @@ const columns = [
   }
 ]
 
-const data = [
-  {
-    name: "Class 1",
-    year: "2021",
-    groupleader: "Juan White",
-    school: "Tallinn Polytechnic School"
-  },
-  {
-    name: "Class 2",
-    year: "2020",
-    groupleader: "Juan Black",
-    school: "Tallinn Polytechnic School"
-  },
-  {
-    name: "Class 3",
-    year: "2019",
-    groupleader: "Juan Green",
-    school: "Tallinn Polytechnic School"
-  }
-]
+const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-export default function manageClass () {
+export default function ManageClass () {
+  const { data } = useSWR("/api/v1/classes", fetcher)
+
   return (
     <body>
       <div className={styles.body}>
@@ -93,7 +77,7 @@ export default function manageClass () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} rowKey="name" dataSource={data}/>
+        <Table columns={columns} pagination={false} rowKey="Class" dataSource={data}/>
 
         <div style={{ float: "right" }}>
         <ClassEditAdd></ClassEditAdd>
