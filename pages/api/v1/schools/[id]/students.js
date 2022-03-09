@@ -52,7 +52,7 @@ export default async function handler (req, res) {
       await res.status(202)
       await prisma.student.delete({
         where: {
-          id: id
+          id: parseInt(id)
         }
       })
       break
