@@ -17,8 +17,16 @@ export default async function schoolIDHandler (req, res) {
       break
     }
     case "GET": {
-      const schools = await prisma.class.findMany()
-      res.status(200).json(schools)
+      const classes = await prisma.class.findMany({
+        include: {
+          school: {
+            select: {
+              name: true
+            }
+          }
+        }
+      })
+      res.status(200).json(classes)
       break
     }
     case "DELETE": {

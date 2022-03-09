@@ -32,8 +32,8 @@ const columns = [
   },
   {
     title: "School",
-    dataIndex: "school",
-    key: "school"
+    dataIndex: ["school", "name"],
+    key: "school.name"
   },
   {
     title: "Action",
@@ -51,7 +51,6 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageClass () {
   const { data } = useSWR("/api/v1/classes", fetcher)
-
   return (
     <body>
       <div className={styles.body}>

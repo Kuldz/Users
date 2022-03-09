@@ -1,10 +1,20 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
 
 const { Option } = Select
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm()
+  const [schools, setSchools] = useState([])
+
+  useEffect(() => {
+    fetch("/api/v1/schools").then(res => res.json()).then(data =>
+      setSchools(data.map(school => ({
+        label: `${school.name}`,
+        value: school.id
+      })))
+    )
+  }, [])
 
   return (
     <Modal
@@ -44,16 +54,12 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "grouplead"]} label="Group Leader" rules={[{ message: "Please input a group leader!" }]}>
+        <Form.Item name={["class", "groupleader"]} label="Group Leader" rules={[{ message: "Please input a group leader!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "school"]} label="School" rules={[{ message: "Please input a school!" }]}>
-          <Select placeholder="Select school">
-            <Option value="Tallinn Polytechnic School">Tallinn Polytechnic School</Option>
-            <Option value="Tartu Art School">Tartu Art School</Option>
-            <Option value="Kuressaare Vocational School">Kuressaare Vocational School</Option>
-          </Select>
+        <Form.Item name={["class", "schoolId"]} label="School" rules={[{ message: "Please input a school!", type: "number" }]}>
+          <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
       </Form>
     </Modal>
