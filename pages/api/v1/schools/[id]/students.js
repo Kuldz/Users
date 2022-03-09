@@ -40,7 +40,7 @@ export default async function handler (req, res) {
       // const students = studentArray.filter(s => s.school_id.toString() === id)
       const students = await prisma.student.findUnique({
         where: {
-          id: id
+          id: parseInt(id)
         }
       })
       // Return OK status and students array
