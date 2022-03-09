@@ -56,6 +56,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageSchool () {
   const { data } = useSWR("/api/v1/schools", fetcher)
+
   return (
     <body>
       <div className={styles.body}>

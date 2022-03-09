@@ -26,6 +26,8 @@ CREATE TABLE `Student` (
 CREATE TABLE `Class` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
+    `year` VARCHAR(191) NOT NULL,
+    `groupleader` VARCHAR(191) NOT NULL,
     `schoolId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
