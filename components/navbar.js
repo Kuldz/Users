@@ -1,9 +1,6 @@
 import { Menu } from "antd"
 import React from "react"
-import Image from "next/image"
 import { MailOutlined, UserOutlined, HomeOutlined } from "@ant-design/icons"
-
-const { SubMenu } = Menu
 
 class NavbarAdmin extends React.Component {
   state = {
