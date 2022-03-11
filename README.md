@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+### NB! It is now *required* to fill out the NEXTAUTH_SECRET variable for anything to work.
+
 First, run the development server:
 
 ```bash
