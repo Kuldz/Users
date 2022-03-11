@@ -52,40 +52,37 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 export default function ManageClass () {
   const { data } = useSWR("/api/v1/classes", fetcher)
   return (
-    <body>
+    <>
       <div className={styles.body}>
-        <Head>
-          <title>Manage Classes</title>
-        </Head>
-        <NavbarAdmin></NavbarAdmin>
-        <Space split>
-          <Select defaultValue="Year" size="large" onChange={handleChange}>
-            <Option value="Year">Filter by</Option>
-            <Option value="School Name">Filter by</Option>
-            <Option value="Yiminghe">Filter by</Option>
-          </Select>
-          <Search
-            placeholder="input search text"
-            allowClear
-            enterButton="Search"
-            size="large"
-            style={{ width: 500 }}
-          />
-        </Space>
-      </div>
+      <Head>
+        <title>Manage Classes</title>
+      </Head>
+      <NavbarAdmin></NavbarAdmin>
+      <Space split>
+        <Select defaultValue="Year" size="large" onChange={handleChange}>
+          <Option value="Year">Filter by</Option>
+          <Option value="School Name">Filter by</Option>
+          <Option value="Yiminghe">Filter by</Option>
+        </Select>
+        <Search
+          placeholder="input search text"
+          allowClear
+          enterButton="Search"
+          size="large"
+          style={{ width: 500 }} />
+      </Space>
+    </div><div className={styles.container}>
 
-      <div className={styles.container}>
-
-        <Table columns={columns} pagination={false} rowKey="Class" dataSource={data}/>
+        <Table columns={columns} pagination={false} dataSource={data} rowKey="id" />
 
         <div style={{ float: "right" }}>
-        <ClassEditAdd></ClassEditAdd>
+          <ClassEditAdd></ClassEditAdd>
         </div>
 
         <div className={styles.pagination}>
           <Pag></Pag>
         </div>
       </div>
-    </body>
+    </>
   )
 }

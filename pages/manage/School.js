@@ -58,7 +58,7 @@ export default function ManageSchool () {
   const { data } = useSWR("/api/v1/schools", fetcher)
 
   return (
-    <body>
+    <>
       <div className={styles.body}>
         <Head>
           <title>Manage Schools</title>
@@ -82,7 +82,7 @@ export default function ManageSchool () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} rowKey="school" dataSource={data}/>
+        <Table columns={columns} pagination={false} rowKey="id" dataSource={data}/>
 
         <div style={{ float: "right" }}>
         <SchoolEditAdd></SchoolEditAdd>
@@ -92,6 +92,6 @@ export default function ManageSchool () {
           <Pag></Pag>
         </div>
       </div>
-    </body>
+    </>
   )
 }
