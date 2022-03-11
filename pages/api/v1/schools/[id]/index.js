@@ -33,17 +33,14 @@ export default async function schoolIDHandler (req, res) {
   const prisma = new PrismaClient()
 
   switch (method) {
-    case "POST": {
-      console.log(req.body)
-      const school = await prisma.school.create({
-        data: req.body.school
+    
+    case "DELETE": {
+      await prisma.school.delete({
+        where: {
+          id: parseInt(req.query.id)
+        }
       })
-      res.status(201).json(school)
-      break
-    }
-    case "GET": {
-      const schools = await prisma.school.findMany()
-      res.status(200).json(schools)
+      res.status(204)
       break
     }
   }

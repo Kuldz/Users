@@ -6,9 +6,16 @@ import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
 import useSWR from "swr"
+import DeleteSchool from "../../components/managing/SchoolEditAdd"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
+}
+
+function handleDelete(id) {
+  fetch("/api/v1/schools/"+id, {
+    method: "DELETE",
+  })
 }
 
 const { Search } = Input
@@ -43,10 +50,10 @@ const columns = [
   {
     title: "Action",
     key: "action",
-    render: (text) => (
+    render: (school) => (
       <Space size="middle">
         <a>Edit</a>
-        <a>Delete</a>
+        <a onClick={() => handleDelete(school.id)}>Delete</a>
       </Space>
     )
   }
