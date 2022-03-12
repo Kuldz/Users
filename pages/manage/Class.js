@@ -14,43 +14,44 @@ function handleChange (value) {
 const { Search } = Input
 const { Option } = Select
 
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name"
-  },
-  {
-    title: "Year",
-    dataIndex: "year",
-    key: "year"
-  },
-  {
-    title: "Group Leader",
-    dataIndex: "groupleader",
-    key: "groupleader"
-  },
-  {
-    title: "School",
-    dataIndex: ["school", "name"],
-    key: "school.name"
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (text) => (
-      <Space size="middle">
-        <a>Edit</a>
-        <a>Delete</a>
-      </Space>
-    )
-  }
-]
-
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageClass () {
   const { data } = useSWR("/api/v1/classes", fetcher)
+
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name"
+    },
+    {
+      title: "Year",
+      dataIndex: "year",
+      key: "year"
+    },
+    {
+      title: "Group Leader",
+      dataIndex: "groupleader",
+      key: "groupleader"
+    },
+    {
+      title: "School",
+      dataIndex: ["school", "name"],
+      key: "school.name"
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, Class) => (
+        <Space size="middle">
+          <ClassEditAdd fields={Class} isPUT></ClassEditAdd>
+          <a>Delete</a>
+        </Space>
+      )
+    }
+  ]
+
   return (
     <>
       <div className={styles.body}>
@@ -76,7 +77,7 @@ export default function ManageClass () {
         <Table columns={columns} pagination={false} dataSource={data} rowKey="id" />
 
         <div style={{ float: "right" }}>
-          <ClassEditAdd></ClassEditAdd>
+          <ClassEditAdd fields={{ name: "", year: "", groupleader: "", schoolId: "" }} isPUT={false}></ClassEditAdd>
         </div>
 
         <div className={styles.pagination}>

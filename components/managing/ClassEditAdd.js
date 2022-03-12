@@ -3,7 +3,8 @@ import { Button, Modal, Form, Input, Select } from "antd"
 
 const { Option } = Select
 
-const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isPUT }) => {
+  console.log(isPUT)
   const [form] = Form.useForm()
   const [schools, setSchools] = useState([])
 
@@ -16,11 +17,29 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
     )
   }, [])
 
+  // Parses the fields into a form that antd can use
+  const parsedFields = [fields].map(field => (([{
+    name: ["class", "name"],
+    value: field.name
+  },
+  {
+    name: ["class", "year"],
+    value: field.year
+  },
+  {
+    name: ["class", "groupleader"],
+    value: field.groupleader
+  },
+  {
+    name: ["class", "schoolId"],
+    value: field.schoolId
+  }])))
+
   return (
     <Modal
       visible={visible}
       title="Add a new Class"
-      okText="Create"
+      okText="Save"
       cancelText="Cancel"
       onCancel={onCancel}
       onOk={() => {
@@ -28,7 +47,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           .validateFields()
           .then((values) => {
             form.resetFields()
-            onCreate(values)
+            if (isPUT) {
+              onEdit(values, fields.id)
+            } else {
+              onCreate(values)
+            }
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
@@ -38,7 +61,9 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
       <Form
         form={form}
         layout="vertical"
-        name="school_add"
+        name="class_add"
+        // Uses 0 index because it is an array containing an array
+        fields={parsedFields[0]}
       >
         <Form.Item name={["class", "name"]} label="Class Name" rules={[{ message: "Please input a name!" }]}>
           <Input />
@@ -66,7 +91,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   )
 }
 
-const CollectionsPage = () => {
+const CollectionsPage = ({ fields, isPUT }) => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
@@ -85,6 +110,22 @@ const CollectionsPage = () => {
       })
   }
 
+  const onEdit = (values, id) => {
+    console.log("Received values of form: ", values)
+    setVisible(false)
+    fetch("/api/v1/classes/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values.class)
+    })
+      .then(res => res.json())
+      .then((json) => {
+        console.log("Edit class response: ", json)
+      })
+  }
+
   return (
     <div>
       <Button
@@ -96,8 +137,11 @@ const CollectionsPage = () => {
         Add
       </Button>
       <CollectionCreateForm
+        isPUT={isPUT}
+        fields={fields}
         visible={visible}
         onCreate={onCreate}
+        onEdit={onEdit}
         onCancel={() => {
           setVisible(false)
         }}
@@ -108,7 +152,7 @@ const CollectionsPage = () => {
 
 class ClassEditAdd extends React.Component {
   render () {
-    return <CollectionsPage />
+    return <CollectionsPage fields={this.props.fields} isPUT={this.props.isPUT} />
   }
 }
 
