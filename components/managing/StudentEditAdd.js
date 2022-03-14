@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
+import { useSWRConfig } from "swr"
 
 const { Option } = Select
 
@@ -55,6 +56,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 
 const CollectionsPage = () => {
   const [visible, setVisible] = useState(false)
+  const { mutate } = useSWRConfig()
 
   const onCreate = (values) => {
     console.log("Received values of form: ", values)

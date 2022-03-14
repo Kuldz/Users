@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
+import { useSWRConfig } from "swr"
 
 const { Option } = Select
 
 const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isPUT }) => {
-  console.log(isPUT)
   const [form] = Form.useForm()
   const [schools, setSchools] = useState([])
 
@@ -92,6 +92,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
 }
 
 const CollectionsPage = ({ fields, isPUT }) => {
+  const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
@@ -107,6 +108,7 @@ const CollectionsPage = ({ fields, isPUT }) => {
       .then(res => res.json())
       .then((json) => {
         console.log("Create class response: ", json)
+        mutate("/api/v1/classes")
       })
   }
 
@@ -123,6 +125,7 @@ const CollectionsPage = ({ fields, isPUT }) => {
       .then(res => res.json())
       .then((json) => {
         console.log("Edit class response: ", json)
+        mutate("/api/v1/classes")
       })
   }
 
