@@ -8,14 +8,17 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
   const [form] = Form.useForm()
   const [schools, setSchools] = useState([])
 
-  useEffect(() => {
-    fetch("/api/v1/schools").then(res => res.json()).then(data =>
-      setSchools(data.map(school => ({
-        label: `${school.name}`,
-        value: school.id
-      })))
-    )
-  }, [])
+  if (!isPUT) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      fetch("/api/v1/schools").then(res => res.json()).then(data =>
+        setSchools(data.map(school => ({
+          label: `${school.name}`,
+          value: school.id
+        })))
+      )
+    }, [])
+  }
 
   // Parses the fields into a form that antd can use
   const parsedFields = [fields].map(field => (([{

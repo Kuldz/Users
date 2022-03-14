@@ -14,15 +14,15 @@ export default async function handler (req, res) {
         // if (key === 'clientId')
         //    continue
         if (req.body[key] === null) { delete req.body[key] }
-
-        const Class = await prisma.class.update({
-          where: {
-            id: parseInt(id)
-          },
-          data: req.body
-        })
-        Class ? res.status(200).json({ Class }) : res.status(404).json({ error: `Could not find class by ID ${id}` })
       }
+
+      const Class = await prisma.class.update({
+        where: {
+          id: parseInt(id)
+        },
+        data: req.body
+      })
+      Class ? res.status(200).json({ Class }) : res.status(404).json({ error: `Could not find class by ID ${id}` })
     }
   }
 }
