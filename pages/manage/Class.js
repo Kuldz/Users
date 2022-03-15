@@ -46,11 +46,16 @@ export default function ManageClass () {
       render: (_, Class) => (
         <Space size="middle">
           <ClassEditAdd fields={Class} isPUT></ClassEditAdd>
-          <a>Delete</a>
+          <a onClick={() => handleDelete(class.id)}>Delete</a>
         </Space>
       )
     }
   ]
+
+  const fetcher = (...args) => fetch(...args).then(res => res.json())
+
+  export default function ManageClass () {
+    const { data } = useSWR("/api/v1/class", fetcher)
 
   return (
     <>
