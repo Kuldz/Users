@@ -27,13 +27,12 @@ const schools = [
 
 export default async function schoolIDHandler (req, res) {
   const {
-    method, id
+    method
   } = req
 
   const prisma = new PrismaClient()
 
   switch (method) {
-    
     case "DELETE": {
       await prisma.school.delete({
         where: {
