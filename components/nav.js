@@ -29,7 +29,7 @@ function Nav (props) {
           <a href="/manage/Class"/>
         </Menu.Item>
         <Menu.Item key="profile" icon={<UserOutlined />} style={{ marginLeft: "auto" }}>
-          <a href="/Profile"/>
+          <a href="/profile"/>
         </Menu.Item>
         <Menu.Item key="signout" onClick={() => signOut()}>
           Sign Out
