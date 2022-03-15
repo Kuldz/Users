@@ -52,7 +52,7 @@ const columns = [
     key: "action",
     render: (school) => (
       <Space size="middle">
-        <a>Edit</a>
+        <Edit fields="" isPUT></Edit>
         <a onClick={() => handleDelete(school.id)}>Delete</a>
       </Space>
     )
@@ -92,7 +92,7 @@ export default function ManageSchool () {
         <Table columns={columns} pagination={false} rowKey="id" dataSource={data}/>
 
         <div style={{ float: "right" }}>
-        <schoolAdd></schoolAdd>
+        <Add></Add>
         </div>
 
         <div className={styles.pagination}>

@@ -1,5 +1,5 @@
 import { Menu } from "antd"
-import React, { useState } from "react"
+import React from "react"
 import { MailOutlined, UserOutlined, HomeOutlined } from "@ant-design/icons"
 import { signOut } from "next-auth/react"
 import useUser from "./hooks/useUser"

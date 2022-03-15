@@ -1,8 +1,8 @@
 import React from "react"
 import Head from "next/head"
 import Nav from "../../components/nav"
-import studentAdd from "../../components/add/studentAdd"
-import studentEdit from "../../components/edit/studentEdit"
+import Add from "../../components/add/studentAdd"
+import Edit from "../../components/edit/studentEdit"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
@@ -51,7 +51,7 @@ export default function ManageStudent () {
       key: "action",
       render: (text) => (
         <Space size="middle">
-          <a>Edit</a>
+          <Edit fields="" isPUT></Edit>
           <a>Delete</a>
         </Space>
       )
@@ -86,7 +86,7 @@ export default function ManageStudent () {
         <Table columns={columns} pagination={false} rowKey="id" dataSource={data}/>
 
         <div style={{ float: "right" }}>
-        <studentAdd></studentAdd>
+        <Add></Add>
         </div>
 
         <div className={styles.pagination}>
