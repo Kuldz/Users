@@ -6,15 +6,14 @@ import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
 import useSWR from "swr"
-import DeleteSchool from "../../components/managing/SchoolEditAdd"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
 }
 
-function handleDelete(id) {
-  fetch("/api/v1/schools/"+id, {
-    method: "DELETE",
+function handleDelete (id) {
+  fetch("/api/v1/schools/" + id, {
+    method: "DELETE"
   })
 }
 

@@ -105,5 +105,4 @@ class SchoolEditAdd extends React.Component {
   }
 }
 
-
 export default SchoolEditAdd
