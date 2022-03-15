@@ -25,4 +25,14 @@ export default async function handler (req, res) {
       Class ? res.status(200).json({ Class }) : res.status(404).json({ error: `Could not find class by ID ${id}` })
     }
   }
+
+  case "DELETE": {
+    await prisma.school.delete({
+      where: {
+        id: parseInt(req.query.id)
+      }
+    })
+    res.status(204)
+    break
+  }
 }
