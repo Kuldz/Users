@@ -5,6 +5,7 @@ import StudentEditAdd from "../../components/managing/StudentEditAdd"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
+import useSWR from "swr"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
@@ -13,53 +14,49 @@ function handleChange (value) {
 const { Search } = Input
 const { Option } = Select
 
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name"
-  },
-  {
-    title: "Class",
-    dataIndex: "class",
-    key: "class"
-  },
-  {
-    title: "School",
-    dataIndex: "school",
-    key: "school"
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (text) => (
-      <Space size="middle">
-        <a>Edit</a>
-        <a>Delete</a>
-      </Space>
-    )
-  }
-]
+const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-const data = [
-  {
-    name: "John Brown",
-    class: "Class 1",
-    school: "Tallinna Polütehnikum"
-  },
-  {
-    name: "Jim Green",
-    class: "Class 2",
-    school: "Tallinna Polütehnikum"
-  },
-  {
-    name: "Joe Black",
-    class: "Class 3",
-    school: "Tallinna Polütehnikum"
-  }
-]
+export default function ManageStudent () {
+  const { data } = useSWR("/api/v1/students", fetcher)
 
-export default function manageStudent () {
+  const columns = [
+    {
+      title: "First Name",
+      dataIndex: "firstName",
+      key: "firstName"
+    },
+    {
+      title: "Last Name",
+      dataIndex: "lastName",
+      key: "lastName"
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email"
+    },
+    {
+      title: "School",
+      dataIndex: ["school", "name"],
+      key: "school.name"
+    },
+    {
+      title: "Class",
+      dataIndex: ["class", "name"],
+      key: "class.name"
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (text) => (
+        <Space size="middle">
+          <a>Edit</a>
+          <a>Delete</a>
+        </Space>
+      )
+    }
+  ]
+
   return (
     <>
       <div className={styles.body}>

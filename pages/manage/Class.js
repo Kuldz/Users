@@ -77,7 +77,7 @@ export default function ManageClass () {
         <Table columns={columns} pagination={false} dataSource={data} rowKey="id" />
 
         <div style={{ float: "right" }}>
-          <ClassEditAdd fields={{ name: "", year: "", groupleader: "", schoolId: "" }} isPUT={false}></ClassEditAdd>
+          <ClassEditAdd fields={{ name: "", year: "", groupLeader: "", schoolId: "" }} isPUT={false}></ClassEditAdd>
         </div>
 
         <div className={styles.pagination}>

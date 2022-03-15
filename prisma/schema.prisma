@@ -36,18 +36,20 @@ model Student {
   schoolId  Int
   classId   Int
   school    School @relation(fields: [schoolId], references: [id])
+  class     Class  @relation(fields: [classId], references: [id])
 
   @@index([schoolId])
   @@index([classId])
 }
 
 model Class {
-  id          Int    @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   year        String
   groupLeader String
   schoolId    Int
-  school      School @relation(fields: [schoolId], references: [id])
+  school      School    @relation(fields: [schoolId], references: [id])
+  student     Student[]
 
   @@index([schoolId])
 }

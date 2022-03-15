@@ -1,10 +1,30 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
+import { useSWRConfig } from "swr"
 
-const { Option } = Select
-
-const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
   const [form] = Form.useForm()
+  const [classes, setClasses] = useState([])
+  const [schools, setSchools] = useState([])
+
+  if (!isPUT) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      fetch("/api/v1/classes").then(res => res.json()).then(data =>
+        setClasses(data.map(c => ({
+          label: `${c.name}`,
+          value: c.id
+        })))
+      )
+      fetch("/api/v1/schools").then(res => res.json()).then(data =>
+        setSchools(data.map(school => ({
+          label: `${school.name}`,
+          value: school.id
+        })))
+      )
+    }, [])
+  }
+
   return (
     <Modal
       visible={visible}
@@ -29,24 +49,24 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="school_add"
       >
-        <Form.Item name={["student", "name"]} label="Student Name">
+        <Form.Item name={["student", "firstName"]} label="First Name">
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "class"]} label="Class">
-          <Select placeholder="Select class">
-            <Option value="class1">Class 1</Option>
-            <Option value="class2">Class 2</Option>
-            <Option value="class3">Class 3</Option>
-          </Select>
+        <Form.Item name={["student", "lastName"]} label="Last Name">
+          <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "school"]} label="Type">
-          <Select placeholder="Select school">
-            <Option value="tps">Tallinn Polytechnic School</Option>
-            <Option value="tas">Tallinn Art School</Option>
-            <Option value="kvs">Kuressaare Vocational School</Option>
-          </Select>
+        <Form.Item name={["student", "email"]} label="Email">
+          <Input />
+        </Form.Item>
+
+        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ message: "Please input a school!", type: "number" }]}>
+          <Select placeholder="Select school" options={schools}></Select>
+        </Form.Item>
+
+        <Form.Item name={["student", "classId"]} label="Class" rules={[{ message: "Please input a class!", type: "number" }]}>
+          <Select placeholder="Select class" options={classes}></Select>
         </Form.Item>
       </Form>
     </Modal>
@@ -54,11 +74,24 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 }
 
 const CollectionsPage = () => {
+  const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     setVisible(false)
+    fetch("/api/v1/students", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+    })
+      .then(res => res.json())
+      .then((json) => {
+        console.log("Create student response: ", json)
+        mutate("/api/v1/students")
+      })
   }
 
   return (
