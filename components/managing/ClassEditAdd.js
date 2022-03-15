@@ -30,8 +30,8 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
     value: field.year
   },
   {
-    name: ["class", "groupleader"],
-    value: field.groupleader
+    name: ["class", "groupLeader"],
+    value: field.groupLeader
   },
   {
     name: ["class", "schoolId"],
@@ -82,7 +82,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "groupleader"]} label="Group Leader" rules={[{ message: "Please input a group leader!" }]}>
+        <Form.Item name={["class", "groupLeader"]} label="Group Leader" rules={[{ message: "Please input a group leader!" }]}>
           <Input />
         </Form.Item>
 

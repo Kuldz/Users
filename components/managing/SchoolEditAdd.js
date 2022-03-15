@@ -31,7 +31,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="school_add"
       >
-        <Form.Item name={["school", "regcode"]} label="Registry Code" rules={[{ required: true, message: "Please input a registry code!" }]}>
+        <Form.Item name={["school", "regCode"]} label="Registry Code" rules={[{ required: true, message: "Please input a registry code!" }]}>
           <InputNumber style={{ width: 472 }}/>
         </Form.Item>
 

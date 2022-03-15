@@ -17,8 +17,8 @@ const { Option } = Select
 const columns = [
   {
     title: "Registry Code",
-    dataIndex: "regcode",
-    key: "regcode"
+    dataIndex: "regCode",
+    key: "regCode"
   },
   {
     title: "Name",

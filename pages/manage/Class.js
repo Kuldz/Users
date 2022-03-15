@@ -32,8 +32,8 @@ export default function ManageClass () {
     },
     {
       title: "Group Leader",
-      dataIndex: "groupleader",
-      key: "groupleader"
+      dataIndex: "groupLeader",
+      key: "groupLeader"
     },
     {
       title: "School",
