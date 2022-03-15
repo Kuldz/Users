@@ -6,6 +6,7 @@ generator client {
 datasource db {
   provider             = "mysql"
   url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
@@ -17,7 +18,7 @@ model User {
 
 model School {
   id       Int       @id @default(autoincrement())
-  regcode  Int
+  regCode  Int
   name     String
   type     String
   county   String
@@ -35,15 +36,20 @@ model Student {
   schoolId  Int
   classId   Int
   school    School @relation(fields: [schoolId], references: [id])
+
+  @@index([schoolId])
+  @@index([classId])
 }
 
 model Class {
   id          Int    @id @default(autoincrement())
   name        String
   year        String
-  groupleader String
+  groupLeader String
   schoolId    Int
   school      School @relation(fields: [schoolId], references: [id])
+
+  @@index([schoolId])
 }
 
 model Teacher {
@@ -52,4 +58,6 @@ model Teacher {
   lastName  String
   schoolId  Int
   school    School @relation(fields: [schoolId], references: [id])
+
+  @@index([schoolId])
 }

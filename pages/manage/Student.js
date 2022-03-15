@@ -61,7 +61,7 @@ const data = [
 
 export default function manageStudent () {
   return (
-    <body>
+    <>
       <div className={styles.body}>
         <Head>
           <title>Manage Students</title>
@@ -85,7 +85,7 @@ export default function manageStudent () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} rowKey="name" dataSource={data}/>
+        <Table columns={columns} pagination={false} rowKey="id" dataSource={data}/>
 
         <div style={{ float: "right" }}>
         <StudentEditAdd></StudentEditAdd>
@@ -95,6 +95,6 @@ export default function manageStudent () {
           <Pag></Pag>
         </div>
       </div>
-    </body>
+    </>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Button, Modal, Form, Input, InputNumber, Select } from "antd"
+import { useSWRConfig } from "swr"
 
 const { Option } = Select
 
@@ -30,7 +31,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="school_add"
       >
-        <Form.Item name={["school", "regcode"]} label="Registry Code" rules={[{ required: true, message: "Please input a registry code!" }]}>
+        <Form.Item name={["school", "regCode"]} label="Registry Code" rules={[{ required: true, message: "Please input a registry code!" }]}>
           <InputNumber style={{ width: 472 }}/>
         </Form.Item>
 
@@ -61,6 +62,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 
 const CollectionsPage = () => {
   const [visible, setVisible] = useState(false)
+  const { mutate } = useSWRConfig()
 
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
@@ -75,6 +77,7 @@ const CollectionsPage = () => {
       .then(res => res.json())
       .then((json) => {
         console.log("Create school response: ", json)
+        mutate("/api/v1/schools")
       })
   }
 
