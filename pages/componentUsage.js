@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import Head from "next/head"
-import NavbarAdmin from "../components/navbar.js"
-import SchoolEditAdd from "../components/managing/SchoolEditAdd.js"
+import Nav from "../components/nav"
 
 class componentUsage extends Component {
   render () {
@@ -10,8 +9,7 @@ class componentUsage extends Component {
         <Head>
           <title>Component Usage and Testing</title>
         </Head>
-        <NavbarAdmin />
-        <SchoolEditAdd></SchoolEditAdd>
+        <Nav />
       </div>
     )
   }

@@ -1,7 +1,8 @@
 import React from "react"
 import Head from "next/head"
-import NavbarAdmin from "../../components/navbar"
-import SchoolEditAdd from "../../components/managing/SchoolEditAdd"
+import Nav from "../../components/nav"
+import Add from "../../components/add/studentAdd"
+import Edit from "../../components/edit/studentEdit"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
@@ -11,65 +12,59 @@ function handleChange (value) {
   console.log(`selected ${value}`)
 }
 
-function handleDelete (id) {
-  fetch("/api/v1/schools/" + id, {
-    method: "DELETE"
-  })
-}
-
 const { Search } = Input
 const { Option } = Select
 
-const columns = [
-  {
-    title: "Registry Code",
-    dataIndex: "regCode",
-    key: "regCode"
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name"
-  },
-  {
-    title: "Type",
-    dataIndex: "type",
-    key: "type"
-  },
-  {
-    title: "County",
-    dataIndex: "county",
-    key: "county"
-  },
-  {
-    title: "City",
-    dataIndex: "city",
-    key: "city"
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (school) => (
-      <Space size="middle">
-        <a>Edit</a>
-        <a onClick={() => handleDelete(school.id)}>Delete</a>
-      </Space>
-    )
-  }
-]
-
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-export default function ManageSchool () {
-  const { data } = useSWR("/api/v1/schools", fetcher)
+export default function ManageStudent () {
+  const { data } = useSWR("/api/v1/students", fetcher)
+
+  const columns = [
+    {
+      title: "First Name",
+      dataIndex: "firstName",
+      key: "firstName"
+    },
+    {
+      title: "Last Name",
+      dataIndex: "lastName",
+      key: "lastName"
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email"
+    },
+    {
+      title: "School",
+      dataIndex: ["school", "name"],
+      key: "school.name"
+    },
+    {
+      title: "Class",
+      dataIndex: ["class", "name"],
+      key: "class.name"
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (text) => (
+        <Space size="middle">
+          <Edit fields="" isPUT></Edit>
+          <a>Delete</a>
+        </Space>
+      )
+    }
+  ]
 
   return (
     <>
       <div className={styles.body}>
         <Head>
-          <title>Manage Schools</title>
+          <title>Manage Students</title>
         </Head>
-        <NavbarAdmin></NavbarAdmin>
+        <Nav></Nav>
         <Space split>
           <Select defaultValue="Year" size="large" onChange={handleChange}>
             <Option value="Year">Filter by</Option>
@@ -91,7 +86,7 @@ export default function ManageSchool () {
         <Table columns={columns} pagination={false} rowKey="id" dataSource={data}/>
 
         <div style={{ float: "right" }}>
-        <SchoolEditAdd></SchoolEditAdd>
+        <Add></Add>
         </div>
 
         <div className={styles.pagination}>

@@ -20,24 +20,6 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
     }, [])
   }
 
-  // Parses the fields into a form that antd can use
-  const parsedFields = [fields].map(field => (([{
-    name: ["class", "name"],
-    value: field.name
-  },
-  {
-    name: ["class", "year"],
-    value: field.year
-  },
-  {
-    name: ["class", "groupLeader"],
-    value: field.groupLeader
-  },
-  {
-    name: ["class", "schoolId"],
-    value: field.schoolId
-  }])))
-
   return (
     <Modal
       visible={visible}
@@ -66,7 +48,6 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
         layout="vertical"
         name="class_add"
         // Uses 0 index because it is an array containing an array
-        fields={parsedFields[0]}
       >
         <Form.Item name={["class", "name"]} label="Class Name" rules={[{ message: "Please input a name!" }]}>
           <Input />
@@ -156,10 +137,8 @@ const CollectionsPage = ({ fields, isPUT }) => {
   )
 }
 
-class ClassEditAdd extends React.Component {
-  render () {
-    return <CollectionsPage fields={this.props.fields} isPUT={this.props.isPUT} />
-  }
+function classAdd (props) {
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
 
-export default ClassEditAdd
+export default classAdd

@@ -1,7 +1,8 @@
 import React from "react"
 import Head from "next/head"
-import NavbarAdmin from "../../components/navbar"
-import StudentEditAdd from "../../components/managing/StudentEditAdd"
+import Nav from "../../components/nav"
+import Add from "../../components/add/schoolAdd"
+import Edit from "../../components/edit/schoolEdit"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
@@ -11,59 +12,65 @@ function handleChange (value) {
   console.log(`selected ${value}`)
 }
 
+function handleDelete (id) {
+  fetch("/api/v1/schools/" + id, {
+    method: "DELETE"
+  })
+}
+
 const { Search } = Input
 const { Option } = Select
 
+const columns = [
+  {
+    title: "Registry Code",
+    dataIndex: "regCode",
+    key: "regCode"
+  },
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name"
+  },
+  {
+    title: "Type",
+    dataIndex: "type",
+    key: "type"
+  },
+  {
+    title: "County",
+    dataIndex: "county",
+    key: "county"
+  },
+  {
+    title: "City",
+    dataIndex: "city",
+    key: "city"
+  },
+  {
+    title: "Action",
+    key: "action",
+    render: (school) => (
+      <Space size="middle">
+        <Edit fields="" isPUT></Edit>
+        <a onClick={() => handleDelete(school.id)}>Delete</a>
+      </Space>
+    )
+  }
+]
+
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-export default function ManageStudent () {
-  const { data } = useSWR("/api/v1/students", fetcher)
-
-  const columns = [
-    {
-      title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName"
-    },
-    {
-      title: "Last Name",
-      dataIndex: "lastName",
-      key: "lastName"
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email"
-    },
-    {
-      title: "School",
-      dataIndex: ["school", "name"],
-      key: "school.name"
-    },
-    {
-      title: "Class",
-      dataIndex: ["class", "name"],
-      key: "class.name"
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: (text) => (
-        <Space size="middle">
-          <a>Edit</a>
-          <a>Delete</a>
-        </Space>
-      )
-    }
-  ]
+export default function ManageSchool () {
+  const { data } = useSWR("/api/v1/schools", fetcher)
 
   return (
     <>
       <div className={styles.body}>
         <Head>
-          <title>Manage Students</title>
+          <title>Manage Schools</title>
         </Head>
-        <NavbarAdmin></NavbarAdmin>
+        <Nav></Nav>
         <Space split>
           <Select defaultValue="Year" size="large" onChange={handleChange}>
             <Option value="Year">Filter by</Option>
@@ -85,7 +92,7 @@ export default function ManageStudent () {
         <Table columns={columns} pagination={false} rowKey="id" dataSource={data}/>
 
         <div style={{ float: "right" }}>
-        <StudentEditAdd></StudentEditAdd>
+        <Add></Add>
         </div>
 
         <div className={styles.pagination}>

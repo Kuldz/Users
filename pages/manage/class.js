@@ -1,7 +1,8 @@
 import React from "react"
 import Head from "next/head"
-import NavbarAdmin from "../../components/navbar"
-import ClassEditAdd from "../../components/managing/ClassEditAdd"
+import Nav from "../../components/nav"
+import Add from "../../components/add/classAdd"
+import Edit from "../../components/edit/classEdit"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
@@ -45,7 +46,7 @@ export default function ManageClass () {
       key: "action",
       render: (_, Class) => (
         <Space size="middle">
-          <ClassEditAdd fields={Class} isPUT></ClassEditAdd>
+          <Edit fields={Class} isPUT></Edit>
           <a>Delete</a>
         </Space>
       )
@@ -58,7 +59,7 @@ export default function ManageClass () {
       <Head>
         <title>Manage Classes</title>
       </Head>
-      <NavbarAdmin></NavbarAdmin>
+      <Nav></Nav>
       <Space split>
         <Select defaultValue="Year" size="large" onChange={handleChange}>
           <Option value="Year">Filter by</Option>
@@ -77,7 +78,7 @@ export default function ManageClass () {
         <Table columns={columns} pagination={false} dataSource={data} rowKey="id" />
 
         <div style={{ float: "right" }}>
-          <ClassEditAdd fields={{ name: "", year: "", groupLeader: "", schoolId: "" }} isPUT={false}></ClassEditAdd>
+          <Add></Add>
         </div>
 
         <div className={styles.pagination}>
