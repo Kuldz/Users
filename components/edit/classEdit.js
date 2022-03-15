@@ -135,8 +135,8 @@ const CollectionsPage = ({ fields, isPUT }) => {
   return (
     <div>
       <a onClick={() => {
-          setVisible(true)
-        }}>Edit</a>
+        setVisible(true)
+      }}>Edit</a>
       <CollectionCreateForm
         isPUT={isPUT}
         fields={fields}
@@ -151,7 +151,7 @@ const CollectionsPage = ({ fields, isPUT }) => {
   )
 }
 
-function classEdit(props) {
+function classEdit (props) {
   return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
 

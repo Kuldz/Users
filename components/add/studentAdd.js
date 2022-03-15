@@ -115,7 +115,7 @@ const CollectionsPage = () => {
   )
 }
 
-function studentAdd(props) {
+function studentAdd (props) {
   return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
 

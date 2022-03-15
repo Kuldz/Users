@@ -102,7 +102,7 @@ const CollectionsPage = () => {
   )
 }
 
-function schoolEdit(props) {
+function schoolEdit (props) {
   return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
 
