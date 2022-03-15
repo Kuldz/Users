@@ -6,40 +6,30 @@ import useUser from "./hooks/useUser"
 
 // This component was transformed from React.Component to the more standardized Default Function
 
-export default function NavbarAdmin (props) {
-  const [state, setState] = useState({
-    theme: "dark",
-    current: "mail"
-  })
-
+function Nav(props) {
   const user = useUser() // Redirects to login if not logged in
   if (!user) return null // Avoids flickering
 
-  const handleClick = e => {
-    console.log("click ", e)
-    setState({ current: e.key })
-  }
-
   return (
     <>
-      <Menu theme={state.theme} onClick={handleClick} selectedKeys={[state.current]} mode="horizontal">
-        <Menu.Item key="home" icon={<HomeOutlined /> }>
+      <Menu theme='dark' selectedKeys={window.location.pathname} mode="horizontal">
+        <Menu.Item key="/" icon={<HomeOutlined /> }>
           <a href="/"/>
         </Menu.Item>
-        <Menu.Item key="empty" icon={<MailOutlined />}>
-          Empty
+        <Menu.Item key="newsstuff" icon={<MailOutlined />}>
+          News
         </Menu.Item>
-        <Menu.Item key="schools">Manage Schools
+        <Menu.Item key="/manage/School">Manage Schools
           <a href="/manage/School"/>
         </Menu.Item>
-        <Menu.Item key="students">Manage Students
-          <a href="/manage/Student"/>
+        <Menu.Item key="/manage/Student">Manage Students
+          <a href="/manage/student"/>
         </Menu.Item>
-        <Menu.Item key="classes">Manage Classes
+        <Menu.Item key="/manage/Class">Manage Classes
           <a href="/manage/Class"/>
         </Menu.Item>
         <Menu.Item key="profile" icon={<UserOutlined />} style={{ marginLeft: "auto" }}>
-          Profile
+          <a href="/Profile"/>
         </Menu.Item>
         <Menu.Item key="signout" onClick={() => signOut()}>
           Sign Out
@@ -48,3 +38,5 @@ export default function NavbarAdmin (props) {
     </>
   )
 }
+
+export default Nav

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Button, Modal, Form, Input, Select } from "antd"
+import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
 const { Option } = Select
@@ -134,14 +134,9 @@ const CollectionsPage = ({ fields, isPUT }) => {
 
   return (
     <div>
-      <Button
-        type="primary"
-        onClick={() => {
+      <a onClick={() => {
           setVisible(true)
-        }}
-      >
-        Add
-      </Button>
+        }}>Edit</a>
       <CollectionCreateForm
         isPUT={isPUT}
         fields={fields}
@@ -156,10 +151,8 @@ const CollectionsPage = ({ fields, isPUT }) => {
   )
 }
 
-class ClassEditAdd extends React.Component {
-  render () {
-    return <CollectionsPage fields={this.props.fields} isPUT={this.props.isPUT} />
-  }
+function classEdit(props) {
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
 
-export default ClassEditAdd
+export default classEdit

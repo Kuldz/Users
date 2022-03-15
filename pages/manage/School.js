@@ -1,7 +1,8 @@
 import React from "react"
 import Head from "next/head"
-import NavbarAdmin from "../../components/navbar"
-import SchoolEditAdd from "../../components/managing/SchoolEditAdd"
+import Nav from "../../components/nav"
+import Add from "../../components/add/schoolAdd"
+import Edit from "../../components/edit/schoolEdit"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
@@ -69,7 +70,7 @@ export default function ManageSchool () {
         <Head>
           <title>Manage Schools</title>
         </Head>
-        <NavbarAdmin></NavbarAdmin>
+        <Nav></Nav>
         <Space split>
           <Select defaultValue="Year" size="large" onChange={handleChange}>
             <Option value="Year">Filter by</Option>
@@ -91,7 +92,7 @@ export default function ManageSchool () {
         <Table columns={columns} pagination={false} rowKey="id" dataSource={data}/>
 
         <div style={{ float: "right" }}>
-        <SchoolEditAdd></SchoolEditAdd>
+        <schoolAdd></schoolAdd>
         </div>
 
         <div className={styles.pagination}>

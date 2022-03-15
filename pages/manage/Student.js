@@ -1,7 +1,8 @@
 import React from "react"
 import Head from "next/head"
-import NavbarAdmin from "../../components/navbar"
-import StudentEditAdd from "../../components/managing/StudentEditAdd"
+import Nav from "../../components/nav"
+import studentAdd from "../../components/add/studentAdd"
+import studentEdit from "../../components/edit/studentEdit"
 import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
@@ -63,7 +64,7 @@ export default function ManageStudent () {
         <Head>
           <title>Manage Students</title>
         </Head>
-        <NavbarAdmin></NavbarAdmin>
+        <Nav></Nav>
         <Space split>
           <Select defaultValue="Year" size="large" onChange={handleChange}>
             <Option value="Year">Filter by</Option>
@@ -85,7 +86,7 @@ export default function ManageStudent () {
         <Table columns={columns} pagination={false} rowKey="id" dataSource={data}/>
 
         <div style={{ float: "right" }}>
-        <StudentEditAdd></StudentEditAdd>
+        <studentAdd></studentAdd>
         </div>
 
         <div className={styles.pagination}>

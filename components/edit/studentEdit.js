@@ -115,10 +115,9 @@ const CollectionsPage = () => {
   )
 }
 
-class StudentEditAdd extends React.Component {
-  render () {
-    return <CollectionsPage />
-  }
+function studentEdit(props) {
+
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
 
-export default StudentEditAdd
+export default studentEdit

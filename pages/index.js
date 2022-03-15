@@ -1,10 +1,10 @@
 import React from "react"
-import NavbarAdmin from "../components/navbar"
+import Nav from "../components/nav"
 
 export default function Home () {
   return (
     <div>
-      <NavbarAdmin></NavbarAdmin>
+      <Nav></Nav>
     </div>
   )
 }
