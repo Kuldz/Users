@@ -31,7 +31,6 @@ export default async function schoolIDHandler (req, res) {
         }),
         prisma.class.count()
       ])
-      console.log(totalCount)
       res.status(200).json({ classes, totalCount })
       break
     }

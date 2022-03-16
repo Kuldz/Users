@@ -1,9 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/studentAdd"
 import Edit from "../../components/edit/studentEdit"
-import Pag from "../../components/pagination"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
 import useSWR from "swr"
@@ -18,7 +17,15 @@ const { Option } = Select
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageStudent () {
-  const { data } = useSWR("/api/v1/students", fetcher)
+  const [page, setPage] = useState(1)
+  const handlePageChange = page => {
+    setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
+  }
+  const { data, error, isValidating } = useSWR("/api/v1/students" + "/?page=" + page, fetcher)
+  if (error) {
+    console.log(error)
+    return <div>failed to load</div>
+  }
 
   const columns = [
     {
@@ -83,14 +90,16 @@ export default function ManageStudent () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} rowKey="id" dataSource={data}/>
+        <Table
+        loading={isValidating}
+        columns={columns}
+        pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
+        rowKey="id"
+        dataSource={data?.students || []}
+        />
 
         <div style={{ float: "right" }}>
         <Add></Add>
-        </div>
-
-        <div className={styles.pagination}>
-          <Pag page={"students"}></Pag>
         </div>
       </div>
     </>
