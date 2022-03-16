@@ -1,8 +1,12 @@
+# Users
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-### NB! It is now *required* to fill out the NEXTAUTH_SECRET variable for anything to work.
+### NB! It is now *required* to fill out the NEXTAUTH_SECRET variable for anything to work
+
+Make sure database is setup before attempting to access pages that depend on a database!
 
 First, run the development server:
 
@@ -24,6 +28,12 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ### Set Up Database
 
+NB! Always run the following command after schema changes or changing the database url!
+
+```bash
+npx prisma generate
+```
+
 * Install MySQL 8.0
 * Go make a copy of .env.example, paste it as .env and fill it with your credentials
 * Run migrations with commands:
@@ -39,16 +49,10 @@ npx prisma migrate dev
 npx prisma db seed
 ```
 
-We use prisma.io as ORM, read more at https://www.prisma.io/docs/concepts
+We use prisma.io as ORM, read more at <https://www.prisma.io/docs/concepts>
 
 * To see the table in Prisma Studio, run:
 
 ```bash
 npx prisma studio
 ```
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
