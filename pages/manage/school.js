@@ -50,10 +50,10 @@ const columns = [
   {
     title: "Action",
     key: "action",
-    render: (school, School) => (
+    render: (_, School) => (
       <Space size="middle">
-        <Edit fields={school} isPUT></Edit>
-        <a onClick={() => handleDelete(school.id)}>Delete</a>
+        <Edit fields={School} isPUT></Edit>
+        <a onClick={() => handleDelete(_.id)}>Delete</a>
       </Space>
     )
   }
