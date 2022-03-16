@@ -1,0 +1,16 @@
+.profile {
+    position: absolute;
+    /* background-color: yellowgreen; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.button {
+    margin-right: 5px;
+}
+
+.pright {
+    float: right
+}

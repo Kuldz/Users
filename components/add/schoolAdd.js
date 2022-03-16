@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { Button, Modal, Form, Input, Select } from "antd"
+import { Button, Modal, Form, Input, InputNumber, Select } from "antd"
+import { useSWRConfig } from "swr"
 
 const { Option } = Select
 
@@ -9,7 +10,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   return (
     <Modal
       visible={visible}
-      title="Add a new Class"
+      title="Add a new School"
       okText="Create"
       cancelText="Cancel"
       onCancel={onCancel}
@@ -30,30 +31,29 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="school_add"
       >
-        <Form.Item name={["class", "name"]} label="Class Name" rules={[{ message: "Please input a name!" }]}>
+        <Form.Item name={["school", "regCode"]} label="Registry Code" rules={[{ required: true, message: "Please input a registry code!" }]}>
+          <InputNumber style={{ width: 472 }}/>
+        </Form.Item>
+
+        <Form.Item name={["school", "name"]} label="Name" rules={[{ required: true, message: "Please input a name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "year"]} label="Year" rules={[{ message: "Please input a starting year!" }]}>
-          <Select placeholder="Select starting year">
-            <Option value="2021">2021</Option>
-            <Option value="2020">2020</Option>
-            <Option value="2019">2019</Option>
-            <Option value="2018">2018</Option>
-            <Option value="2017">2017</Option>
+        <Form.Item name={["school", "type"]} label="Type" rules={[{ required: true, message: "Please input a type!" }]}>
+          <Select placeholder="Select school type">
+            <Option value="Primary School">Primary School</Option>
+            <Option value="High School">High School</Option>
+            <Option value="Vocational School">Vocational School</Option>
+            <Option value="University">University</Option>
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "grouplead"]} label="Group Leader" rules={[{ message: "Please input a group leader!" }]}>
+        <Form.Item name={["school", "county"]} label="County" rules={[{ required: true, message: "Please input a county!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "school"]} label="School" rules={[{ message: "Please input a school!" }]}>
-          <Select placeholder="Select school">
-            <Option value="Tallinn Polytechnic School">Tallinn Polytechnic School</Option>
-            <Option value="Tartu Art School">Tartu Art School</Option>
-            <Option value="Kuressaare Vocational School">Kuressaare Vocational School</Option>
-          </Select>
+        <Form.Item name={["school", "city"]} label="City" rules={[{ required: true, message: "Please input a city!" }]}>
+          <Input />
         </Form.Item>
       </Form>
     </Modal>
@@ -62,11 +62,12 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 
 const CollectionsPage = () => {
   const [visible, setVisible] = useState(false)
+  const { mutate } = useSWRConfig()
 
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     setVisible(false)
-    fetch("/api/v1/classes", {
+    fetch("/api/v1/schools", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -75,7 +76,8 @@ const CollectionsPage = () => {
     })
       .then(res => res.json())
       .then((json) => {
-        console.log("Create class response: ", json)
+        console.log("Create school response: ", json)
+        mutate("/api/v1/schools")
       })
   }
 
@@ -100,10 +102,6 @@ const CollectionsPage = () => {
   )
 }
 
-class ClassEditAdd extends React.Component {
-  render () {
-    return <CollectionsPage />
-  }
+export default function schoolAdd (props) {
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
-
-export default ClassEditAdd

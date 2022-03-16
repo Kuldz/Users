@@ -1,14 +1,19 @@
 import PropTypes from "prop-types"
 import React from "react"
 import "antd/dist/antd.css"
+import { SessionProvider } from "next-auth/react"
 
-function MyApp ({ Component, pageProps }) {
-  return <Component {...pageProps} />
+export default function MyApp ({
+  Component, pageProps: { session, ...pageProps }
+}) {
+  return (
+    <SessionProvider session={session}>
+      <Component {...pageProps}/>
+    </SessionProvider>
+  )
 }
 
 MyApp.propTypes = {
   pageProps: PropTypes.shape({}),
   Component: PropTypes.elementType
 }
-
-export default MyApp

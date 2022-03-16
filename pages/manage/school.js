@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import Head from "next/head"
-import NavbarAdmin from "../../components/navbar"
-import SchoolEditAdd from "../../components/managing/SchoolEditAdd"
-import Pag from "../../components/pagination"
+import Nav from "../../components/navigation"
+import Add from "../../components/add/schoolAdd"
+import Edit from "../../components/edit/schoolEdit"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select } from "antd"
 import useSWR from "swr"
@@ -11,14 +11,20 @@ function handleChange (value) {
   console.log(`selected ${value}`)
 }
 
+function handleDelete (id) {
+  fetch("/api/v1/schools/" + id, {
+    method: "DELETE"
+  })
+}
+
 const { Search } = Input
 const { Option } = Select
 
 const columns = [
   {
     title: "Registry Code",
-    dataIndex: "regcode",
-    key: "regcode"
+    dataIndex: "regCode",
+    key: "regCode"
   },
   {
     title: "Name",
@@ -43,10 +49,10 @@ const columns = [
   {
     title: "Action",
     key: "action",
-    render: (text) => (
+    render: (_, School) => (
       <Space size="middle">
-        <a>Edit</a>
-        <a>Delete</a>
+        <Edit fields={School} isPUT></Edit>
+        <a onClick={() => handleDelete(_.id)}>Delete</a>
       </Space>
     )
   }
@@ -55,15 +61,23 @@ const columns = [
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageSchool () {
-  const { data } = useSWR("/api/v1/schools", fetcher)
+  const [page, setPage] = useState(1)
+  const handlePageChange = page => {
+    setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
+  }
+  const { data, error, isValidating } = useSWR("/api/v1/schools" + "/?page=" + page, fetcher)
+  if (error) {
+    console.log(error)
+    return <div>failed to load</div>
+  }
 
   return (
-    <body>
+    <>
       <div className={styles.body}>
         <Head>
           <title>Manage Schools</title>
         </Head>
-        <NavbarAdmin></NavbarAdmin>
+        <Nav></Nav>
         <Space split>
           <Select defaultValue="Year" size="large" onChange={handleChange}>
             <Option value="Year">Filter by</Option>
@@ -82,16 +96,18 @@ export default function ManageSchool () {
 
       <div className={styles.container}>
 
-        <Table columns={columns} pagination={false} rowKey="school" dataSource={data}/>
+        <Table
+        loading={isValidating}
+        columns={columns}
+        pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
+        rowKey="id"
+        dataSource={data?.schools || []}
+        />
 
         <div style={{ float: "right" }}>
-        <SchoolEditAdd></SchoolEditAdd>
-        </div>
-
-        <div className={styles.pagination}>
-          <Pag></Pag>
+        <Add></Add>
         </div>
       </div>
-    </body>
+    </>
   )
 }
