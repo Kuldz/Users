@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client"
 
 export default async function schoolIDHandler (req, res) {
   const {
-    method
+    method, query: { page }
   } = req
 
   const prisma = new PrismaClient()
@@ -17,8 +17,14 @@ export default async function schoolIDHandler (req, res) {
       break
     }
     case "GET": {
-      const schools = await prisma.school.findMany()
-      res.status(200).json(schools)
+      const [schools, totalCount] = await prisma.$transaction([
+        prisma.school.findMany({
+          skip: parseInt((page - 1) * 10) ?? 0,
+          take: 10
+        }),
+        prisma.school.count()
+      ])
+      res.status(200).json({ schools, totalCount })
       break
     }
   }

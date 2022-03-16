@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client"
 
 export default async function schoolIDHandler (req, res) {
   const {
-    method, id
+    method, id, query: { page }
   } = req
 
   const prisma = new PrismaClient()
@@ -17,16 +17,21 @@ export default async function schoolIDHandler (req, res) {
       break
     }
     case "GET": {
-      const classes = await prisma.class.findMany({
-        include: {
-          school: {
-            select: {
-              name: true
+      const [classes, totalCount] = await prisma.$transaction([
+        prisma.class.findMany({
+          skip: parseInt((page - 1) * 10) ?? 0,
+          take: 10,
+          include: {
+            school: {
+              select: {
+                name: true
+              }
             }
           }
-        }
-      })
-      res.status(200).json(classes)
+        }),
+        prisma.class.count()
+      ])
+      res.status(200).json({ classes, totalCount })
       break
     }
     case "DELETE": {
