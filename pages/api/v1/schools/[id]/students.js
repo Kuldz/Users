@@ -59,15 +59,6 @@ export default async function handler (req, res) {
       break
     }
 
-    case "POST": {
-      console.log(req.body)
-      const newSchool = await prisma.school.create({
-        data: req.body.school
-      })
-      res.status(201).json(newSchool)
-      break
-    }
-
     default:
       res.status(405)
       break
