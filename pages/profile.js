@@ -2,10 +2,10 @@ import React from "react"
 import Head from "next/head"
 import Nav from "../components/navigation"
 import styles from "../styles/Profile.module.css"
-import { Card, Avatar, Button, Col, Row } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Card, Avatar, Button, Col, Row } from "antd"
+import { UserOutlined } from "@ant-design/icons"
 
-const { Meta } = Card;
+const { Meta } = Card
 
 export default function Profile () {
   return (
@@ -16,9 +16,9 @@ export default function Profile () {
         </Head>
         <Nav></Nav>
         <div className={styles.profile}>
-          <Card style={{ width: 600, margin: 14, borderColor:"#001529", borderWidth:"2px", borderRadius:"5px" }}>
-            <Meta 
-              avatar={<Avatar size={100} style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />}/>}
+          <Card style={{ width: 600, margin: 14, borderColor: "#001529", borderWidth: "2px", borderRadius: "5px" }}>
+            <Meta
+              avatar={<Avatar size={100} style={{ backgroundColor: "#87d068" }} icon={<UserOutlined />}/>}
               title="Upload your avatar"
               description={<>
                 <p>Photo should be at least 300px x 300px</p>
