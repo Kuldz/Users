@@ -90,7 +90,7 @@ export default function ManageStudent () {
         </div>
 
         <div className={styles.pagination}>
-          <Pag></Pag>
+          <Pag page={"students"}></Pag>
         </div>
       </div>
     </>

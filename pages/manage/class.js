@@ -18,7 +18,12 @@ const { Option } = Select
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageClass () {
-  const { data } = useSWR("/api/v1/classes", fetcher)
+  const { data, error } = useSWR("/api/v1/classes?page=1", fetcher)
+  if (error) {
+    console.log(error)
+    return <div>failed to load</div>
+  }
+  if (!data) return <div>loading...</div>
 
   const columns = [
     {
@@ -75,14 +80,14 @@ export default function ManageClass () {
       </Space>
     </div><div className={styles.container}>
 
-        <Table columns={columns} pagination={false} dataSource={data} rowKey="id" />
+        <Table columns={columns} pagination={false} dataSource={data.classes} rowKey="id" />
 
         <div style={{ float: "right" }}>
           <Add></Add>
         </div>
 
         <div className={styles.pagination}>
-          <Pag></Pag>
+          <Pag page={"classes"}></Pag>
         </div>
       </div>
     </>

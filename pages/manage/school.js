@@ -96,7 +96,7 @@ export default function ManageSchool () {
         </div>
 
         <div className={styles.pagination}>
-          <Pag></Pag>
+          <Pag page={"schools"}></Pag>
         </div>
       </div>
     </>
