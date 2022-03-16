@@ -96,14 +96,9 @@ const CollectionsPage = () => {
 
   return (
     <div>
-      <Button
-        type="primary"
-        onClick={() => {
-          setVisible(true)
-        }}
-      >
-        Add
-      </Button>
+      <a onClick={() => {
+        setVisible(true)
+      }}>Edit</a>
       <CollectionCreateForm
         visible={visible}
         onCreate={onCreate}
