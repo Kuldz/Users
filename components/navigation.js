@@ -17,16 +17,20 @@ export default function Nav (props) {
         <Menu.Item key="news" icon={<MailOutlined />}>
           News
         </Menu.Item>
-        <Menu.Item key="/manage/school">Manage Schools
+        <Menu.Item key="/manage/school">
+          Manage Schools
           <a href="/manage/school"/>
         </Menu.Item>
-        <Menu.Item key="/manage/student">Manage Students
+        <Menu.Item key="/manage/student">
+          Manage Students
           <a href="/manage/student"/>
         </Menu.Item>
-        <Menu.Item key="/manage/class">Manage Classes
+        <Menu.Item key="/manage/class">
+          Manage Classes
           <a href="/manage/class"/>
         </Menu.Item>
         <Menu.Item key="profile" icon={<UserOutlined />} style={{ marginLeft: "auto" }}>
+          Profile
           <a href="/profile"/>
         </Menu.Item>
         <Menu.Item key="signout" onClick={() => signOut()}>
