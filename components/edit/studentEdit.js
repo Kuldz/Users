@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Button, Modal, Form, Input, Select } from "antd"
+import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
@@ -96,14 +96,9 @@ const CollectionsPage = () => {
 
   return (
     <div>
-      <Button
-        type="primary"
-        onClick={() => {
-          setVisible(true)
-        }}
-      >
-        Add
-      </Button>
+      <a onClick={() => {
+        setVisible(true)
+      }}>Edit</a>
       <CollectionCreateForm
         visible={visible}
         onCreate={onCreate}
@@ -115,8 +110,6 @@ const CollectionsPage = () => {
   )
 }
 
-function studentEdit (props) {
+export default function studentEdit (props) {
   return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
-
-export default studentEdit

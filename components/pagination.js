@@ -1,21 +1,16 @@
 import { Pagination } from "antd"
 import React from "react"
 
-class Pag extends React.Component {
-  state = {
+export default function Pag (props) {
+  props.state = {
     current: 3
-  };
+  }
 
-  onChange = page => {
+  props.onChange = page => {
     console.log(page)
-    this.setState({
+    props.setState({
       current: page
     })
-  };
-
-  render () {
-    return <Pagination current={this.state.current} onChange={this.onChange} total={50} />
   }
+  return <Pagination current={props.state.current} onChange={props.onChange} total={50} />
 }
-
-export default Pag

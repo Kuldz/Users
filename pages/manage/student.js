@@ -1,6 +1,6 @@
 import React from "react"
 import Head from "next/head"
-import Nav from "../../components/nav"
+import Nav from "../../components/navigation"
 import Add from "../../components/add/studentAdd"
 import Edit from "../../components/edit/studentEdit"
 import Pag from "../../components/pagination"

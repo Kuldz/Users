@@ -4,9 +4,7 @@ import { MailOutlined, UserOutlined, HomeOutlined } from "@ant-design/icons"
 import { signOut } from "next-auth/react"
 import useUser from "./hooks/useUser"
 
-// This component was transformed from React.Component to the more standardized Default Function
-
-function Nav (props) {
+export default function Nav (props) {
   const user = useUser() // Redirects to login if not logged in
   if (!user) return null // Avoids flickering
 
@@ -16,17 +14,17 @@ function Nav (props) {
         <Menu.Item key="/" icon={<HomeOutlined /> }>
           <a href="/"/>
         </Menu.Item>
-        <Menu.Item key="newsstuff" icon={<MailOutlined />}>
+        <Menu.Item key="news" icon={<MailOutlined />}>
           News
         </Menu.Item>
-        <Menu.Item key="/manage/School">Manage Schools
-          <a href="/manage/School"/>
+        <Menu.Item key="/manage/school">Manage Schools
+          <a href="/manage/school"/>
         </Menu.Item>
-        <Menu.Item key="/manage/Student">Manage Students
+        <Menu.Item key="/manage/student">Manage Students
           <a href="/manage/student"/>
         </Menu.Item>
-        <Menu.Item key="/manage/Class">Manage Classes
-          <a href="/manage/Class"/>
+        <Menu.Item key="/manage/class">Manage Classes
+          <a href="/manage/class"/>
         </Menu.Item>
         <Menu.Item key="profile" icon={<UserOutlined />} style={{ marginLeft: "auto" }}>
           <a href="/profile"/>
@@ -38,5 +36,3 @@ function Nav (props) {
     </>
   )
 }
-
-export default Nav

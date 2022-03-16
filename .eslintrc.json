@@ -7,7 +7,8 @@
     "extends": [
         "next/core-web-vitals",
         "plugin:react/recommended",
-        "standard"
+        "standard",
+        "plugin:react-prefer-function-component/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -18,7 +19,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-prefer-function-component"
     ],
     "rules": {
         "@next/next/no-html-link-for-pages": "off",
