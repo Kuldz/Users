@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Button, Modal, Form, Input, Select } from "antd"
+import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
