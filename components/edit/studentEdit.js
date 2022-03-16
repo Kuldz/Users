@@ -110,8 +110,6 @@ const CollectionsPage = () => {
   )
 }
 
-function studentEdit (props) {
+export default function studentEdit (props) {
   return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
-
-export default studentEdit

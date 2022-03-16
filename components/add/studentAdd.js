@@ -115,8 +115,6 @@ const CollectionsPage = () => {
   )
 }
 
-function studentAdd (props) {
+export default function studentAdd (props) {
   return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
-
-export default studentAdd

@@ -4,9 +4,7 @@ import { MailOutlined, UserOutlined, HomeOutlined } from "@ant-design/icons"
 import { signOut } from "next-auth/react"
 import useUser from "./hooks/useUser"
 
-// This component was transformed from React.Component to the more standardized Default Function
-
-function Nav (props) {
+export default function Nav (props) {
   const user = useUser() // Redirects to login if not logged in
   if (!user) return null // Avoids flickering
 
@@ -38,5 +36,3 @@ function Nav (props) {
     </>
   )
 }
-
-export default Nav

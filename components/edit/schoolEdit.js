@@ -97,8 +97,6 @@ const CollectionsPage = () => {
   )
 }
 
-function schoolEdit (props) {
+export default function schoolEdit (props) {
   return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
 }
-
-export default schoolEdit

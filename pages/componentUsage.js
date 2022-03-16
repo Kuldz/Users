@@ -2,7 +2,7 @@ import React from "react"
 import Head from "next/head"
 import Nav from "../components/navigation"
 
-function componentUsage () {
+export default function componentUsage () {
   return (
     <div>
       <Head>
@@ -12,5 +12,3 @@ function componentUsage () {
     </div>
   )
 }
-
-export default componentUsage
