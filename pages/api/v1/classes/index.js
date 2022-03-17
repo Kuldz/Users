@@ -19,7 +19,7 @@ export default async function schoolIDHandler (req, res) {
     case "GET": {
       const [classes, totalCount] = await prisma.$transaction([
         prisma.class.findMany({
-          skip: parseInt((page - 1) * 10) ?? 0,
+          skip: parseInt((page - 1) * 10) || 0,
           take: 10,
           include: {
             school: {
