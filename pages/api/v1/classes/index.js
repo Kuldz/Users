@@ -16,6 +16,7 @@ export default async function schoolIDHandler (req, res) {
       res.status(201).json(newClass)
       break
     }
+
     case "GET": {
       const [classes, totalCount] = await prisma.$transaction([
         prisma.class.findMany({
@@ -34,6 +35,7 @@ export default async function schoolIDHandler (req, res) {
       res.status(200).json({ classes, totalCount })
       break
     }
+
     case "DELETE": {
       await prisma.class.delete({
         where: {
