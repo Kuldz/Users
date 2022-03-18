@@ -16,6 +16,7 @@ export default async function schoolIDHandler (req, res) {
       res.status(201).json(school)
       break
     }
+
     case "GET": {
       const [schools, totalCount] = await prisma.$transaction([
         prisma.school.findMany({
