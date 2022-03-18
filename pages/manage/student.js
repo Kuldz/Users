@@ -56,9 +56,9 @@ export default function ManageStudent () {
     {
       title: "Action",
       key: "action",
-      render: (text) => (
+      render: (_, Student) => (
         <Space size="middle">
-          <Edit fields="" isPUT></Edit>
+          <Edit fields={Student} isPUT></Edit>
           <a>Delete</a>
         </Space>
       )
