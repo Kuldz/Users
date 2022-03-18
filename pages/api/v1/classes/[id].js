@@ -23,7 +23,6 @@ export default async function classIdHandler (req, res) {
       Class ? res.status(200).json({ Class }) : res.status(404).json({ error: `Could not find class by ID ${id}` })
       break
     }
-
     case "DELETE": {
       await prisma.class.delete({
         where: {

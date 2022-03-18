@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client"
 
 export default async function schoolIDHandler (req, res) {
   const {
-    method, id, query: { page }
+    method, query: { page }
   } = req
 
   const prisma = new PrismaClient()
@@ -33,16 +33,6 @@ export default async function schoolIDHandler (req, res) {
         prisma.class.count()
       ])
       res.status(200).json({ classes, totalCount })
-      break
-    }
-
-    case "DELETE": {
-      await prisma.class.delete({
-        where: {
-          id: id
-        }
-      })
-      res.status(204)
       break
     }
   }
