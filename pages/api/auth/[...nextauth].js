@@ -18,10 +18,7 @@ export default NextAuth({
         console.log("made it to authorize")
         console.log("credentials", credentials)
         try {
-          console.log("nextauth url" + process.env.NEXTAUTH_URL)
-          console.log("vercel url" + process.env.VERCEL_URL)
-          console.log("next public vercel url" + process.env.NEXT_PUBLIC_VERCEL_URL)
-          const res = await fetch(process.env.NEXTAUTH_URL || process.env.VERCEL_URL + "/api/v1/login", {
+          const res = await fetch(process.env.NEXTAUTH_URL || ("https://" + process.env.VERCEL_URL) + "/api/v1/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
