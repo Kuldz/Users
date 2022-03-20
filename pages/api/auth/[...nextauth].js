@@ -19,7 +19,7 @@ export default NextAuth({
         console.log("credentials", credentials)
         try {
           console.log(process.env.NEXTAUTH_URL)
-          const res = await fetch(process.env.NEXTAUTH_URL + "/api/v1/login", {
+          const res = await fetch(process.env.NEXTAUTH_URL || process.env.VERCEL_URL + "/api/v1/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
