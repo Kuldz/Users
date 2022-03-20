@@ -18,7 +18,7 @@ export default NextAuth({
         console.log("made it to authorize")
         console.log("credentials", credentials)
         try {
-          const res = await fetch("http://localhost:3000/api/v1/login", {
+          const res = await fetch(process.env.NEXTAUTH_URL + "/api/v1/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
