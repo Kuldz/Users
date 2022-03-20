@@ -1,8 +1,5 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
 
 export default NextAuth({
   providers: [
@@ -21,20 +18,25 @@ export default NextAuth({
         console.log("made it to authorize")
         console.log("credentials", credentials)
         try {
-          const user = await prisma.user.findUnique({
-            where: {
-              email: credentials.email
-            }
+          const res = await fetch("http://localhost:3000/api/v1/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(credentials)
           })
+          if (res.status === 401) {
+            throw new Error("Invalid credentials")
+          }
 
-          if (user && user.password === credentials.password) {
-            // Any object returned will be saved in `user` property of the JWT
-            console.log("Authorization successful!", user)
+          const user = await res.json()
+
+          if (res.ok && user) {
+            console.log("user: ", user)
             return user
           }
         } catch (e) {
-          console.log(e)
-          const errorMessage = e.response.data.message
+          const errorMessage = e.message
           throw new Error(errorMessage + "&email=" + credentials.email)
         }
       }
