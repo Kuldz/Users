@@ -18,6 +18,7 @@ export default NextAuth({
         console.log("made it to authorize")
         console.log("credentials", credentials)
         try {
+          console.log(process.env.NEXTAUTH_URL)
           const res = await fetch(process.env.NEXTAUTH_URL + "/api/v1/login", {
             method: "POST",
             headers: {
