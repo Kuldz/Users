@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 
-export default async function schoolIdHandler (req, res) {
+export default async function studentIdHandler (req, res) {
   const {
     query: { id },
     method
@@ -14,18 +14,18 @@ export default async function schoolIdHandler (req, res) {
         if (req.body[key] === null) { delete req.body[key] }
       }
 
-      const School = await prisma.school.update({
+      const Student = await prisma.student.update({
         where: {
           id: parseInt(id)
         },
         data: req.body
       })
-      School ? res.status(200).json({ School }) : res.status(404).json({ error: `Could not find school by ID ${id}` })
+      Student ? res.status(200).json({ Student }) : res.status(404).json({ error: `Could not find student by ID ${id}` })
       break
     }
 
     case "DELETE": {
-      await prisma.school.delete({
+      await prisma.student.delete({
         where: {
           id: parseInt(req.query.id)
         }

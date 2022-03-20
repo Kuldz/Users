@@ -11,6 +11,12 @@ function handleChange (value) {
   console.log(`selected ${value}`)
 }
 
+function handleDelete (id) {
+  fetch("/api/v1/students/" + id, {
+    method: "DELETE"
+  })
+}
+
 const { Search } = Input
 const { Option } = Select
 
@@ -56,10 +62,10 @@ export default function ManageStudent () {
     {
       title: "Action",
       key: "action",
-      render: (text) => (
+      render: (_, Student) => (
         <Space size="middle">
-          <Edit fields="" isPUT></Edit>
-          <a>Delete</a>
+          <Edit fields={Student} isPUT></Edit>
+          <a onClick={() => handleDelete(_.id)}>Delete</a>
         </Space>
       )
     }

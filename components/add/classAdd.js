@@ -12,7 +12,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.map(school => ({
+        setSchools(data.schools.map(school => ({
           label: `${school.name}`,
           value: school.id
         })))

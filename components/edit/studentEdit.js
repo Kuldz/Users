@@ -2,22 +2,43 @@ import React, { useState, useEffect } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
-const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
+const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
   const [form] = Form.useForm()
   const [classes, setClasses] = useState([])
   const [schools, setSchools] = useState([])
+
+  const parsedFields = [fields].map(field => (([{
+    name: ["student", "firstName"],
+    value: field.firstName
+  },
+  {
+    name: ["student", "lastName"],
+    value: field.lastName
+  },
+  {
+    name: ["student", "email"],
+    value: field.email
+  },
+  {
+    name: ["student", "schoolId"],
+    value: field.schoolId
+  },
+  {
+    name: ["student", "classId"],
+    value: field.classId
+  }])))
 
   if (!isPUT) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       fetch("/api/v1/classes").then(res => res.json()).then(data =>
-        setClasses(data.map(c => ({
+        setClasses(data.classes.map(c => ({
           label: `${c.name}`,
           value: c.id
         })))
       )
       fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.map(school => ({
+        setSchools(data.schools.map(school => ({
           label: `${school.name}`,
           value: school.id
         })))
@@ -28,8 +49,8 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
   return (
     <Modal
       visible={visible}
-      title="Add a new Student"
-      okText="Create"
+      title="Edit Student"
+      okText="Save"
       cancelText="Cancel"
       onCancel={onCancel}
       onOk={() => {
@@ -37,7 +58,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
           .validateFields()
           .then((values) => {
             form.resetFields()
-            onCreate(values)
+            onEdit(values, fields.id)
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
@@ -47,13 +68,14 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
       <Form
         form={form}
         layout="vertical"
-        name="school_add"
+        name="student_edit"
+        fields={parsedFields[0]}
       >
-        <Form.Item name={["student", "firstName"]} label="First Name">
+        <Form.Item name={["student", "firstName"]} label="First Name" rules={[{ required: true, message: "Please input a first name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "lastName"]} label="Last Name">
+        <Form.Item name={["student", "lastName"]} label="Last Name" rules={[{ required: true, message: "Please input a last name!" }]}>
           <Input />
         </Form.Item>
 
@@ -61,11 +83,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ message: "Please input a school!", type: "number" }]}>
+        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ required: true, message: "Please input a school!", type: "number" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
 
-        <Form.Item name={["student", "classId"]} label="Class" rules={[{ message: "Please input a class!", type: "number" }]}>
+        <Form.Item name={["student", "classId"]} label="Class" rules={[{ required: true, message: "Please input a class!", type: "number" }]}>
           <Select placeholder="Select class" options={classes}></Select>
         </Form.Item>
       </Form>
@@ -73,23 +95,23 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
   )
 }
 
-const CollectionsPage = () => {
+const CollectionsPage = ({ fields }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
-  const onCreate = (values) => {
+  const onEdit = (values, id) => {
     console.log("Received values of form: ", values)
     setVisible(false)
-    fetch("/api/v1/students", {
-      method: "POST",
+    fetch("/api/v1/students/" + id, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(values)
+      body: JSON.stringify(values.student)
     })
       .then(res => res.json())
       .then((json) => {
-        console.log("Create student response: ", json)
+        console.log("Edit student response: ", json)
         mutate("/api/v1/students")
       })
   }
@@ -100,8 +122,9 @@ const CollectionsPage = () => {
         setVisible(true)
       }}>Edit</a>
       <CollectionCreateForm
+        fields={fields}
         visible={visible}
-        onCreate={onCreate}
+        onEdit={onEdit}
         onCancel={() => {
           setVisible(false)
         }}

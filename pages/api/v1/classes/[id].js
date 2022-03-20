@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 
-export default async function handler (req, res) {
+export default async function classIdHandler (req, res) {
   const {
     query: { id },
     method
@@ -11,8 +11,6 @@ export default async function handler (req, res) {
   switch (method) {
     case "PUT": {
       for (const key in req.body) {
-        // if (key === 'clientId')
-        //    continue
         if (req.body[key] === null) { delete req.body[key] }
       }
 
@@ -25,8 +23,9 @@ export default async function handler (req, res) {
       Class ? res.status(200).json({ Class }) : res.status(404).json({ error: `Could not find class by ID ${id}` })
       break
     }
+
     case "DELETE": {
-      await prisma.school.delete({
+      await prisma.class.delete({
         where: {
           id: parseInt(req.query.id)
         }
