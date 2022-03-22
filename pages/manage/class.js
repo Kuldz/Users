@@ -28,7 +28,7 @@ export default function ManageClass () {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
 
-  const { data, error, isValidating } = useSWR("/api/v1/classes" + "/?page=" + page, fetcher)
+  const { data, error, isValidating } = useSWR(`/api/v1/classes?page=${page}`, fetcher)
   if (error) {
     console.log(error)
     return <div>failed to load</div>

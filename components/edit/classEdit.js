@@ -4,7 +4,7 @@ import { useSWRConfig } from "swr"
 
 const { Option } = Select
 
-const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isPUT }) => {
+const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
   const [form] = Form.useForm()
   const [schools, setSchools] = useState([])
 
@@ -50,11 +50,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           .validateFields()
           .then((values) => {
             form.resetFields()
-            if (isPUT) {
-              onEdit(values, fields.id)
-            } else {
-              onCreate(values)
-            }
+            onEdit(values, fields.id)
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
@@ -98,23 +94,6 @@ const CollectionsPage = ({ fields, isPUT }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
-  const onCreate = (values) => {
-    console.log("Received values of form: ", values)
-    setVisible(false)
-    fetch("/api/v1/classes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(values)
-    })
-      .then(res => res.json())
-      .then((json) => {
-        console.log("Create class response: ", json)
-        mutate("/api/v1/classes")
-      })
-  }
-
   const onEdit = (values, id) => {
     console.log("Received values of form: ", values)
     setVisible(false)
@@ -128,7 +107,8 @@ const CollectionsPage = ({ fields, isPUT }) => {
       .then(res => res.json())
       .then((json) => {
         console.log("Edit class response: ", json)
-        mutate("/api/v1/classes")
+        console.log("page", json.page)
+        mutate(`/api/v1/classes/${json.page}`)
       })
   }
 
@@ -141,7 +121,6 @@ const CollectionsPage = ({ fields, isPUT }) => {
         isPUT={isPUT}
         fields={fields}
         visible={visible}
-        onCreate={onCreate}
         onEdit={onEdit}
         onCancel={() => {
           setVisible(false)
