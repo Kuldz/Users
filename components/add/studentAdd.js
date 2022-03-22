@@ -57,7 +57,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "email"]} label="Email">
+        <Form.Item name={["student", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }]}>
           <Input />
         </Form.Item>
 
