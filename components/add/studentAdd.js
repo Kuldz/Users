@@ -61,11 +61,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ required: true, message: "Please input a school!", type: "number" }]}>
+        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ type: "number" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
 
-        <Form.Item name={["student", "classId"]} label="Class" rules={[{ required: true, message: "Please input a class!", type: "number" }]}>
+        <Form.Item name={["student", "classId"]} label="Class" rules={[{ type: "number" }]}>
           <Select placeholder="Select class" options={classes}></Select>
         </Form.Item>
       </Form>
