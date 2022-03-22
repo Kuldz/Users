@@ -4,7 +4,7 @@ import Nav from "../../components/navigation"
 import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
 import styles from "../../styles/Manage.module.css"
-import { Input, Table, Space, Select } from "antd"
+import { Input, Table, Space, Select, Popconfirm, Button } from "antd"
 import useSWR from "swr"
 
 function handleChange (value) {
@@ -61,7 +61,11 @@ export default function ManageClass () {
       render: (_, Class) => (
         <Space size="middle">
           <Edit fields={Class} isPUT></Edit>
-          <a onClick={() => handleDelete(_.id)}>Delete</a>
+          <Popconfirm title="Are you sure you want to delete this Class?"
+                onConfirm={() => handleDelete(_.id)}
+                okText="Yes" cancelText="No">
+            <Button type="link" icon="Delete"/>
+          </Popconfirm>
         </Space>
       )
     }
