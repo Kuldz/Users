@@ -1,0 +1,146 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #1e2731;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.ant-table {
+  background: #1e2731;
+  color:#d3d3d3;
+}
+
+.ant-table-thead>tr>th {
+  background: #1c242e;
+  color: #f0f8ff
+}
+.ant-table a {
+  color: #1890ff;
+}
+
+.ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark, .ant-menu.ant-menu-dark .ant-menu-sub {
+  background: #12171d
+}
+
+.ant-table-tbody>tr>td, .ant-table-thead>tr>th, .ant-table tfoot>tr>td, .ant-table tfoot>tr>th {
+  border-bottom: 1px solid #1c242e;
+}
+
+.ant-pagination-next .ant-pagination-item-link, .ant-pagination-prev .ant-pagination-item-link {
+  background: #2a3644;
+  color:#f0f8ff;
+  border: 1px solid #1c242e;
+}
+
+.ant-pagination-item-active {
+  background: #2a3644;
+}
+
+.ant-pagination-item {
+  background: #2a3644;
+  color: #f0f8ff;
+  border: 1px solid #1c242e;
+}
+
+.ant-pagination-item a {
+  color: #f0f8ff;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background: #2a3644;
+  color:#f0f8ff;
+  border: 1px solid #1c242e;
+}
+
+.ant-select-arrow {
+  color:#f0f8ff;
+}
+
+.ant-input-affix-wrapper {
+  background: #2a3644;
+  border: 1px solid #1c242e;
+}
+
+.ant-input {
+  background: #2a3644;
+  border: 1px solid #12171d;
+  color:#d3d3d3;
+}
+
+.ant-input-group-addon {
+  color:#f0f8ff;
+  border: 1px solid #1c242e;
+}
+
+.ant-card {
+  background: #1e2731;
+  color:#f0f8ff;
+}
+
+.ant-card-bordered {
+  border: 1px solid #1c242e;
+}
+
+.ant-card-meta-title {
+  color:#f0f8ff;
+}
+
+h3 {
+  color:#f0f8ff;
+}
+
+p {
+  color:#d3d3d3;
+}
+
+.ant-form-item-label>label {
+  color:#f0f8ff;
+}
+
+.anticon svg {
+  color:#f0f8ff;
+}
+
+.ant-modal-content {
+  background-color: #12171d;
+}
+
+.ant-modal-header {
+  background-color: #14191f;
+  border: 1px solid #14191f;
+}
+
+.ant-modal-title {
+  color: #f0f8ff;
+}
+
+.ant-modal-footer {
+  border: 1px solid #12171d;
+}
+
+.ant-input-number {
+  background: #2a3644;
+  color: #d3d3d3;
+  border: 1px solid #1c242e;
+}
+
+.ant-input-number-handler-wrap {
+  background: #2a3644;
+  color: #f0f8ff;
+  border: 1px solid #2a3644;
+}
+
+.ant-input-number-handler {
+  border-left: 1px solid #2a3644;
+  border-top: 1px solid #2a3644;
+}
+
+.ant-table-tbody>tr.ant-table-row:hover>td, .ant-table-tbody>tr>td.ant-table-cell-row-hover {
+  background: #2a3644;
+}
+
+* {
+  box-sizing: border-box;
+}

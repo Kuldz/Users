@@ -20,44 +20,6 @@ function handleDelete (id) {
 const { Search } = Input
 const { Option } = Select
 
-const columns = [
-  {
-    title: "Registry Code",
-    dataIndex: "regCode",
-    key: "regCode"
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name"
-  },
-  {
-    title: "Type",
-    dataIndex: "type",
-    key: "type"
-  },
-  {
-    title: "County",
-    dataIndex: "county",
-    key: "county"
-  },
-  {
-    title: "City",
-    dataIndex: "city",
-    key: "city"
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, School) => (
-      <Space size="middle">
-        <Edit fields={School} isPUT></Edit>
-        <a onClick={() => handleDelete(_.id)}>Delete</a>
-      </Space>
-    )
-  }
-]
-
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageSchool () {
@@ -65,11 +27,49 @@ export default function ManageSchool () {
   const handlePageChange = page => {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
-  const { data, error, isValidating } = useSWR("/api/v1/schools" + "/?page=" + page, fetcher)
+  const { data, error, isValidating } = useSWR(`/api/v1/schools?page=${page}`, fetcher)
   if (error) {
     console.log(error)
     return <div>failed to load</div>
   }
+
+  const columns = [
+    {
+      title: "Registry Code",
+      dataIndex: "regCode",
+      key: "regCode"
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name"
+    },
+    {
+      title: "Type",
+      dataIndex: "type",
+      key: "type"
+    },
+    {
+      title: "County",
+      dataIndex: "county",
+      key: "county"
+    },
+    {
+      title: "City",
+      dataIndex: "city",
+      key: "city"
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, School) => (
+        <Space size="middle">
+          <Edit fields={School} page={page}></Edit>
+          <a onClick={() => handleDelete(_.id)}>Delete</a>
+        </Space>
+      )
+    }
+  ]
 
   return (
     <>
@@ -105,7 +105,7 @@ export default function ManageSchool () {
         />
 
         <div style={{ float: "right" }}>
-        <Add></Add>
+        <Add page={page}></Add>
         </div>
       </div>
     </>

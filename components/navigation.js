@@ -29,7 +29,7 @@ export default function Nav (props) {
           Manage Classes
           <a href="/manage/class"/>
         </Menu.Item>
-        <Menu.Item key="profile" icon={<UserOutlined />} style={{ marginLeft: "auto" }}>
+        <Menu.Item key="/profile" icon={<UserOutlined />} style={{ marginLeft: "auto" }}>
           Profile
           <a href="/profile"/>
         </Menu.Item>

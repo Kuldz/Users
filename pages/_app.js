@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import React from "react"
-import "antd/dist/antd.css"
+import "antd/dist/antd.variable.min.css"
+import "../styles/global.css"
 import { SessionProvider } from "next-auth/react"
 
 export default function MyApp ({

@@ -28,7 +28,7 @@ export default function ManageClass () {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
 
-  const { data, error, isValidating } = useSWR("/api/v1/classes" + "/?page=" + page, fetcher)
+  const { data, error, isValidating } = useSWR(`/api/v1/classes?page=${page}`, fetcher)
   if (error) {
     console.log(error)
     return <div>failed to load</div>
@@ -60,7 +60,7 @@ export default function ManageClass () {
       key: "action",
       render: (_, Class) => (
         <Space size="middle">
-          <Edit fields={Class} isPUT></Edit>
+          <Edit fields={Class} isPUT page={page}></Edit>
           <Popconfirm title="Are you sure you want to delete this Class?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
@@ -102,7 +102,7 @@ export default function ManageClass () {
         />
 
         <div style={{ float: "right" }}>
-          <Add></Add>
+          <Add page={page}></Add>
         </div>
       </div>
     </>
