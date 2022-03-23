@@ -4,7 +4,7 @@ import Nav from "../../components/navigation"
 import Add from "../../components/add/schoolAdd"
 import Edit from "../../components/edit/schoolEdit"
 import styles from "../../styles/Manage.module.css"
-import { Input, Table, Space, Select, Popconfirm, Button } from "antd"
+import { Input, Table, Space, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
 function handleChange (value) {
@@ -74,7 +74,7 @@ export default function ManageSchool () {
           <Popconfirm title="Are you sure you want to delete this school?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
-            <Button type="link" icon="Delete"/>
+            <a>Delete</a>
           </Popconfirm>
         </Space>
       )
