@@ -75,7 +75,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
   )
 }
 
-const CollectionsPage = ({ fields, isPUT }) => {
+const CollectionsPage = ({ fields, isPUT, page }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -92,7 +92,7 @@ const CollectionsPage = ({ fields, isPUT }) => {
       .then(res => res.json())
       .then((json) => {
         console.log("Create class response: ", json)
-        mutate("/api/v1/classes")
+        mutate(`/api/v1/classes?page=${page}`)
       })
   }
 
@@ -138,5 +138,5 @@ const CollectionsPage = ({ fields, isPUT }) => {
 }
 
 export default function classAdd (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
 }
