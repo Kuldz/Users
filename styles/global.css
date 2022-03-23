@@ -29,19 +29,19 @@ body {
 }
 
 .ant-pagination-next .ant-pagination-item-link, .ant-pagination-prev .ant-pagination-item-link {
-  background: #1e2731;
+  background: #2a3644;
   color:#f0f8ff;
-  border: 1px solid #12171d;
+  border: 1px solid #1c242e;
 }
 
 .ant-pagination-item-active {
-  background: #1e2731;
+  background: #2a3644;
 }
 
 .ant-pagination-item {
-  background: #1e2731;
+  background: #2a3644;
   color: #f0f8ff;
-  border: 1px solid #12171d;
+  border: 1px solid #1c242e;
 }
 
 .ant-pagination-item a {
@@ -49,9 +49,9 @@ body {
 }
 
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  background: #1e2731;
+  background: #2a3644;
   color:#f0f8ff;
-  border: 1px solid #12171d;
+  border: 1px solid #1c242e;
 }
 
 .ant-select-arrow {
@@ -59,17 +59,19 @@ body {
 }
 
 .ant-input-affix-wrapper {
-  background: #1e2731;
-  border: 1px solid #12171d;
+  background: #2a3644;
+  border: 1px solid #1c242e;
 }
 
 .ant-input {
-  background: #1e2731;
+  background: #2a3644;
+  border: 1px solid #12171d;
+  color:#d3d3d3;
 }
 
 .ant-input-group-addon {
   color:#f0f8ff;
-  border: 1px solid #12171d;
+  border: 1px solid #1c242e;
 }
 
 .ant-card {
@@ -78,7 +80,7 @@ body {
 }
 
 .ant-card-bordered {
-  border: 1px solid #12171d;
+  border: 1px solid #1c242e;
 }
 
 .ant-card-meta-title {
@@ -97,13 +99,42 @@ p {
   color:#f0f8ff;
 }
 
-.ant-input {
-  border: 1px solid #12171d;
-  color:#d3d3d3;
-}
-
 .anticon svg {
   color:#f0f8ff;
+}
+
+.ant-modal-content {
+  background-color: #12171d;
+}
+
+.ant-modal-header {
+  background-color: #14191f;
+  border: 1px solid #14191f;
+}
+
+.ant-modal-title {
+  color: #f0f8ff;
+}
+
+.ant-modal-footer {
+  border: 1px solid #12171d;
+}
+
+.ant-input-number {
+  background: #2a3644;
+  color: #d3d3d3;
+  border: 1px solid #1c242e;
+}
+
+.ant-input-number-handler-wrap {
+  background: #2a3644;
+  color: #f0f8ff;
+  border: 1px solid #2a3644;
+}
+
+.ant-input-number-handler {
+  border-left: 1px solid #2a3644;
+  border-top: 1px solid #2a3644;
 }
 
 * {
