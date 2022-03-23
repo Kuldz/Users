@@ -25,7 +25,7 @@ body {
 }
 .ant-table-thead>tr>th {
   background: #1c242e;
-  color: #f0f8ff
+  color: #ffffff
 }
 .ant-table a {
   color: #43b581;
@@ -41,7 +41,7 @@ body {
 
 .ant-pagination-next .ant-pagination-item-link, .ant-pagination-prev .ant-pagination-item-link {
   background: #2a3644;
-  color:#f0f8ff;
+  color:#ffffff;
   border: 1px solid #1c242e;
 }
 
@@ -51,22 +51,22 @@ body {
 
 .ant-pagination-item {
   background: #2a3644;
-  color: #f0f8ff;
+  color: #ffffff;
   border: 1px solid #1c242e;
 }
 
 .ant-pagination-item a {
-  color: #f0f8ff;
+  color: #ffffff;
 }
 
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   background: #2a3644;
-  color:#f0f8ff;
+  color:#ffffff;
   border: 1px solid #1c242e;
 }
 
 .ant-select-arrow {
-  color:#f0f8ff;
+  color:#ffffff;
 }
 
 .ant-input-affix-wrapper {
@@ -76,18 +76,18 @@ body {
 
 .ant-input {
   background: #2a3644;
-  border: 1px solid #12171d;
+  border: 1px solid #1c242e;
   color:#d3d3d3;
 }
 
 .ant-input-group-addon {
-  color:#f0f8ff;
+  color:#ffffff;
   border: 1px solid #1c242e;
 }
 
 .ant-card {
   background: #1e2731;
-  color:#f0f8ff;
+  color:#ffffff;
 }
 
 .ant-card-bordered {
@@ -95,11 +95,11 @@ body {
 }
 
 .ant-card-meta-title {
-  color:#f0f8ff;
+  color:#ffffff;
 }
 
 h3 {
-  color:#f0f8ff;
+  color:#ffffff;
 }
 
 p {
@@ -107,11 +107,11 @@ p {
 }
 
 .ant-form-item-label>label {
-  color:#f0f8ff;
+  color:#ffffff;
 }
 
 .anticon svg {
-  color:#f0f8ff;
+  color:#ffffff;
 }
 
 .ant-modal-content {
@@ -124,7 +124,7 @@ p {
 }
 
 .ant-modal-title {
-  color: #f0f8ff;
+  color: #ffffff;
 }
 
 .ant-modal-footer {
@@ -139,7 +139,7 @@ p {
 
 .ant-input-number-handler-wrap {
   background: #2a3644;
-  color: #f0f8ff;
+  color: #ffffff;
   border: 1px solid #2a3644;
 }
 
