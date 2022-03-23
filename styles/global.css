@@ -1,0 +1,77 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #1e2731;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.ant-table {
+  background: #1e2731;
+  color:#d3d3d3;
+}
+
+.ant-table-thead>tr>th {
+  background: #1c242e;
+  color: #f0f8ff
+}
+.ant-table a {
+  color: #1890ff;
+}
+
+.ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark, .ant-menu.ant-menu-dark .ant-menu-sub {
+  background: #12171d
+}
+
+.ant-table-tbody>tr>td, .ant-table-thead>tr>th, .ant-table tfoot>tr>td, .ant-table tfoot>tr>th {
+  border-bottom: 1px solid #1c242e;
+}
+
+.ant-pagination-next .ant-pagination-item-link, .ant-pagination-prev .ant-pagination-item-link {
+  background: #1e2731;
+  color:#f0f8ff;
+  border: 1px solid #12171d;
+}
+
+.ant-pagination-item-active {
+  background: #1e2731;
+}
+
+.ant-pagination-item {
+  background: #1e2731;
+  color: #f0f8ff;
+  border: 1px solid #12171d;
+}
+
+.ant-pagination-item a {
+  color: #f0f8ff;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background: #1e2731;
+  color:#f0f8ff;
+  border: 1px solid #12171d;
+}
+
+.ant-select-arrow {
+  color:#f0f8ff;
+}
+
+.ant-input-affix-wrapper {
+  background: #1e2731;
+  border: 1px solid #12171d;
+}
+
+.ant-input {
+  background: #1e2731;
+}
+
+.ant-input-group-addon {
+  color:#f0f8ff;
+  border: 1px solid #12171d;
+}
+
+* {
+  box-sizing: border-box;
+}

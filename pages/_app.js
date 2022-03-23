@@ -1,7 +1,16 @@
 import PropTypes from "prop-types"
 import React from "react"
-import "antd/dist/antd.css"
+import { ConfigProvider } from "antd"
+import "antd/dist/antd.variable.min.css"
+import "../styles/global.css"
 import { SessionProvider } from "next-auth/react"
+
+ConfigProvider.config({
+  theme: {
+    primaryColor: "#2275c9",
+    "background-color": "#12171d"
+  }
+})
 
 export default function MyApp ({
   Component, pageProps: { session, ...pageProps }
