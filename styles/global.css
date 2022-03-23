@@ -72,6 +72,40 @@ body {
   border: 1px solid #12171d;
 }
 
+.ant-card {
+  background: #1e2731;
+  color:#f0f8ff;
+}
+
+.ant-card-bordered {
+  border: 1px solid #12171d;
+}
+
+.ant-card-meta-title {
+  color:#f0f8ff;
+}
+
+h3 {
+  color:#f0f8ff;
+}
+
+p {
+  color:#d3d3d3;
+}
+
+.ant-form-item-label>label {
+  color:#f0f8ff;
+}
+
+.ant-input {
+  border: 1px solid #12171d;
+  color:#d3d3d3;
+}
+
+.anticon svg {
+  color:#f0f8ff;
+}
+
 * {
   box-sizing: border-box;
 }
