@@ -4,7 +4,7 @@ import Nav from "../../components/navigation"
 import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
 import styles from "../../styles/Manage.module.css"
-import { Input, Table, Space, Select, Popconfirm, Button } from "antd"
+import { Input, Table, Space, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
 function handleChange (value) {
