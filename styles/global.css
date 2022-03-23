@@ -137,6 +137,10 @@ p {
   border-top: 1px solid #2a3644;
 }
 
+.ant-table-tbody>tr.ant-table-row:hover>td, .ant-table-tbody>tr>td.ant-table-cell-row-hover {
+  background: #2a3644;
+}
+
 * {
   box-sizing: border-box;
 }
