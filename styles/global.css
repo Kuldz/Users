@@ -235,6 +235,9 @@ p {
   border-color: #43b581;
 }
 
+.ant-menu-dark .ant-menu-item, .ant-menu-dark .ant-menu-item-group-title, .ant-menu-dark .ant-menu-item>a, .ant-menu-dark .ant-menu-item>span>a {
+  color:#ffffff;
+}
 * {
   box-sizing: border-box;
 }
