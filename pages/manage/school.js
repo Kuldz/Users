@@ -74,7 +74,7 @@ export default function ManageSchool () {
           <Popconfirm title="Are you sure you want to delete this school?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
-            <Button color="red" type="link" icon="Delete"/>
+            <Button type="link" icon="Delete"/>
           </Popconfirm>
         </Space>
       )
