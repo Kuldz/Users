@@ -21,6 +21,12 @@ export default async function schoolIdHandler (req, res) {
         data: req.body
       })
       School ? res.status(200).json({ School }) : res.status(404).json({ error: `Could not find school by ID ${id}` })
+
+      const regCode = School.regCode
+
+      if (regCode.toString().length !== 8 || regCode < 0) {
+        return console.error("incorrect format")
+      }
       break
     }
 
