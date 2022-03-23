@@ -168,6 +168,73 @@ p {
   color:#f0f8ff;
 }
 
+.ant-btn-primary:focus, .ant-btn-primary:hover {
+  border-color: #5edaa2;
+  background: #5edaa2;
+}
+
+.ant-pagination-item-active:focus-visible, .ant-pagination-item-active:hover {
+  border-color: #43b581;
+}
+
+.ant-pagination-item-active:focus-visible a, .ant-pagination-item-active:hover a {
+  color: #43b581;
+}
+
+.ant-pagination-item:hover {
+  border-color: #43b581;
+}
+
+.ant-pagination-item:hover, .ant-pagination-item:hover a {
+  color: #43b581;
+}
+
+.ant-pagination-next:hover, .ant-pagination-next:hover a{
+  border-color: #43b581;
+}
+
+.ant-pagination-next:focus-visible .ant-pagination-item-link, .ant-pagination-next:hover .ant-pagination-item-link, .ant-pagination-prev:focus-visible .ant-pagination-item-link, .ant-pagination-prev:hover .ant-pagination-item-link {
+  border-color: #43b581;
+  color: #43b581;
+}
+
+.ant-input-number:hover {
+  border-color: #43b581;
+}
+
+.ant-input-number-focused, .ant-input-number:focus{
+  border-color: #43b581;
+}
+
+.ant-input:hover {
+  border-color: #43b581;
+}
+
+.ant-input-focused, .ant-input:focus{
+  border-color: #43b581;
+}
+
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-color: #43b581;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #43b581;
+}
+
+.ant-btn:hover {
+  border-color: #43b581;
+  color: #43b581;
+}
+
+.ant-input-affix-wrapper-focused, .ant-input-affix-wrapper:focus{
+  border-color: #43b581;
+}
+
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+  border-color: #43b581;
+}
+
 * {
   box-sizing: border-box;
 }
