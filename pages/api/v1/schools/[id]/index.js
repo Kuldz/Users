@@ -36,7 +36,7 @@ export default async function schoolIdHandler (req, res) {
           id: parseInt(req.query.id)
         }
       })
-      res.status(204)
+      res.status(200).json({ message: "School deleted" })
       break
     }
   }
