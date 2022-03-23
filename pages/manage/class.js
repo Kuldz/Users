@@ -60,7 +60,7 @@ export default function ManageClass () {
       key: "action",
       render: (_, Class) => (
         <Space size="middle">
-          <Edit fields={Class} isPUT></Edit>
+          <Edit fields={Class} page={page}></Edit>
           <a onClick={() => handleDelete(_.id)}>Delete</a>
         </Space>
       )
@@ -98,7 +98,7 @@ export default function ManageClass () {
         />
 
         <div style={{ float: "right" }}>
-          <Add></Add>
+          <Add page={page}></Add>
         </div>
       </div>
     </>

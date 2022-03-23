@@ -82,7 +82,7 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields }) => {
   )
 }
 
-const CollectionsPage = ({ fields }) => {
+const CollectionsPage = ({ fields, page }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -99,7 +99,7 @@ const CollectionsPage = ({ fields }) => {
       .then(res => res.json())
       .then((json) => {
         console.log("Edit school response: ", json)
-        mutate("/api/v1/schools")
+        mutate(`/api/v1/schools?page=${page}`)
       })
   }
 
@@ -121,5 +121,5 @@ const CollectionsPage = ({ fields }) => {
 }
 
 export default function schoolEdit (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
 }

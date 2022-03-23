@@ -27,7 +27,7 @@ export default function ManageStudent () {
   const handlePageChange = page => {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
-  const { data, error, isValidating } = useSWR("/api/v1/students" + "/?page=" + page, fetcher)
+  const { data, error, isValidating } = useSWR(`/api/v1/students?page=${page}`, fetcher)
   if (error) {
     console.log(error)
     return <div>failed to load</div>
@@ -64,7 +64,7 @@ export default function ManageStudent () {
       key: "action",
       render: (_, Student) => (
         <Space size="middle">
-          <Edit fields={Student} isPUT></Edit>
+          <Edit fields={Student} page={page}></Edit>
           <a onClick={() => handleDelete(_.id)}>Delete</a>
         </Space>
       )
@@ -105,7 +105,7 @@ export default function ManageStudent () {
         />
 
         <div style={{ float: "right" }}>
-        <Add></Add>
+        <Add page={page}></Add>
         </div>
       </div>
     </>
