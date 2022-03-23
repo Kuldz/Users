@@ -18,7 +18,7 @@ export default function Profile () {
         <div className={styles.profile}>
           <Card style={{ width: 600, margin: 14, borderColor: "#12171d", borderWidth: "2px", borderRadius: "5px" }}>
             <Meta
-              avatar={<Avatar size={100} style={{ backgroundColor: "#2275c9" }} icon={<UserOutlined />}/>}
+              avatar={<Avatar size={100} style={{ backgroundColor: "#43b581" }} icon={<UserOutlined />}/>}
               title="Upload your avatar"
               description={<>
                 <p>Photo should be at least 300px x 300px</p>
