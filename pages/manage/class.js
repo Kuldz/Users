@@ -69,7 +69,7 @@ export default function ManageClass () {
           <Popconfirm title="Are you sure you want to delete this Class?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
-            <Button type="link" icon="Delete"/>
+            <a>Delete</a>
           </Popconfirm>
         </Space>
       )

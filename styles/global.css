@@ -118,6 +118,17 @@ p {
   background-color: #12171d;
 }
 
+.ant-popover-inner {
+  background: #12171d;
+}
+
+.ant-popover-arrow-content {
+  background-color:#12171d;
+}
+
+.ant-popover-message {
+  color:#ffffff;
+}
 .ant-modal-header {
   background-color: #14191f;
   border: 1px solid #14191f;
