@@ -49,11 +49,11 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
         name="class_add"
         // Uses 0 index because it is an array containing an array
       >
-        <Form.Item name={["class", "name"]} label="Class Name" rules={[{ message: "Please input a name!" }]}>
+        <Form.Item name={["class", "name"]} label="Name" rules={[{ required: true, message: "Please input a name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "year"]} label="Year" rules={[{ message: "Please input a starting year!" }]}>
+        <Form.Item name={["class", "year"]} label="Starting Year" rules={[{ required: true, message: "Please input a starting year!" }]}>
           <Select placeholder="Select starting year">
             <Option value="2021">2021</Option>
             <Option value="2020">2020</Option>
@@ -63,11 +63,11 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "groupLeader"]} label="Group Leader" rules={[{ message: "Please input a group leader!" }]}>
+        <Form.Item name={["class", "groupLeader"]} label="Group Leader">
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "schoolId"]} label="School" rules={[{ message: "Please input a school!", type: "number" }]}>
+        <Form.Item name={["class", "schoolId"]} label="School" rules={[{ required: true, message: "Please input a school!", type: "number" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
       </Form>

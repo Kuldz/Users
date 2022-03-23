@@ -35,8 +35,8 @@ model Student {
   email     String? @unique
   schoolId  Int
   classId   Int
-  school    School @relation(fields: [schoolId], references: [id])
-  class     Class  @relation(fields: [classId], references: [id])
+  school    School? @relation(fields: [schoolId], references: [id])
+  class     Class?  @relation(fields: [classId], references: [id])
 
   @@index([schoolId])
   @@index([classId])
