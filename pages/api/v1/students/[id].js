@@ -30,7 +30,7 @@ export default async function studentIdHandler (req, res) {
           id: parseInt(req.query.id)
         }
       })
-      res.status(204)
+      res.status(200).json({ message: "Student deleted" })
       break
     }
   }

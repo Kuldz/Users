@@ -30,7 +30,7 @@ export default async function classIdHandler (req, res) {
           id: parseInt(req.query.id)
         }
       })
-      res.status(204)
+      res.status(200).json({ message: "Class deleted" })
       break
     }
   }

@@ -5,16 +5,10 @@ import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
 import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select, Popconfirm, Button } from "antd"
-import useSWR from "swr"
+import useSWR, { useSWRConfig } from "swr"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
-}
-
-function handleDelete (id) {
-  fetch("/api/v1/classes/" + id, {
-    method: "DELETE"
-  })
 }
 
 const { Search } = Input
@@ -23,6 +17,7 @@ const { Option } = Select
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageClass () {
+  const { mutate } = useSWRConfig()
   const [page, setPage] = useState(1)
   const handlePageChange = page => {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
@@ -32,6 +27,16 @@ export default function ManageClass () {
   if (error) {
     console.log(error)
     return <div>failed to load</div>
+  }
+  function handleDelete (id) {
+    fetch("/api/v1/classes/" + id, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then((json) => {
+        console.log("Delete class response: ", json)
+        mutate(`/api/v1/classes?page=${page}`)
+      })
   }
 
   const columns = [
