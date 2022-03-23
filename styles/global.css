@@ -7,21 +7,32 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected, .ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: #43b581;
+}
+
+.ant-menu-dark.ant-menu-horizontal>.ant-menu-item:hover {
+  background-color: #43b581;
+}
 .ant-table {
   background: #1e2731;
   color:#d3d3d3;
 }
 
+.ant-btn-primary {
+  border-color: #43b581;
+  background: #43b581;
+}
 .ant-table-thead>tr>th {
   background: #1c242e;
   color: #f0f8ff
 }
 .ant-table a {
-  color: #1890ff;
+  color: #43b581;
 }
 
 .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark, .ant-menu.ant-menu-dark .ant-menu-sub {
-  background: #12171d
+  background: #14191f;
 }
 
 .ant-table-tbody>tr>td, .ant-table-thead>tr>th, .ant-table tfoot>tr>td, .ant-table tfoot>tr>th {
@@ -139,6 +150,22 @@ p {
 
 .ant-table-tbody>tr.ant-table-row:hover>td, .ant-table-tbody>tr>td.ant-table-cell-row-hover {
   background: #2a3644;
+}
+
+.ant-select-dropdown {
+  background: #2a3644;
+}
+
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+  background: #1c242e;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: #12171d;
+}
+
+.ant-select-item-option-content {
+  color:#f0f8ff;
 }
 
 * {
