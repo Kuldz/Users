@@ -6,9 +6,9 @@ export default function emailValidator (rule, value, callback) {
     })
       .then(res => {
         if (res.status === 200) {
-          callback()
-        } else if (res.status === 404) {
           callback(new Error("Email is not unique!"))
+        } else if (res.status === 404) {
+          callback()
         }
       })
   } catch (error) {

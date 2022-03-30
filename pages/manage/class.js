@@ -25,7 +25,6 @@ export default function ManageClass () {
   const { data, error, isValidating } = useSWR(`/api/v1/classes?page=${page}`, fetcher)
   if (error) {
     console.log(error)
-    return <div>failed to load</div>
   }
   function handleDelete (id) {
     fetch("/api/v1/classes/" + id, {

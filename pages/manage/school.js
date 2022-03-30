@@ -24,7 +24,6 @@ export default function ManageSchool () {
   const { data, error, isValidating } = useSWR(`/api/v1/schools?page=${page}`, fetcher)
   if (error) {
     console.log(error)
-    return <div>failed to load</div>
   }
 
   function handleDelete (id) {

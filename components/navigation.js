@@ -36,6 +36,7 @@ export default function Nav (props) {
         </Menu.Item>
         <Menu.Item key="signout" onClick={() => signOut()}>
           Sign Out
+          <a href="/signout"/>
         </Menu.Item>
       </Menu>
     </>
