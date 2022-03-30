@@ -96,23 +96,6 @@ const CollectionsPage = ({ fields, isPUT, page }) => {
       })
   }
 
-  const onEdit = (values, id) => {
-    console.log("Received values of form: ", values)
-    setVisible(false)
-    fetch("/api/v1/classes/" + id, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(values.class)
-    })
-      .then(res => res.json())
-      .then((json) => {
-        console.log("Edit class response: ", json)
-        mutate("/api/v1/classes")
-      })
-  }
-
   return (
     <div className="table-add">
       <Button
@@ -128,7 +111,6 @@ const CollectionsPage = ({ fields, isPUT, page }) => {
         fields={fields}
         visible={visible}
         onCreate={onCreate}
-        onEdit={onEdit}
         onCancel={() => {
           setVisible(false)
         }}
