@@ -6,7 +6,7 @@ export default async function studentEmailHandler (req, res) {
 
   if (session) {
     const {
-      method, query: { page }
+      method, query: { page, email }
     } = req
 
     const prisma = new PrismaClient()
@@ -22,27 +22,40 @@ export default async function studentEmailHandler (req, res) {
       }
 
       case "GET": {
-        const [students, totalCount] = await prisma.$transaction([
-          prisma.student.findMany({
-            skip: parseInt((page - 1) * 10) || 0,
-            take: 10,
-            include: {
-              school: {
-                select: {
-                  name: true
-                }
-              },
-              class: {
-                select: {
-                  name: true
+        if (page) {
+          const [students, totalCount] = await prisma.$transaction([
+            prisma.student.findMany({
+              skip: parseInt((page - 1) * 10) || 0,
+              take: 10,
+              include: {
+                school: {
+                  select: {
+                    name: true
+                  }
+                },
+                class: {
+                  select: {
+                    name: true
+                  }
                 }
               }
+            }),
+            prisma.student.count()
+          ])
+          res.status(200).json({ students, totalCount })
+          break
+        } else if (email) {
+          const student = await prisma.student.findUnique({
+            where: {
+              email: email
             }
-          }),
-          prisma.student.count()
-        ])
-        res.status(200).json({ students, totalCount })
-        break
+          })
+          if (student) {
+            res.status(200).json(student)
+          } else {
+            res.status(404).json({ message: "Student not found" })
+          }
+        }
       }
     }
   } else {
