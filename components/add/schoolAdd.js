@@ -7,13 +7,6 @@ const { Option } = Select
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm()
 
-  function handleEmail (email) {
-    fetch(`/api/v1/students?email=${email}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    })
-  }
-
   return (
     <Modal
       visible={visible}

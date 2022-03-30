@@ -1,3 +1,4 @@
+import emailValidator from "../../functions/emailValidator"
 import React, { useState, useEffect } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
@@ -79,7 +80,7 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "email"]} label="Email">
+        <Form.Item name={["student", "email"]} label="Email" rules={[{ validator: emailValidator }]}>
           <Input />
         </Form.Item>
 

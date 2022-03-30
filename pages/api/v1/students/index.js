@@ -45,12 +45,16 @@ export default async function studentEmailHandler (req, res) {
           res.status(200).json({ students, totalCount })
           break
         } else if (email) {
-          const students = await prisma.student.findUnique({
+          const student = await prisma.student.findUnique({
             where: {
               email: email
             }
           })
-          res.status(200).json(students)
+          if (student) {
+            res.status(200).json(student)
+          } else {
+            res.status(404).json({ message: "Student not found" })
+          }
         }
       }
     }
