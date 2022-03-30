@@ -114,7 +114,7 @@ const CollectionsPage = ({ fields, isPUT, page }) => {
   }
 
   return (
-    <div>
+    <div className="table-add">
       <Button
         type="primary"
         onClick={() => {

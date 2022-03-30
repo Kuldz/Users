@@ -82,7 +82,7 @@ const CollectionsPage = ({ page }) => {
   }
 
   return (
-    <div>
+    <div className="table-add">
       <Button
         type="primary"
         onClick={() => {

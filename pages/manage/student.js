@@ -3,7 +3,6 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/studentAdd"
 import Edit from "../../components/edit/studentEdit"
-import styles from "../../styles/Manage.module.css"
 import { Input, Table, Space, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
@@ -69,55 +68,45 @@ export default function ManageStudent () {
       title: "Action",
       key: "action",
       render: (_, Student) => (
-        <Space size="middle">
-          <Edit fields={Student} page={page}></Edit>
+        <div className="table-functions">
+          <Edit fields={Student} page={page} />
           <Popconfirm title="Are you sure you want to delete this student?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
             <a>Delete</a>
           </Popconfirm>
-        </Space>
+        </div>
       )
     }
   ]
 
   return (
     <>
-      <div className={styles.body}>
-        <Head>
-          <title>Manage Students</title>
-        </Head>
-        <Nav></Nav>
-        <Space split>
-          <Select defaultValue="Year" size="large" onChange={handleChange}>
-            <Option value="Year">Filter by</Option>
-            <Option value="School Name">Filter by</Option>
-            <Option value="Yiminghe">Filter by</Option>
-          </Select>
-          <Search
-            placeholder="input search text"
-            allowClear
-            enterButton="Search"
-            size="large"
-            style={{ width: 500 }}
-          />
-        </Space>
-      </div>
-
-      <div className={styles.container}>
-
-        <Table
-        loading={isValidating}
-        columns={columns}
-        pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
-        rowKey="id"
-        dataSource={data?.students || []}
-        />
-
-        <div style={{ float: "right" }}>
-        <Add page={page}></Add>
-        </div>
-      </div>
+    <Head>
+      <title>Manage Students </title>
+    </Head>
+    <Nav />
+    <Add page={page} />
+    <Space>
+      <Select defaultValue="Year" size="large" onChange={handleChange}>
+        <Option value="Year">Filter by</Option>
+        <Option value="Student Name">Filter by</Option>
+        <Option value="Yiminghe">Filter by</Option>
+      </Select>
+      <Search
+        placeholder="input search text"
+        allowClear
+        enterButton="Search"
+        size="large"
+      />
+    </Space>
+    <Table
+      loading={isValidating}
+      columns={columns}
+      pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
+      dataSource={data?.students || []}
+      rowKey="id"
+    />
     </>
   )
 }

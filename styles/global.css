@@ -7,6 +7,37 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.table-functions {
+  display: inline-flex;
+  gap: 16px;
+}
+
+.ant-space {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 8.5%;
+  width: 100%
+}
+
+.table-add {
+  text-align: center;
+  padding: 0 3rem;
+  position: absolute;
+  top: 13%;
+}
+
+.ant-table-wrapper {
+  top: 17%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  min-width: 100%;
+  padding: 0 3rem;
+  flex-direction: column;
+}
+
 .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected, .ant-menu.ant-menu-dark .ant-menu-item-selected {
   background-color: #43b581;
 }
@@ -70,6 +101,7 @@ body {
 }
 
 .ant-input-affix-wrapper {
+  min-width: 500px;
   background: #2a3644;
   border: 1px solid #1c242e;
 }
@@ -168,11 +200,11 @@ p {
 }
 
 .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
-  background: #1c242e;
+  background: #43b581;
 }
 
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  background: #12171d;
+  background: #1dad6c;
 }
 
 .ant-select-item-option-content {
