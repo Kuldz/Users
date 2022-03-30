@@ -34,7 +34,7 @@ export default function Nav (props) {
           Profile
           <a href="/profile"/>
         </Menu.Item>
-        <Menu.Item key="signout" onClick={() => signOut()}>
+        <Menu.Item key="signout" onClick={() => signOut({ callbackUrl: "/" })}>
           Sign Out
           <a href="/signout"/>
         </Menu.Item>
