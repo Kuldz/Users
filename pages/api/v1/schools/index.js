@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 import { getSession } from "next-auth/react"
 
-export default async function schoolIDHandler (req, res) {
+export default async function schoolIdHandler (req, res) {
   const session = await getSession({ req })
 
   if (session) {
