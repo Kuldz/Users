@@ -5,11 +5,11 @@ const bcrypt = require("bcrypt")
 function bcryptPassword () {
   return new Promise(resolve => {
     const saltRounds = 10
-    const plaintext = "123ewq"
-    // could put function (err, salt) and function (err, hashedpassword) if handling errors is necessary
+    const plainText = "123ewq"
+    // could put function (err, salt) and function (err, hashedPassword) if handling errors is necessary
     bcrypt.genSalt(saltRounds, function (salt) {
-      bcrypt.hash(plaintext, salt, function (hashedpassword) {
-        resolve(hashedpassword)
+      bcrypt.hash(plainText, salt, function (hashedPassword) {
+        resolve(hashedPassword)
       })
     })
   })
