@@ -6,10 +6,10 @@ async function fetchPassword (credentials) {
     where: {
       email: credentials.email
     },
-      select: {
-        password: true
-      }
-    })
+    select: {
+      password: true
+    }
+  })
   const passwordOfUser = fetcher.password
   console.log("(From FetchPassword) Data given:", passwordOfUser)
   return Promise.resolve(passwordOfUser)

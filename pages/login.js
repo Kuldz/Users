@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react"
 
 export default function Login () {
   const [loginError, setLoginError] = useState("")
-  
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const errorParam = urlParams.get("error")

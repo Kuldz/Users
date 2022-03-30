@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
+// Temporary fix while the bcrypt functionality is a WIP
 import { reject } from "bcrypt/promises"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { resolveHref } from "next/dist/shared/lib/router/router"
 import fetchPassword from "../prisma/fetchPassword"
+import bcrypt from "bcrypt"
 const { PrismaClient } = require("@prisma/client")
+
 const prisma = new PrismaClient()
-const bcrypt = require("bcrypt")
 
 export default NextAuth({
   providers: [
@@ -28,7 +30,7 @@ export default NextAuth({
         const inputPassword = credentials.password
         console.log("(From User) Data received:", inputPassword)
 
-        /*function compareAsync(inputPassword, hashedPassword) {
+        /* function compareAsync(inputPassword, hashedPassword) {
           return new Promise(function(resolve, reject) {
             bcrypt.compare(inputPassword, hashedPassword, function(err, result) {
               if (result == true) {
@@ -43,7 +45,7 @@ export default NextAuth({
         }
 
         const result = await compareAsync(inputPassword, hashedPassword)
-        console.log(result)*/
+        console.log(result) */
 
         console.log("made it to authorize")
         console.log("credentials", credentials)
