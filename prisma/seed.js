@@ -2,6 +2,19 @@ const { PrismaClient } = require("@prisma/client")
 const prisma = new PrismaClient()
 const bcrypt = require("bcrypt")
 
+function bcryptPassword () {
+  return new Promise(resolve => {
+    const saltRounds = 10
+    const plaintext = "123ewq"
+    // could put function (err, salt) and function (err, hashedpassword) if handling errors is necessary
+    bcrypt.genSalt(saltRounds, function (salt) {
+      bcrypt.hash(plaintext, salt, function (hashedpassword) {
+        resolve(hashedpassword)
+      })
+    })
+  })
+}
+
 async function main () {
   await prisma.user.upsert({
     where: { email: "alice@prisma.io" },
@@ -13,20 +26,12 @@ async function main () {
   })
   console.log("bob success")
 
-  const saltRounds = 10
-  const plaintext = "123ewq"
-  bcrypt.genSalt(saltRounds, function(err, salt) {
-    bcrypt.hash(plaintext, salt, function(err, hashedpassword) {
-      console.log(hashedpassword)
-    });
-  });
-
   await prisma.user.upsert({
     where: { email: "viola@prisma.io" },
     update: {},
     create: {
       email: "viola@prisma.io",
-      password: hashedpassword
+      password: await bcryptPassword()
     }
   })
   console.log("viola success")
