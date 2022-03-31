@@ -6,11 +6,19 @@ function bcryptPassword () {
   return new Promise(resolve => {
     const saltRounds = 10
     const plainText = "123ewq"
-    // could put function (err, salt) and function (err, hashedPassword) if handling errors is necessary
-    bcrypt.genSalt(saltRounds, function (salt) {
-      bcrypt.hash(plainText, salt, function (hashedPassword) {
-        resolve(hashedPassword)
-      })
+    // Edit: Putting (err) into the function parameters seemes to be necessary on some devices, so the code has been refactored to satisfy both ESLint and those odd cases.
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      if (err) {
+        throw new Error("Unexpected error while salting")
+      } else {
+        bcrypt.hash(plainText, salt, function (err, hashedPassword) {
+          if (err) {
+            throw new Error("Unexpected error while hashing")
+          } else {
+            resolve(hashedPassword)
+          }
+        })
+      }
     })
   })
 }
