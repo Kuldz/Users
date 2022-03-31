@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client")
-const prisma = new PrismaClient()
+import prisma from "../../../client.ts"
 
 async function fetchPassword (credentials) {
   const fetcher = await prisma.user.findUnique({

@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client")
-const prisma = new PrismaClient()
+import prisma from "../client.ts"
 const bcrypt = require("bcrypt")
 
 function bcryptPassword () {

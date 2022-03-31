@@ -1,11 +1,9 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from "../../../client.ts"
 
 export default async function handler (req, res) {
   const {
     method
   } = req
-
-  const prisma = new PrismaClient()
 
   switch (method) {
     case "POST": {

@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
+import prisma from "../../../client.ts"
 
 export default async function handler (req, res) {
   const {

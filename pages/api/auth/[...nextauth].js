@@ -5,9 +5,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import fetchPassword from "../prisma/fetchPassword"
 import bcrypt from "bcrypt"
-const { PrismaClient } = require("@prisma/client")
-
-const prisma = new PrismaClient()
+// import prisma from "../../../client.ts"
 
 export default NextAuth({
   providers: [

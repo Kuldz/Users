@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from "../../../../client.ts"
 import { getSession } from "next-auth/react"
 
 export default async function studentEmailHandler (req, res) {
@@ -8,8 +8,6 @@ export default async function studentEmailHandler (req, res) {
     const {
       method, query: { page, email }
     } = req
-
-    const prisma = new PrismaClient()
 
     switch (method) {
       case "POST": {
