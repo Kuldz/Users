@@ -1,3 +1,4 @@
+import emailValidator from "../../functions/emailValidator"
 import React, { useState, useEffect } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
@@ -79,15 +80,15 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "email"]} label="Email">
+        <Form.Item name={["student", "email"]} label="Email" rules={[{ validator: emailValidator }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ required: true, message: "Please input a school!", type: "number" }]}>
+        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ type: "number" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
 
-        <Form.Item name={["student", "classId"]} label="Class" rules={[{ required: true, message: "Please input a class!", type: "number" }]}>
+        <Form.Item name={["student", "classId"]} label="Class" rules={[{ type: "number" }]}>
           <Select placeholder="Select class" options={classes}></Select>
         </Form.Item>
       </Form>
@@ -95,7 +96,7 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
   )
 }
 
-const CollectionsPage = ({ fields }) => {
+const CollectionsPage = ({ fields, page }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -112,7 +113,7 @@ const CollectionsPage = ({ fields }) => {
       .then(res => res.json())
       .then((json) => {
         console.log("Edit student response: ", json)
-        mutate("/api/v1/students")
+        mutate(`/api/v1/students?page=${page}`)
       })
   }
 
@@ -134,5 +135,5 @@ const CollectionsPage = ({ fields }) => {
 }
 
 export default function studentEdit (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
 }

@@ -30,5 +30,9 @@
             "warn",
             "double"
         ]
+    },
+    "globals": {
+        "NodeJS": true
+        // Wont work otherwise
     }
 }
