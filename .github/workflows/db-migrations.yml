@@ -1,0 +1,30 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: DB migrations
+
+on:
+  push:
+    branches: [ "*" ]
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    container: node:16
+    services:
+      mysql:
+        image: mysql
+        # https://hub.docker.com/_/mysql
+        env:
+          MYSQL_ROOT_PASSWORD: testme123
+          MYSQL_DATABASE: ciUserstestdb
+          MYSQL_USER: mysqluser
+          MYSQL_PASSWORD: mysqlpassword
+
+    steps:
+    - uses: actions/checkout@v3
+    - run: npm ci
+    - run: node_modules/.bin/prisma migrate deploy
+      env:
+        DATABASE_URL: "mysql://mysqluser:mysqlpassword@mysql:3306/ciUserstestdb"
+
