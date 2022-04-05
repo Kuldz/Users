@@ -5,6 +5,7 @@ import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
 import { Input, Table, Space, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
+import teacherIdHandler from "../api/v1/teachers/[id]"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
@@ -49,9 +50,18 @@ export default function ManageClass () {
       key: "year"
     },
     {
-      title: "Teacher",
-      dataIndex: "teacher",
-      key: "teacher"
+      title: "teacher",
+      key: "teacher",
+      render: (_, Teacher) => (
+        <div teacherName="table-functions">
+          <Add fields={Teacher} isPOST />
+          <Popconfirm title="Are you sure you want to delete this Class?"
+                onConfirm={() => handleDelete(teacherIdHandler.id)}
+                okText="Yes" cancelText="No">
+            <a>Delete</a>
+          </Popconfirm>
+        </div>
+      )
     },
     {
       title: "School",

@@ -2,8 +2,8 @@ import prisma from "../../../../client.ts"
 import { getSession } from "next-auth/react"
 
 export default async function teacherIdHandler (req, res) {
+  console.log(res)
   const session = await getSession({ req })
-
   if (session) {
     const {
       query: { id },

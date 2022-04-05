@@ -46,7 +46,7 @@ model Class {
   id          Int       @id @default(autoincrement())
   name        String
   year        String
-  groupLeader String?
+  teacher     String?
   schoolId    Int
   school      School    @relation(fields: [schoolId], references: [id])
   student     Student[]
