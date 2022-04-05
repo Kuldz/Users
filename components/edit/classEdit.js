@@ -30,8 +30,8 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
     value: field.year
   },
   {
-    name: ["class", "groupLeader"],
-    value: field.groupLeader
+    name: ["class", "teacher"],
+    value: field.teacher
   },
   {
     name: ["class", "schoolId"],
@@ -78,7 +78,7 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "groupLeader"]} label="Group Leader">
+        <Form.Item name={["class", "teacher"]} label="Teacher">
           <Input />
         </Form.Item>
 
