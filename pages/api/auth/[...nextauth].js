@@ -5,6 +5,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import fetchPassword from "../prisma/fetchPassword"
 import bcrypt from "bcrypt"
+import handler from "../v1/login"
 // import prisma from "../../../client.ts"
 
 export default NextAuth({
@@ -26,9 +27,10 @@ export default NextAuth({
         const hashedPassword = await fetchPassword(credentials)
         console.log("(From NextAuth) Data received:", hashedPassword)
         const inputPassword = credentials.password
+        handler(inputPassword)
         console.log("(From User) Data received:", inputPassword)
-
-        /* function compareAsync(inputPassword, hashedPassword) {
+      
+        function compareAsync(inputPassword, hashedPassword) {
           return new Promise(function(resolve, reject) {
             bcrypt.compare(inputPassword, hashedPassword, function(err, result) {
               if (result == true) {
@@ -36,15 +38,15 @@ export default NextAuth({
                 resolve(result)
               } else {
                 console.log("bcrypt FAIL")
-                reject(new Error("Invalid Credentials."))
+                reject(new Error("(Bcrypt) Invalid Credentials."))
               }
             });
           })
         }
-
+      
         const result = await compareAsync(inputPassword, hashedPassword)
-        console.log(result) */
-
+        console.log(result)
+        
         console.log("made it to authorize")
         console.log("credentials", credentials)
         try {
@@ -56,9 +58,11 @@ export default NextAuth({
             },
             body: JSON.stringify(credentials)
           })
+
           if (res.status === 401) {
-            throw new Error("Invalid credentials")
+            throw new Error("(Res Status) Invalid credentials")
           }
+
           console.log("After!")
           const user = await res.json()
           console.log("After! 2")
