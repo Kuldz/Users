@@ -49,9 +49,9 @@ export default function ManageClass () {
       key: "year"
     },
     {
-      title: "Group Leader",
-      dataIndex: "groupLeader",
-      key: "groupLeader"
+      title: "Teacher",
+      dataIndex: "teacher",
+      key: "teacher"
     },
     {
       title: "School",
