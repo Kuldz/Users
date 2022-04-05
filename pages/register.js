@@ -1,6 +1,7 @@
 import React from "react"
 import Head from "next/head"
 import { Form, Input, Button } from "antd"
+import userEmailValidator from "../functions/userEmailValidator"
 
 export default function Register () {
   const onCreate = (values) => {
@@ -27,7 +28,8 @@ export default function Register () {
         <Form.Item label="Email" name="email" type="email"
           rules={[
             { type: "email", message: "Please input a valid email!" },
-            { required: true, message: "Please input an email!" }
+            { required: true, message: "Please input an email!" },
+            { validator: userEmailValidator }
           ]}>
           <Input />
         </Form.Item>
