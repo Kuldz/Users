@@ -3,7 +3,7 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/schoolAdd"
 import Edit from "../../components/edit/schoolEdit"
-import { Input, Table, Space, Select, Popconfirm } from "antd"
+import { Input, Table, Space, Select, Popconfirm, notification } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
 function handleChange (value) {
@@ -30,9 +30,19 @@ export default function ManageSchool () {
     fetch("/api/v1/schools/" + id, {
       method: "DELETE"
     })
-      .then(res => res.json())
-      .then((json) => {
+      .then(async function (res) {
+        const json = await res.json().catch(() => {})
         console.log("Delete school response: ", json)
+        if (res.status !== 200) {
+          notification.error({
+            placement: "bottomRight",
+            bottom: 50,
+            duration: 3,
+            rtl: true,
+            message: "Error deleting school",
+            description: json.message
+          })
+        }
         mutate(`/api/v1/schools?page=${page}`)
       })
   }
