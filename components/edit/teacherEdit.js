@@ -1,9 +1,11 @@
+import emailValidator from "../../functions/emailValidator"
 import React, { useState, useEffect } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
 const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
   const [form] = Form.useForm()
+  const [classes, setClasses] = useState([])
   const [schools, setSchools] = useState([])
 
   const parsedFields = [fields].map(field => (([{
@@ -31,7 +33,7 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       fetch("/api/v1/classes").then(res => res.json()).then(data =>
-        (data.classes.map(c => ({
+        setClasses(data.classes.map(c => ({
           label: `${c.name}`,
           value: c.id
         })))

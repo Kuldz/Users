@@ -63,7 +63,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "teacher"]} label="Teacher">
+        <Form.Item name={["class", "groupLeader"]} label="Group Leader">
           <Input />
         </Form.Item>
 
