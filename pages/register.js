@@ -1,6 +1,6 @@
 import React from "react"
 import Head from "next/head"
-import { Form, Input, Button } from "antd"
+import { Form, Input, Button, Card } from "antd"
 import userEmailValidator from "../functions/userEmailValidator"
 
 export default function Register () {
@@ -20,47 +20,56 @@ export default function Register () {
   }
 
   return (
-    <div className="site-layout-background" style={{ padding: 24, textAlign: "center" }}>
+    <div className="center">
       <Head>
         <title>Register</title>
       </Head>
-      <Form name="basic" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} initialValues={{ remember: true }} autoComplete="off" onFinish={onCreate}>
-        <Form.Item label="Email" name="email" type="email"
-          rules={[
-            { type: "email", message: "Please input a valid email!" },
-            { required: true, message: "Please input an email!" },
-            { validator: userEmailValidator }
-          ]}>
-          <Input />
-        </Form.Item>
+      <Card title="Create an account" bordered={true}>
+        <Form
+        name="basic"
+        initialValues={{ remember: true }}
+        autoComplete="off"
+        onFinish={onCreate}
+        layout="vertical">
 
-        <Form.Item label="Password" name="password" type="password"
-          rules={[{ required: true, message: "Please input a password!" }]} hasFeedback>
-          <Input.Password />
-        </Form.Item>
+          <Form.Item label="Email" name="email" type="email"
+            rules={[
+              { type: "email", message: "Please input a valid email!" },
+              { required: true, message: "Please input an email!" },
+              { validator: userEmailValidator }
+            ]}>
+            <Input />
+          </Form.Item>
 
-        <Form.Item label="Confirm Password" name="confirmPassword" dependencies={["password"]} type="password" hasFeedback
-          rules={[
-            { required: true, message: "Please confirm your password!" },
-            ({ getFieldValue }) => ({
-              validator (_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve()
+          <Form.Item label="Password" name="password" type="password"
+            rules={[{ required: true, message: "Please input a password!" }]} hasFeedback>
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item label="Confirm Password" name="confirmPassword" dependencies={["password"]} type="password" hasFeedback
+            rules={[
+              { required: true, message: "Please confirm your password!" },
+              ({ getFieldValue }) => ({
+                validator (_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve()
+                  }
+
+                  return Promise.reject(new Error("Passwords do not match!"))
                 }
+              })
+            ]}>
+            <Input.Password />
+          </Form.Item>
 
-                return Promise.reject(new Error("Passwords do not match!"))
-              }
-            })
-          ]}>
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 8, span: 1 }}>
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item style={{ "margin-bottom": "4px" }}>
+            <Button type="primary" htmlType="submit">
+              Register
+            </Button>
+          </Form.Item>
+          <a href="/login">Already have an account?</a>
+        </Form>
+      </Card>
     </div>
   )
 }

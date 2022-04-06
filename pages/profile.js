@@ -1,7 +1,6 @@
 import React from "react"
 import Head from "next/head"
 import Nav from "../components/navigation"
-import styles from "../styles/Profile.module.css"
 import { Card, Avatar, Button, Col, Row } from "antd"
 import { UserOutlined } from "@ant-design/icons"
 
@@ -15,14 +14,14 @@ export default function Profile () {
           <title>Profile</title>
         </Head>
         <Nav></Nav>
-        <div className={styles.profile}>
-          <Card style={{ width: 600, margin: 14, borderColor: "#12171d", borderWidth: "2px", borderRadius: "5px" }}>
+        <div className="center">
+          <Card className="profile">
             <Meta
               avatar={<Avatar size={100} style={{ backgroundColor: "#43b581" }} icon={<UserOutlined />}/>}
               title="Upload your avatar"
               description={<>
                 <p>Photo should be at least 300px x 300px</p>
-                <Button type="primary" className={styles.button}>Upload a Photo</Button>
+                <Button type="primary">Upload a Photo</Button>
               </>}
             />
             <br></br>
@@ -37,9 +36,11 @@ export default function Profile () {
             </Row>
             <p id="email">Insert email from backend here</p>
             <h3>Account Settings</h3>
-            <Button type="primary" className={styles.button}>Change Password</Button>
-            <Button type="primary" className={styles.button}>Change E-mail</Button>
-            <Button type="danger" className={styles.button}>Delete Account</Button>
+            <div className="profile-buttons">
+              <Button type="primary">Change Password</Button>
+              <Button type="primary">Change E-mail</Button>
+              <Button type="danger">Delete Account</Button>
+            </div>
           </Card>
         </div>
       </div>
