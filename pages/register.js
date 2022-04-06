@@ -62,7 +62,7 @@ export default function Register () {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item style={{ "margin-bottom": "4px" }}>
+          <Form.Item style={{ marginBottom: 4 }}>
             <Button type="primary" htmlType="submit">
               Register
             </Button>
