@@ -32,7 +32,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         name="school_add"
       >
         <Form.Item name={["school", "regCode"]} label="Registry Code" rules={[{ required: true, message: "Please input a registry code!" }]}>
-          <InputNumber style={{ width: 472 }}/>
+          <InputNumber style={{ width: 472 }} min='0' maxLength='8'/>
         </Form.Item>
 
         <Form.Item name={["school", "name"]} label="Name" rules={[{ required: true, message: "Please input a name!" }]}>
@@ -60,7 +60,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   )
 }
 
-const CollectionsPage = () => {
+const CollectionsPage = ({ page }) => {
   const [visible, setVisible] = useState(false)
   const { mutate } = useSWRConfig()
 
@@ -77,12 +77,12 @@ const CollectionsPage = () => {
       .then(res => res.json())
       .then((json) => {
         console.log("Create school response: ", json)
-        mutate("/api/v1/schools")
+        mutate(`/api/v1/schools?page=${page}`)
       })
   }
 
   return (
-    <div>
+    <div className="table-add">
       <Button
         type="primary"
         onClick={() => {
@@ -103,5 +103,5 @@ const CollectionsPage = () => {
 }
 
 export default function schoolAdd (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
 }

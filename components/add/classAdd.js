@@ -49,11 +49,11 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
         name="class_add"
         // Uses 0 index because it is an array containing an array
       >
-        <Form.Item name={["class", "name"]} label="Class Name" rules={[{ message: "Please input a name!" }]}>
+        <Form.Item name={["class", "name"]} label="Name" rules={[{ required: true, message: "Please input a name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "year"]} label="Year" rules={[{ message: "Please input a starting year!" }]}>
+        <Form.Item name={["class", "year"]} label="Starting Year" rules={[{ required: true, message: "Please input a starting year!" }]}>
           <Select placeholder="Select starting year">
             <Option value="2021">2021</Option>
             <Option value="2020">2020</Option>
@@ -63,11 +63,11 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "groupLeader"]} label="Group Leader" rules={[{ message: "Please input a group leader!" }]}>
+        <Form.Item name={["class", "teacher"]} label="Teacher">
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "schoolId"]} label="School" rules={[{ message: "Please input a school!", type: "number" }]}>
+        <Form.Item name={["class", "schoolId"]} label="School" rules={[{ required: true, message: "Please input a school!", type: "number" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
       </Form>
@@ -75,7 +75,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
   )
 }
 
-const CollectionsPage = ({ fields, isPUT }) => {
+const CollectionsPage = ({ fields, isPUT, page }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -92,29 +92,12 @@ const CollectionsPage = ({ fields, isPUT }) => {
       .then(res => res.json())
       .then((json) => {
         console.log("Create class response: ", json)
-        mutate("/api/v1/classes")
-      })
-  }
-
-  const onEdit = (values, id) => {
-    console.log("Received values of form: ", values)
-    setVisible(false)
-    fetch("/api/v1/classes/" + id, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(values.class)
-    })
-      .then(res => res.json())
-      .then((json) => {
-        console.log("Edit class response: ", json)
-        mutate("/api/v1/classes")
+        mutate(`/api/v1/classes?page=${page}`)
       })
   }
 
   return (
-    <div>
+    <div className="table-add">
       <Button
         type="primary"
         onClick={() => {
@@ -128,7 +111,6 @@ const CollectionsPage = ({ fields, isPUT }) => {
         fields={fields}
         visible={visible}
         onCreate={onCreate}
-        onEdit={onEdit}
         onCancel={() => {
           setVisible(false)
         }}
@@ -138,5 +120,5 @@ const CollectionsPage = ({ fields, isPUT }) => {
 }
 
 export default function classAdd (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
 }

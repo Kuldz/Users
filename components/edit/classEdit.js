@@ -4,7 +4,7 @@ import { useSWRConfig } from "swr"
 
 const { Option } = Select
 
-const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isPUT }) => {
+const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
   const [form] = Form.useForm()
   const [schools, setSchools] = useState([])
 
@@ -30,8 +30,8 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
     value: field.year
   },
   {
-    name: ["class", "groupLeader"],
-    value: field.groupLeader
+    name: ["class", "teacher"],
+    value: field.teacher
   },
   {
     name: ["class", "schoolId"],
@@ -41,7 +41,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
   return (
     <Modal
       visible={visible}
-      title="Add a new Class"
+      title="Edit Class"
       okText="Save"
       cancelText="Cancel"
       onCancel={onCancel}
@@ -50,11 +50,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           .validateFields()
           .then((values) => {
             form.resetFields()
-            if (isPUT) {
-              onEdit(values, fields.id)
-            } else {
-              onCreate(values)
-            }
+            onEdit(values, fields.id)
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
@@ -64,15 +60,15 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
       <Form
         form={form}
         layout="vertical"
-        name="class_add"
+        name="class_edit"
         // Uses 0 index because it is an array containing an array
         fields={parsedFields[0]}
       >
-        <Form.Item name={["class", "name"]} label="Class Name" rules={[{ message: "Please input a name!" }]}>
+        <Form.Item name={["class", "name"]} label="Name" rules={[{ required: true, message: "Please input a name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "year"]} label="Year" rules={[{ message: "Please input a starting year!" }]}>
+        <Form.Item name={["class", "year"]} label="Starting Year" rules={[{ required: true, message: "Please input a starting year!" }]}>
           <Select placeholder="Select starting year">
             <Option value="2021">2021</Option>
             <Option value="2020">2020</Option>
@@ -82,11 +78,11 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "groupLeader"]} label="Group Leader" rules={[{ message: "Please input a group leader!" }]}>
+        <Form.Item name={["class", "teacher"]} label="Teacher">
           <Input />
         </Form.Item>
 
-        <Form.Item name={["class", "schoolId"]} label="School" rules={[{ message: "Please input a school!", type: "number" }]}>
+        <Form.Item name={["class", "schoolId"]} label="School" rules={[{ required: true, message: "Please input a school!", type: "number" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
       </Form>
@@ -94,26 +90,9 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
   )
 }
 
-const CollectionsPage = ({ fields, isPUT }) => {
+const CollectionsPage = ({ fields, isPUT, page }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
-
-  const onCreate = (values) => {
-    console.log("Received values of form: ", values)
-    setVisible(false)
-    fetch("/api/v1/classes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(values)
-    })
-      .then(res => res.json())
-      .then((json) => {
-        console.log("Create class response: ", json)
-        mutate("/api/v1/classes")
-      })
-  }
 
   const onEdit = (values, id) => {
     console.log("Received values of form: ", values)
@@ -128,7 +107,8 @@ const CollectionsPage = ({ fields, isPUT }) => {
       .then(res => res.json())
       .then((json) => {
         console.log("Edit class response: ", json)
-        mutate("/api/v1/classes")
+        console.log("page", json.page)
+        mutate(`/api/v1/classes?page=${page}`)
       })
   }
 
@@ -141,7 +121,6 @@ const CollectionsPage = ({ fields, isPUT }) => {
         isPUT={isPUT}
         fields={fields}
         visible={visible}
-        onCreate={onCreate}
         onEdit={onEdit}
         onCancel={() => {
           setVisible(false)
@@ -152,5 +131,5 @@ const CollectionsPage = ({ fields, isPUT }) => {
 }
 
 export default function classEdit (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
 }

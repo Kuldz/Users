@@ -3,18 +3,11 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
-import styles from "../../styles/Manage.module.css"
-import { Input, Table, Space, Select } from "antd"
-import useSWR from "swr"
+import { Input, Table, Space, Select, Popconfirm } from "antd"
+import useSWR, { useSWRConfig } from "swr"
 
 function handleChange (value) {
   console.log(`selected ${value}`)
-}
-
-function handleDelete (id) {
-  fetch("/api/v1/classes/" + id, {
-    method: "DELETE"
-  })
 }
 
 const { Search } = Input
@@ -23,15 +16,25 @@ const { Option } = Select
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function ManageClass () {
+  const { mutate } = useSWRConfig()
   const [page, setPage] = useState(1)
   const handlePageChange = page => {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
 
-  const { data, error, isValidating } = useSWR("/api/v1/classes" + "/?page=" + page, fetcher)
+  const { data, error, isValidating } = useSWR(`/api/v1/classes?page=${page}`, fetcher)
   if (error) {
     console.log(error)
-    return <div>failed to load</div>
+  }
+  function handleDelete (id) {
+    fetch("/api/v1/classes/" + id, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then((json) => {
+        console.log("Delete class response: ", json)
+        mutate(`/api/v1/classes?page=${page}`)
+      })
   }
 
   const columns = [
@@ -46,9 +49,9 @@ export default function ManageClass () {
       key: "year"
     },
     {
-      title: "Group Leader",
-      dataIndex: "groupLeader",
-      key: "groupLeader"
+      title: "Teacher",
+      dataIndex: "teacher",
+      key: "teacher"
     },
     {
       title: "School",
@@ -59,48 +62,45 @@ export default function ManageClass () {
       title: "Action",
       key: "action",
       render: (_, Class) => (
-        <Space size="middle">
-          <Edit fields={Class} isPUT></Edit>
-          <a onClick={() => handleDelete(_.id)}>Delete</a>
-        </Space>
+        <div className="table-functions">
+          <Edit fields={Class} isPUT page={page} />
+          <Popconfirm title="Are you sure you want to delete this Class?"
+                onConfirm={() => handleDelete(_.id)}
+                okText="Yes" cancelText="No">
+            <a>Delete</a>
+          </Popconfirm>
+        </div>
       )
     }
   ]
 
   return (
     <>
-      <div className={styles.body}>
-      <Head>
-        <title>Manage Classes</title>
-      </Head>
-      <Nav></Nav>
-      <Space split>
-        <Select defaultValue="Year" size="large" onChange={handleChange}>
-          <Option value="Year">Filter by</Option>
-          <Option value="School Name">Filter by</Option>
-          <Option value="Yiminghe">Filter by</Option>
-        </Select>
-        <Search
-          placeholder="input search text"
-          allowClear
-          enterButton="Search"
-          size="large"
-          style={{ width: 500 }} />
-      </Space>
-    </div><div className={styles.container}>
-
-        <Table
-        loading={isValidating}
-        columns={columns}
-        pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
-        dataSource={data?.classes || []}
-        rowKey="id"
-        />
-
-        <div style={{ float: "right" }}>
-          <Add></Add>
-        </div>
-      </div>
+    <Head>
+      <title>Manage Classes</title>
+    </Head>
+    <Nav />
+    <Add page={page} />
+    <Space>
+      <Select defaultValue="Year" size="large" onChange={handleChange}>
+        <Option value="Year">Filter by</Option>
+        <Option value="Class Name">Filter by</Option>
+        <Option value="Yiminghe">Filter by</Option>
+      </Select>
+      <Search
+        placeholder="input search text"
+        allowClear
+        enterButton="Search"
+        size="large"
+      />
+    </Space>
+    <Table
+      loading={isValidating}
+      columns={columns}
+      pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
+      dataSource={data?.classes || []}
+      rowKey="id"
+    />
     </>
   )
 }

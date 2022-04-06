@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
+import emailValidator from "../../functions/emailValidator"
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
   const [form] = Form.useForm()
@@ -49,23 +50,23 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
         layout="vertical"
         name="school_add"
       >
-        <Form.Item name={["student", "firstName"]} label="First Name">
+        <Form.Item name={["student", "firstName"]} label="First Name" rules={[{ required: true, message: "Please input a first name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "lastName"]} label="Last Name">
+        <Form.Item name={["student", "lastName"]} label="Last Name" rules={[{ required: true, message: "Please input a last name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "email"]} label="Email">
+        <Form.Item name={["student", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: emailValidator }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ message: "Please input a school!", type: "number" }]}>
+        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ type: "number", required: true, message: "Please input a school!" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
 
-        <Form.Item name={["student", "classId"]} label="Class" rules={[{ message: "Please input a class!", type: "number" }]}>
+        <Form.Item name={["student", "classId"]} label="Class" rules={[{ type: "number", required: true, message: "Please input a class!" }]}>
           <Select placeholder="Select class" options={classes}></Select>
         </Form.Item>
       </Form>
@@ -73,7 +74,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
   )
 }
 
-const CollectionsPage = () => {
+const CollectionsPage = ({ page }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -90,12 +91,12 @@ const CollectionsPage = () => {
       .then(res => res.json())
       .then((json) => {
         console.log("Create student response: ", json)
-        mutate("/api/v1/students")
+        mutate(`/api/v1/students?page=${page}`)
       })
   }
 
   return (
-    <div>
+    <div className="table-add">
       <Button
         type="primary"
         onClick={() => {
@@ -116,5 +117,5 @@ const CollectionsPage = () => {
 }
 
 export default function studentAdd (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} />
+  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
 }
