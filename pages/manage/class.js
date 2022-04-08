@@ -30,13 +30,15 @@ export default function ManageClass () {
   function returnFilterValues () {
     const records = []
     const usedValues = []
+
     data?.classes.forEach(_class => {
-      if (usedValues.includes(_class.schoolId)) return
-      usedValues.push(_class.schoolId)
+      const filterBy = _class.school.name
+      if (usedValues.includes(filterBy)) return
+      usedValues.push(filterBy)
 
       const record = {}
-      record.text = _class.school.name
-      record.value = _class.school.name
+      record.text = filterBy
+      record.value = filterBy
       records.push(record)
     })
     return records
