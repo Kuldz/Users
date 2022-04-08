@@ -3,7 +3,7 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/studentAdd"
 import Edit from "../../components/edit/studentEdit"
-import { Input, Table, Space, Select, Popconfirm } from "antd"
+import { Input, Table, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
 function handleChange (value) {

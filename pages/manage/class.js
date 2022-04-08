@@ -3,7 +3,7 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
-import { Input, Table, Space, Select, Popconfirm } from "antd"
+import { Input, Table, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
 function handleChange (value) {
@@ -52,7 +52,7 @@ export default function ManageClass () {
       title: "Teacher",
       dataIndex: "teacher",
       key: "teacher",
-      render: teacher => <a>{teacher}</a>,
+      render: teacher => <a>{teacher}</a>
     },
     {
       title: "School",
@@ -102,12 +102,12 @@ export default function ManageClass () {
       rowKey="id"
       onHeaderRow={(columns, index) => {
         return {
-          onClick: () => {}, 
-          /* 
-          https://ant.design/components/table/#onRow-usage 
+          onClick: () => {}
+          /*
+          https://ant.design/components/table/#onRow-usage
           teacher header click stuff thingie whatever
           */
-        };
+        }
       }}
     />
     </>
