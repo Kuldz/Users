@@ -3,15 +3,10 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/schoolAdd"
 import Edit from "../../components/edit/schoolEdit"
-import { Input, Table, Space, Select, Popconfirm, notification } from "antd"
+import { Input, Table, Space, Popconfirm, notification } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
-function handleChange (value) {
-  console.log(`selected ${value}`)
-}
-
 const { Search } = Input
-const { Option } = Select
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
@@ -97,11 +92,6 @@ export default function ManageSchool () {
     <Nav />
     <Add page={page} />
     <Space>
-      <Select defaultValue="Year" size="large" onChange={handleChange}>
-        <Option value="Year">Filter by</Option>
-        <Option value="School Name">Filter by</Option>
-        <Option value="Yiminghe">Filter by</Option>
-      </Select>
       <Search
         placeholder="input search text"
         allowClear
