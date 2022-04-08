@@ -33,11 +33,24 @@ export default async function schoolIdHandler (req, res) {
       }
 
       case "DELETE": {
-        await prisma.school.delete({
-          where: {
-            id: parseInt(req.query.id)
+        try {
+          await prisma.school.delete({
+            where: {
+              id: parseInt(req.query.id)
+            }
+          })
+        } catch (err) {
+          let errMsg
+          if (err.code === "P2014") {
+            errMsg = `Please delete all related ${err.meta.model_a_name.toLowerCase()}es before deleting this school`
+          } else {
+            errMsg = `Something went wrong! Code ${err.code}`
+            console.error(err)
           }
-        })
+          res.status(403).json({ message: errMsg })
+          break
+        }
+
         res.status(200).json({ message: "School deleted" })
         break
       }

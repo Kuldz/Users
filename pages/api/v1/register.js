@@ -2,7 +2,7 @@ import prisma from "../../../client.ts"
 
 export default async function handler (req, res) {
   const {
-    method
+    method, query: { email }
   } = req
 
   switch (method) {
@@ -15,6 +15,22 @@ export default async function handler (req, res) {
         }
       })
       res.status(201).json(user)
+      break
+    }
+
+    case "GET": {
+      if (email) {
+        const user = await prisma.user.findUnique({
+          where: {
+            email: email
+          }
+        })
+        if (user) {
+          res.status(200).json(user)
+        } else {
+          res.status(404).json({ message: "User not found" })
+        }
+      }
       break
     }
   }
