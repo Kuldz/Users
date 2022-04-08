@@ -26,6 +26,24 @@ export default function ManageClass () {
   if (error) {
     console.log(error)
   }
+
+  function returnFilterValues () {
+    const records = []
+    const usedValues = []
+    data?.classes.forEach(_class => {
+      if (usedValues.includes(_class.schoolId)) return
+      usedValues.push(_class.schoolId)
+
+      const record = {}
+      record.text = _class.school.name
+      record.value = _class.school.name
+      records.push(record)
+    })
+    return records
+  }
+
+  console.log("Filter values:", returnFilterValues())
+
   function handleDelete (id) {
     fetch("/api/v1/classes/" + id, {
       method: "DELETE"
@@ -56,7 +74,12 @@ export default function ManageClass () {
     {
       title: "School",
       dataIndex: ["school", "name"],
-      key: "school.name"
+      key: "school.name",
+      filters: returnFilterValues(),
+      filterMode: "tree",
+      filterSearch: true,
+      onFilter: (value, record) => record.school.name === value,
+      width: "30%"
     },
     {
       title: "Action",
