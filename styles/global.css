@@ -22,7 +22,7 @@ p {
 /* Button */
 
   .ant-btn-primary {
-    border-color: hsl(153, 46%, 49%);
+    border-color: #43b683;
     background: #43b581;
     color:#ffffff;
   }
@@ -40,8 +40,42 @@ p {
   }
 
   .ant-btn-primary:focus, .ant-btn-primary:hover {
-    border-color: hsl(153, 63%, 61%);
+    border-color: #5ddaa2;
     background: #5edaa2;
+  }
+
+  .ant-popover .ant-btn-default-sm {
+    background-color: #ff393d;
+    border: 1px solid #ff393d;
+    color: #ffffff;
+  }
+
+  .ant-form-item .ant-btn {
+    width: 500px;
+    margin-top: 20px;
+  }
+
+  .ant-modal-footer .ant-btn-default{
+    background-color: #ff393d;
+    border: 1px solid #ff393d;
+    color: #ffffff;
+  }
+
+  .ant-modal-footer .ant-btn-default:focus, .ant-btn-default:hover {
+    border-color: #ff4d4f;
+    background: #ff4d4f;
+  }
+
+  .ant-btn-primary[disabled], .ant-btn-primary[disabled]:active, .ant-btn-primary[disabled]:focus, .ant-btn-primary[disabled]:hover {
+    border-color: #43b683;
+    background: #43b581;
+    color:#ffffff;
+  }
+
+  .ant-btn-default {
+    background: #ff393d;
+    border-color: #ff393d;
+    color:#ffffff;
   }
 
 /* Card */
@@ -96,12 +130,18 @@ p {
     background: #2a3644;
   }
 
-  .ant-form-item .ant-btn {
-    width: 500px;
-    margin-top: 20px;
-  }
-
 /* Input */
+
+  .ant-input-group-wrapper {
+    max-width: 500px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+  }
 
   .ant-input-affix-wrapper {
     min-width: 500px;
@@ -123,6 +163,7 @@ p {
 
   .ant-input-group-addon {
     color:#ffffff;
+    background:#43b581;
     border: 1px solid #1c242e;
   }
 
@@ -159,6 +200,10 @@ p {
 
   .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
     border-color: #43b581;
+  }
+
+  .ant-input-affix-wrapper-disabled:hover {
+    border-color: #ff4d4f;
   }
 
 /* Menu */
@@ -199,17 +244,6 @@ p {
     border-top: 1px solid #1c242e;
   }
 
-  .ant-modal-footer .ant-btn-default{
-    background-color: #ff393d;
-    border: 1px solid #ff393d;
-    color: #ffffff;
-  }
-
-  .ant-modal-footer .ant-btn-default:focus, .ant-btn-default:hover {
-    border-color: #ff4d4f;
-    background: #ff4d4f;
-  }
-
 /* Other */
 
   .ant-space {
@@ -217,8 +251,7 @@ p {
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 8.5%;
-    width: 100%
+    gap: 50%;
   }
 
   .anticon svg {
@@ -246,7 +279,41 @@ p {
     gap: 25px;
   }
 
+  .ant-select-lg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 175px;
+    top: 12.5%;
+    right: 1.9%;
+  }
+
+  .ant-notification-notice {
+    background: #161d24;
+    border-color: #161d24;
+    color: #d3d3d3;
+  }
+
+  .ant-notification-notice .anticon svg {
+    color: #ff393d;
+  }
+
+  .ant-notification-notice-with-icon .ant-notification-notice-message {
+    color:#ffffff;
+  }
+
 /* Pagination */ 
+
+  .ant-table-pagination.ant-pagination {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 120%;
+    left: 50%;
+    transform: translate(-50%, -120%);
+  }
 
   .ant-pagination-next .ant-pagination-item-link, .ant-pagination-prev .ant-pagination-item-link {
     background: #2a3644;

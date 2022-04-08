@@ -85,20 +85,19 @@ export default function ManageStudent () {
       <title>Manage Students </title>
     </Head>
     <Nav />
+    <Search
+      placeholder="Disabled for now..."
+      allowClear
+      enterButton="Search"
+      size="large"
+      disabled={true}
+    />
     <Add page={page} />
-    <Space>
-      <Select defaultValue="Year" size="large" onChange={handleChange}>
-        <Option value="Year">Filter by</Option>
-        <Option value="Student Name">Filter by</Option>
-        <Option value="Yiminghe">Filter by</Option>
-      </Select>
-      <Search
-        placeholder="input search text"
-        allowClear
-        enterButton="Search"
-        size="large"
-      />
-    </Space>
+    <Select defaultValue="Year" size="large" onChange={handleChange}>
+      <Option value="Year">Filter by</Option>
+      <Option value="Student Name">Filter by</Option>
+      <Option value="Yiminghe">Filter by</Option>
+    </Select>
     <Table
       loading={isValidating}
       columns={columns}
