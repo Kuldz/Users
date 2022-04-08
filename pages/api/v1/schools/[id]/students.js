@@ -25,16 +25,6 @@ export default async function handler (req, res) {
         break
       }
 
-      case "DELETE": {
-        await res.status(202)
-        await prisma.student.delete({
-          where: {
-            id: parseInt(id)
-          }
-        })
-        break
-      }
-
       default:
         res.status(405)
         break
