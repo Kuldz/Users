@@ -26,6 +26,25 @@ export default function ManageStudent () {
     console.log(error)
   }
 
+  console.log(data?.students)
+
+  function returnFilterValues (column) {
+    const records = []
+    const usedValues = []
+
+    data?.students.forEach(student => {
+      const filterBy = (column === "school") ? student.school.name : student.class.name
+      if (usedValues.includes(filterBy)) return
+      usedValues.push(filterBy)
+
+      const record = {}
+      record.text = filterBy
+      record.value = filterBy
+      records.push(record)
+    })
+    return records
+  }
+
   function handleDelete (id) {
     fetch("/api/v1/students/" + id, {
       method: "DELETE"
@@ -56,12 +75,22 @@ export default function ManageStudent () {
     {
       title: "School",
       dataIndex: ["school", "name"],
-      key: "school.name"
+      key: "school.name",
+      filters: returnFilterValues("school"),
+      filterMode: "tree",
+      filterSearch: true,
+      onFilter: (value, record) => record.school.name === value,
+      width: "30%"
     },
     {
       title: "Class",
       dataIndex: ["class", "name"],
-      key: "class.name"
+      key: "class.name",
+      filters: returnFilterValues("class"),
+      filterMode: "tree",
+      filterSearch: true,
+      onFilter: (value, record) => record.class.name === value,
+      width: "30%"
     },
     {
       title: "Action",
