@@ -103,7 +103,7 @@ const CollectionsPage = ({ page }) => {
           setVisible(true)
         }}
       >
-        Add
+        Add Teacher
       </Button>
       <CollectionCreateForm
         visible={visible}
