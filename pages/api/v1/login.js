@@ -17,8 +17,10 @@ export default async function handler (req, res) {
 
   console.log("(User)", user)
 
-  bcrypt.compare(req.body.password, user.password, function(err, result) {
-    if (result == true) {
+  bcrypt.compare(req.body.password, user.password, function (_err, result) {
+    // I am pretty sure ignoring the err call with a prefix is not a good idea,
+    // but I haven't made one for it so it might as well be
+    if (result === true) {
       console.log("bcrypt PASS")
       delete user.password
       res.status(200).json(user)
@@ -26,5 +28,5 @@ export default async function handler (req, res) {
       console.log("bcrypt FAIL")
       res.status(401).json("Invalid credentials.")
     }
-  });
+  })
 }
