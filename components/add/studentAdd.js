@@ -48,7 +48,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
       <Form
         form={form}
         layout="vertical"
-        name="school_add"
+        name="student_add"
       >
         <Form.Item name={["student", "firstName"]} label="First Name" rules={[{ required: true, message: "Please input a first name!" }]}>
           <Input />

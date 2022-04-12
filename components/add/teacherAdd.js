@@ -48,7 +48,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
       <Form
         form={form}
         layout="vertical"
-        name="school_add"
+        name="teacher_add"
       >
         <Form.Item name={["teacher", "firstName"]} label="First Name" rules={[{ required: true, message: "Please input a first name!" }]}>
           <Input />
@@ -58,8 +58,16 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
           <Input />
         </Form.Item>
 
+        <Form.Item name={["teacher", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: emailValidator }]}>
+          <Input />
+        </Form.Item>
+
         <Form.Item name={["teacher", "schoolId"]} label="School" rules={[{ type: "number", required: true, message: "Please input a school!" }]}>
           <Select placeholder="Select school" options={schools}></Select>
+        </Form.Item>
+
+        <Form.Item name={["teacher", "classId"]} label="Class" rules={[{ type: "number", required: true, message: "Please input a class!" }]}>
+          <Select placeholder="Select class" options={classes}></Select>
         </Form.Item>
       </Form>
     </Modal>
@@ -88,7 +96,7 @@ const CollectionsPage = ({ page }) => {
   }
 
   return (
-    <div className="table-add">
+    <div className="teacher-table-add">
       <Button
         type="primary"
         onClick={() => {

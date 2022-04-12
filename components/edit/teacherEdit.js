@@ -80,8 +80,16 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name={["teacher", "schoolId"]} label="School" rules={[{ type: "number" }]}>
+        <Form.Item name={["teacher", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: emailValidator }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item name={["teacher", "schoolId"]} label="School" rules={[{ type: "number", required: true, message: "Please input a school!" }]}>
           <Select placeholder="Select school" options={schools}></Select>
+        </Form.Item>
+
+        <Form.Item name={["teacher", "classId"]} label="Class" rules={[{ type: "number", required: true, message: "Please input a class!" }]}>
+          <Select placeholder="Select class" options={classes}></Select>
         </Form.Item>
       </Form>
     </Modal>
