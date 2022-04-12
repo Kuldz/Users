@@ -63,10 +63,6 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "teacher"]} label="Teacher">
-          <Input />
-        </Form.Item>
-
         <Form.Item name={["class", "schoolId"]} label="School" rules={[{ required: true, message: "Please input a school!", type: "number" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
@@ -104,7 +100,7 @@ const CollectionsPage = ({ fields, isPUT, page }) => {
           setVisible(true)
         }}
       >
-        Add
+        Add Class
       </Button>
       <CollectionCreateForm
         isPUT={isPUT}

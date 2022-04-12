@@ -3,7 +3,7 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/teacherAdd"
 import Edit from "../../components/edit/teacherEdit"
-import { Input, Table, Space, Select, Popconfirm } from "antd"
+import { Input, Table, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
 function handleChange (value) {
@@ -49,9 +49,19 @@ export default function ManageTeacher () {
       key: "lastName"
     },
     {
+      title: "Email",
+      dataIndex: "email",
+      key: "email"
+    },
+    {
       title: "School",
       dataIndex: ["school", "name"],
       key: "school.name"
+    },
+    {
+      title: "Class",
+      dataIndex: ["class", "name"],
+      key: "class.name"
     },
     {
       title: "Action",
@@ -75,20 +85,19 @@ export default function ManageTeacher () {
       <title>Manage Teachers </title>
     </Head>
     <Nav />
+    <Search
+    placeholder="Disabled for now..."
+    allowClear
+    enterButton="Search"
+    size="large"
+    disabled={true}
+    />
     <Add page={page} />
-    <Space>
-      <Select defaultValue="Year" size="large" onChange={handleChange}>
-        <Option value="Year">Filter by</Option>
-        <Option value="Teacher Name">Filter by</Option>
-        <Option value="Yiminghe">Filter by</Option>
-      </Select>
-      <Search
-        placeholder="input search text"
-        allowClear
-        enterButton="Search"
-        size="large"
-      />
-    </Space>
+    <Select defaultValue="Year" size="large" onChange={handleChange}>
+      <Option value="Year">Filter by</Option>
+      <Option value="Teacher Name">Filter by</Option>
+      <Option value="Yiminghe">Filter by</Option>
+    </Select>
     <Table
       loading={isValidating}
       columns={columns}

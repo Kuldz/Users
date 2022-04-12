@@ -30,6 +30,10 @@ export default function Nav (props) {
           Manage Students
           <a href="/manage/student"/>
         </Menu.Item>
+        <Menu.Item key="/manage/teacher">
+          Manage Teachers
+          <a href="/manage/teacher"/>
+        </Menu.Item>
         <Menu.Item key="/profile" icon={<UserOutlined />} style={{ marginLeft: "auto" }}>
           Profile
           <a href="/profile"/>

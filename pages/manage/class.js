@@ -3,7 +3,6 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
-import AddTeacher from "../../components/add/teacherAdd"
 import { Input, Table, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
@@ -90,7 +89,6 @@ export default function ManageClass () {
         disabled={true}
       />
     <Add page={page} />
-    <AddTeacher />
     <Select defaultValue="Year" size="large" onChange={handleChange}>
       <Option value="Year">Filter by AAAAA</Option>
       <Option value="Class Name">Filter by BBBBB</Option>

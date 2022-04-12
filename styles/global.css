@@ -34,13 +34,6 @@ p {
     top: 13%;
   }
 
-  .teacher-table-add {
-    text-align: center;
-    padding: 0 7rem;
-    position: absolute;
-    top: 13%;
-  }
-
   .ant-btn:hover {
     border-color: #43b581;
     color: #ffffff;
