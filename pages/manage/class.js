@@ -3,7 +3,7 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
-import { Input, Table, Select, Popconfirm } from "antd"
+import { Input, Table, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
 const { Search } = Input
@@ -66,7 +66,7 @@ export default function ManageClass () {
     {
       title: "Teacher",
       dataIndex: "teacher",
-      key: "teacher",
+      key: "teacher"
     },
     {
       title: "School",
@@ -108,11 +108,6 @@ export default function ManageClass () {
         disabled={true}
       />
     <Add page={page} />
-    <Select defaultValue="Year" size="large" onChange={handleChange}>
-      <Option value="Year">Filter by AAAAA</Option>
-      <Option value="Class Name">Filter by BBBBB</Option>
-      <Option value="Yiminghe">Filter by CCCCC</Option>
-    </Select>
     <Table
       loading={isValidating}
       columns={columns}

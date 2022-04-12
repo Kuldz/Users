@@ -3,7 +3,7 @@ import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/schoolAdd"
 import Edit from "../../components/edit/schoolEdit"
-import { Input, Table, Select, Popconfirm, notification } from "antd"
+import { Input, Table, Popconfirm, notification } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
 const { Search } = Input
@@ -98,11 +98,6 @@ export default function ManageSchool () {
       disabled={true}
     />
     <Add page={page} />
-    <Select defaultValue="Year" size="large" onChange={handleChange}>
-      <Option value="Year">Filter by</Option>
-      <Option value="School Name">Filter by</Option>
-      <Option value="Yiminghe">Filter by</Option>
-    </Select>
     <Table
       loading={isValidating}
       columns={columns}
