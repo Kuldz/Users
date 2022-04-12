@@ -16,7 +16,7 @@ export default function Nav (props) {
         </Menu.Item>
         <Menu.Item key="news" icon={<MailOutlined />}>
           News
-          <a href="https://schoolnews.vercel.app/" />
+          <a href="https://ta-19-e-news-three.vercel.app/" target="_blank" rel="noreferrer" />
         </Menu.Item>
         <Menu.Item key="/manage/school">
           Manage Schools
@@ -29,6 +29,10 @@ export default function Nav (props) {
         <Menu.Item key="/manage/student">
           Manage Students
           <a href="/manage/student"/>
+        </Menu.Item>
+        <Menu.Item key="/manage/teacher">
+          Manage Teachers
+          <a href="/manage/teacher"/>
         </Menu.Item>
         <Menu.Item key="/profile" icon={<UserOutlined />} style={{ marginLeft: "auto" }}>
           Profile
