@@ -101,13 +101,6 @@ export default function ManageClass () {
       dataSource={data?.classes || []}
       rowKey="id"
       onHeaderRow={(columns, index) => {
-        return {
-          onClick: () => {}
-          /*
-          https://ant.design/components/table/#onRow-usage
-          teacher header click stuff thingie whatever
-          */
-        }
       }}
     />
     </>
