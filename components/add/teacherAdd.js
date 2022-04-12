@@ -29,7 +29,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
   return (
     <Modal
       visible={visible}
-      title="Add a new Student"
+      title="Add a new Teacher"
       okText="Create"
       cancelText="Cancel"
       onCancel={onCancel}
@@ -48,25 +48,25 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
       <Form
         form={form}
         layout="vertical"
-        name="student_add"
+        name="teacher_add"
       >
-        <Form.Item name={["student", "firstName"]} label="First Name" rules={[{ required: true, message: "Please input a first name!" }]}>
+        <Form.Item name={["teacher", "firstName"]} label="First Name" rules={[{ required: true, message: "Please input a first name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "lastName"]} label="Last Name" rules={[{ required: true, message: "Please input a last name!" }]}>
+        <Form.Item name={["teacher", "lastName"]} label="Last Name" rules={[{ required: true, message: "Please input a last name!" }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: emailValidator }]}>
+        <Form.Item name={["teacher", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: emailValidator }]}>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "schoolId"]} label="School" rules={[{ type: "number", required: true, message: "Please input a school!" }]}>
+        <Form.Item name={["teacher", "schoolId"]} label="School" rules={[{ type: "number", required: true, message: "Please input a school!" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
 
-        <Form.Item name={["student", "classId"]} label="Class" rules={[{ type: "number", required: true, message: "Please input a class!" }]}>
+        <Form.Item name={["teacher", "classId"]} label="Class" rules={[{ type: "number", required: true, message: "Please input a class!" }]}>
           <Select placeholder="Select class" options={classes}></Select>
         </Form.Item>
       </Form>
@@ -81,7 +81,7 @@ const CollectionsPage = ({ page }) => {
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     setVisible(false)
-    fetch("/api/v1/students", {
+    fetch("/api/v1/teachers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -90,13 +90,13 @@ const CollectionsPage = ({ page }) => {
     })
       .then(res => res.json())
       .then((json) => {
-        console.log("Create student response: ", json)
-        mutate(`/api/v1/students?page=${page}`)
+        console.log("Create teacher response: ", json)
+        mutate(`/api/v1/teachers?page=${page}`)
       })
   }
 
   return (
-    <div className="table-add">
+    <div className="teacher-table-add">
       <Button
         type="primary"
         onClick={() => {
@@ -116,6 +116,6 @@ const CollectionsPage = ({ page }) => {
   )
 }
 
-export default function studentAdd (props) {
+export default function teacherAdd (props) {
   return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
 }

@@ -2,8 +2,10 @@ import React from "react"
 import Head from "next/head"
 import { Form, Input, Button, Card } from "antd"
 import userEmailValidator from "../functions/userEmailValidator"
+import { useRouter } from "next/router"
 
 export default function Register () {
+  const router = useRouter()
   const onCreate = (values) => {
     console.log("Received values of form: ", values)
     fetch("api/v1/register", {
@@ -13,7 +15,11 @@ export default function Register () {
       },
       body: JSON.stringify(values)
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 201) {
+          router.push("/login") // redirect to login
+        }
+      })
       .then((json) => {
         console.log("Create user response: ", json)
       })
@@ -62,7 +68,7 @@ export default function Register () {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item style={{ marginBottom: 4 }}>
+          <Form.Item style={{ "margin-bottom": "4px" }}>
             <Button type="primary" htmlType="submit">
               Register
             </Button>
