@@ -23,19 +23,19 @@ model School {
   type     String
   county   String
   city     String
-  students Student[]
   classes  Class[]
+  students Student[]
   teachers Teacher[]
 }
 
 model Student {
-  id        Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   firstName String
   lastName  String
   email     String? @unique
   schoolId  Int
   classId   Int
-  school    School @relation(fields: [schoolId], references: [id])
+  school    School? @relation(fields: [schoolId], references: [id])
   class     Class?  @relation(fields: [classId], references: [id])
 
   @@index([schoolId])
@@ -43,23 +43,27 @@ model Student {
 }
 
 model Class {
-  id          Int       @id @default(autoincrement())
-  name        String
-  year        String
-  teacher     String?
-  schoolId    Int
-  school      School    @relation(fields: [schoolId], references: [id])
-  student     Student[]
+  id       Int       @id @default(autoincrement())
+  name     String
+  year     String
+  teacher  String?
+  schoolId Int
+  school   School    @relation(fields: [schoolId], references: [id])
+  students Student[]
+  teachers Teacher[]
 
   @@index([schoolId])
 }
 
 model Teacher {
-  id        Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   firstName String
   lastName  String
+  email     String? @unique
   schoolId  Int
-  school    School @relation(fields: [schoolId], references: [id])
+  classId   Int
+  school    School  @relation(fields: [schoolId], references: [id])
+  class     Class?  @relation(fields: [classId], references: [id])
 
   @@index([schoolId])
 }

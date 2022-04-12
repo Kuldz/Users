@@ -6,12 +6,7 @@ import Edit from "../../components/edit/schoolEdit"
 import { Input, Table, Select, Popconfirm, notification } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
-function handleChange (value) {
-  console.log(`selected ${value}`)
-}
-
 const { Search } = Input
-const { Option } = Select
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 

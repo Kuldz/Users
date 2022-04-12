@@ -6,12 +6,7 @@ import Edit from "../../components/edit/classEdit"
 import { Input, Table, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
-function handleChange (value) {
-  console.log(`selected ${value}`)
-}
-
 const { Search } = Input
-const { Option } = Select
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
@@ -26,6 +21,26 @@ export default function ManageClass () {
   if (error) {
     console.log(error)
   }
+
+  function returnFilterValues () {
+    const records = []
+    const usedValues = []
+
+    data?.classes.forEach(_class => {
+      const filterBy = _class.school.name
+      if (usedValues.includes(filterBy)) return
+      usedValues.push(filterBy)
+
+      const record = {}
+      record.text = filterBy
+      record.value = filterBy
+      records.push(record)
+    })
+    return records
+  }
+
+  console.log("Filter values:", returnFilterValues())
+
   function handleDelete (id) {
     fetch("/api/v1/classes/" + id, {
       method: "DELETE"
@@ -52,12 +67,16 @@ export default function ManageClass () {
       title: "Teacher",
       dataIndex: "teacher",
       key: "teacher",
-      render: teacher => <a>{teacher}</a>
     },
     {
       title: "School",
       dataIndex: ["school", "name"],
-      key: "school.name"
+      key: "school.name",
+      filters: returnFilterValues(),
+      filterMode: "tree",
+      filterSearch: true,
+      onFilter: (value, record) => record.school.name === value,
+      width: "30%"
     },
     {
       title: "Action",
