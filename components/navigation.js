@@ -16,7 +16,7 @@ export default function Nav (props) {
         </Menu.Item>
         <Menu.Item key="news" icon={<MailOutlined />}>
           News
-          <a href="https://schoolnews.vercel.app/" />
+          <a href="https://ta-19-e-news-three.vercel.app/" target="_blank" rel="noreferrer" />
         </Menu.Item>
         <Menu.Item key="/manage/school">
           Manage Schools

@@ -4,7 +4,7 @@ import Nav from "../../components/navigation"
 import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
 import AddTeacher from "../../components/add/teacherAdd"
-import { Input, Table, Space, Select, Popconfirm } from "antd"
+import { Input, Table, Select, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
 function handleChange (value) {
@@ -52,7 +52,8 @@ export default function ManageClass () {
     {
       title: "Teacher",
       dataIndex: "teacher",
-      key: "teacher"
+      key: "teacher",
+      render: teacher => <a>{teacher}</a>
     },
     {
       title: "School",
@@ -81,29 +82,35 @@ export default function ManageClass () {
       <title>Manage Classes</title>
     </Head>
     <Nav />
-    <Space>
-      <Add page={page} />
-      <AddTeacher />
-    </Space>
-    <Space>
-      <Select defaultValue="Year" size="large" onChange={handleChange}>
-        <Option value="Year">Filter by</Option>
-        <Option value="Class Name">Filter by</Option>
-        <Option value="Yiminghe">Filter by</Option>
-      </Select>
-      <Search
-        placeholder="input search text"
+    <Search
+        placeholder="Disabled for now..."
         allowClear
         enterButton="Search"
         size="large"
+        disabled={true}
       />
-    </Space>
+    <Add page={page} />
+    <AddTeacher />
+    <Select defaultValue="Year" size="large" onChange={handleChange}>
+      <Option value="Year">Filter by AAAAA</Option>
+      <Option value="Class Name">Filter by BBBBB</Option>
+      <Option value="Yiminghe">Filter by CCCCC</Option>
+    </Select>
     <Table
       loading={isValidating}
       columns={columns}
       pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
       dataSource={data?.classes || []}
       rowKey="id"
+      onHeaderRow={(columns, index) => {
+        return {
+          onClick: () => {}
+          /*
+          https://ant.design/components/table/#onRow-usage
+          teacher header click stuff thingie whatever
+          */
+        }
+      }}
     />
     </>
   )
