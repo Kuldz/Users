@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
-import emailValidator from "../../functions/emailValidator"
+import emailValidator from "../../functions/teacherEmailValidator"
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
   const [form] = Form.useForm()

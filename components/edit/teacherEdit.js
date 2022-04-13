@@ -1,4 +1,4 @@
-import emailValidator from "../../functions/emailValidator"
+import emailValidator from "../../functions/teacherEmailValidator"
 import React, { useState, useEffect } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
