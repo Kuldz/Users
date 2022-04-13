@@ -114,8 +114,6 @@ export default function ManageClass () {
       pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
       dataSource={data?.classes || []}
       rowKey="id"
-      onHeaderRow={(columns, index) => {
-      }}
     />
     </>
   )
