@@ -66,4 +66,5 @@ model Teacher {
   class     Class?  @relation(fields: [classId], references: [id])
 
   @@index([schoolId])
+  @@index([classId])
 }
