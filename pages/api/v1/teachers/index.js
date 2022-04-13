@@ -1,7 +1,7 @@
 import prisma from "../../../../client.ts"
 import { getSession } from "next-auth/react"
 
-export default async function studentEmailHandler (req, res) {
+export default async function teacherEmailHandler (req, res) {
   const session = await getSession({ req })
 
   if (session) {
@@ -12,17 +12,17 @@ export default async function studentEmailHandler (req, res) {
     switch (method) {
       case "POST": {
         console.log(req.body)
-        const student = await prisma.student.create({
-          data: req.body.student
+        const teacher = await prisma.teacher.create({
+          data: req.body.teacher
         })
-        res.status(201).json(student)
+        res.status(201).json(teacher)
         break
       }
 
       case "GET": {
         if (!email) {
-          const [students, totalCount] = await prisma.$transaction([
-            prisma.student.findMany({
+          const [teachers, totalCount] = await prisma.$transaction([
+            prisma.teacher.findMany({
               skip: parseInt((page - 1) * 10) || 0,
               take: 10,
               include: {
@@ -38,20 +38,20 @@ export default async function studentEmailHandler (req, res) {
                 }
               }
             }),
-            prisma.student.count()
+            prisma.teacher.count()
           ])
-          res.status(200).json({ students, totalCount })
+          res.status(200).json({ teachers, totalCount })
           break
         } else if (email) {
-          const student = await prisma.student.findUnique({
+          const teacher = await prisma.teacher.findUnique({
             where: {
               email: email
             }
           })
-          if (student) {
-            res.status(200).json(student)
+          if (teacher) {
+            res.status(200).json(teacher)
           } else {
-            res.status(404).json({ message: "Student not found" })
+            res.status(404).json({ message: "Teacher not found" })
           }
         }
       }

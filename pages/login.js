@@ -40,7 +40,7 @@ export default function Login () {
             <Input />
           </Form.Item>
 
-          <Form.Item label="Password" name="password" type="password" style={{ "margin-bottom": "4px" }}
+          <Form.Item label="Password" name="password" type="password" style={{ marginBottom: 4 }}
             rules={[{ required: true, message: "Input password" }]}>
             <Input.Password />
           </Form.Item>
@@ -56,7 +56,7 @@ export default function Login () {
 
           <a>Forgot your password?</a>
 
-          <Form.Item style={{ "margin-bottom": "4px" }}>
+          <Form.Item style={{ marginBottom: 4 }}>
             <Button type="primary" htmlType="submit">
               Login
             </Button>

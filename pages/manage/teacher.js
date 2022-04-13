@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import Head from "next/head"
 import Nav from "../../components/navigation"
-import Add from "../../components/add/studentAdd"
-import Edit from "../../components/edit/studentEdit"
+import Add from "../../components/add/teacherAdd"
+import Edit from "../../components/edit/teacherEdit"
 import { Input, Table, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
@@ -10,13 +10,13 @@ const { Search } = Input
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-export default function ManageStudent () {
+export default function ManageTeacher () {
   const { mutate } = useSWRConfig()
   const [page, setPage] = useState(1)
   const handlePageChange = page => {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
-  const { data, error, isValidating } = useSWR(`/api/v1/students?page=${page}`, fetcher)
+  const { data, error, isValidating } = useSWR(`/api/v1/teachers?page=${page}`, fetcher)
   if (error) {
     console.log(error)
   }
@@ -27,8 +27,8 @@ export default function ManageStudent () {
     const records = []
     const usedValues = []
 
-    data?.students.forEach(student => {
-      const filterBy = (column === "school") ? student.school.name : student.class.name
+    data?.teachers.forEach(teacher => {
+      const filterBy = (column === "school") ? teacher.school.name : teacher.class.name
       if (usedValues.includes(filterBy)) return
       usedValues.push(filterBy)
 
@@ -41,13 +41,13 @@ export default function ManageStudent () {
   }
 
   function handleDelete (id) {
-    fetch("/api/v1/students/" + id, {
+    fetch("/api/v1/teachers/" + id, {
       method: "DELETE"
     })
       .then(res => res.json())
       .then((json) => {
-        console.log("Delete student response: ", json)
-        mutate(`/api/v1/students?page=${page}`)
+        console.log("Delete teacher response: ", json)
+        mutate(`/api/v1/teachers?page=${page}`)
       })
   }
 
@@ -90,10 +90,10 @@ export default function ManageStudent () {
     {
       title: "Action",
       key: "action",
-      render: (_, Student) => (
+      render: (_, Teacher) => (
         <div className="table-functions">
-          <Edit fields={Student} page={page} />
-          <Popconfirm title="Are you sure you want to delete this student?"
+          <Edit fields={Teacher} page={page} />
+          <Popconfirm title="Are you sure you want to delete this teacher?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
             <a>Delete</a>
@@ -106,22 +106,22 @@ export default function ManageStudent () {
   return (
     <>
     <Head>
-      <title>Manage Students </title>
+      <title>Manage Teachers </title>
     </Head>
     <Nav />
     <Search
-      placeholder="Disabled for now..."
-      allowClear
-      enterButton="Search"
-      size="large"
-      disabled={true}
+    placeholder="Disabled for now..."
+    allowClear
+    enterButton="Search"
+    size="large"
+    disabled={true}
     />
     <Add page={page} />
     <Table
       loading={isValidating}
       columns={columns}
       pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
-      dataSource={data?.students || []}
+      dataSource={data?.teachers || []}
       rowKey="id"
     />
     </>
