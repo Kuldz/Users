@@ -1,4 +1,4 @@
-export default function emailValidator (rule, value, callback) {
+export default function studentEmailValidator (rule, value, callback) {
   try {
     fetch(`/api/v1/students?email=${value}`, {
       method: "GET",

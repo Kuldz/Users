@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
-import emailValidator from "../../functions/emailValidator"
+import studentEmailValidator from "../../functions/studentEmailValidator"
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
   const [form] = Form.useForm()
@@ -58,7 +58,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: emailValidator }]}>
+        <Form.Item name={["student", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: studentEmailValidator }]}>
           <Input />
         </Form.Item>
 
