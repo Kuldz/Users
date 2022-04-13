@@ -39,7 +39,7 @@ html {
     text-align: center;
     padding: 0 3rem;
     position: absolute;
-    top: 14%;
+    top: 16%;
   }
 
   .ant-btn:hover {
@@ -471,7 +471,7 @@ html {
 /* Table */
 
   .ant-table-wrapper {
-    top: 17%;
+    top: 20%;
     display: flex;
     justify-content: center;
     position: absolute;
