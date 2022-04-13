@@ -21,7 +21,7 @@ export default function ManageTeacher () {
     console.log(error)
   }
 
-  console.log(data?.students)
+  console.log(data?.teachers)
 
   function returnFilterValues (column) {
     const records = []
@@ -110,11 +110,11 @@ export default function ManageTeacher () {
     </Head>
     <Nav />
     <Search
-    placeholder="Disabled for now..."
-    allowClear
-    enterButton="Search"
-    size="large"
-    disabled={true}
+      placeholder="Disabled for now..."
+      allowClear
+      enterButton="Search"
+      size="large"
+      disabled={true}
     />
     <Add page={page} />
     <Table
