@@ -1,24 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
 const { Option } = Select
 
-const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isPUT }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel, schools }) => {
   const [form] = Form.useForm()
-  const [schools, setSchools] = useState([])
-
-  if (!isPUT) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.schools.map(school => ({
-          label: `${school.name}`,
-          value: school.id
-        })))
-      )
-    }, [])
-  }
 
   return (
     <Modal
@@ -32,11 +19,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           .validateFields()
           .then((values) => {
             form.resetFields()
-            if (isPUT) {
-              onEdit(values, fields.id)
-            } else {
-              onCreate(values)
-            }
+            onCreate(values)
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
@@ -71,7 +54,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
   )
 }
 
-const CollectionsPage = ({ fields, isPUT, page }) => {
+const CollectionsPage = ({ page, schools }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -103,18 +86,17 @@ const CollectionsPage = ({ fields, isPUT, page }) => {
         Add Class
       </Button>
       <CollectionCreateForm
-        isPUT={isPUT}
-        fields={fields}
         visible={visible}
         onCreate={onCreate}
         onCancel={() => {
           setVisible(false)
         }}
+        schools={schools}
       />
     </div>
   )
 }
 
 export default function classAdd (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
+  return <CollectionsPage page={props.page} schools={props.schools} />
 }

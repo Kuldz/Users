@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 import teacherEmailValidator from "../../functions/teacherEmailValidator"
 
-const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
+const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, classes, schools }) => {
   const [form] = Form.useForm()
-  const [classes, setClasses] = useState([])
-  const [schools, setSchools] = useState([])
 
   const parsedFields = [fields].map(field => (([{
     name: ["teacher", "firstName"],
@@ -28,24 +26,6 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
     name: ["teacher", "classId"],
     value: field.classId
   }])))
-
-  if (!isPUT) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      fetch("/api/v1/classes").then(res => res.json()).then(data =>
-        setClasses(data.classes.map(c => ({
-          label: `${c.name}`,
-          value: c.id
-        })))
-      )
-      fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.schools.map(school => ({
-          label: `${school.name}`,
-          value: school.id
-        })))
-      )
-    }, [])
-  }
 
   return (
     <Modal
@@ -96,7 +76,7 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
   )
 }
 
-const CollectionsPage = ({ fields, page }) => {
+const CollectionsPage = ({ fields, page, classes, schools }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -129,11 +109,13 @@ const CollectionsPage = ({ fields, page }) => {
         onCancel={() => {
           setVisible(false)
         }}
+        classes={classes}
+        schools={schools}
       />
     </div>
   )
 }
 
 export default function teacherEdit (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
+  return <CollectionsPage fields={props.fields} page={props.page} classes={props.classes} schools={props.schools} />
 }

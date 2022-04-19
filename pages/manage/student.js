@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/studentAdd"
@@ -13,6 +13,25 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 export default function ManageStudent () {
   const { mutate } = useSWRConfig()
   const [page, setPage] = useState(1)
+  const [classes, setClasses] = useState([])
+  const [schools, setSchools] = useState([])
+
+  useEffect(() => {
+    fetch("/api/v1/classes").then(res => res.json()).then(data =>
+      setClasses(data.classes.map(c => ({
+        label: `${c.name}`,
+        value: c.id
+      })))
+    )
+
+    fetch("/api/v1/schools").then(res => res.json()).then(data =>
+      setSchools(data.schools.map(school => ({
+        label: `${school.name}`,
+        value: school.id
+      })))
+    )
+  }, [])
+
   const handlePageChange = page => {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
@@ -20,15 +39,6 @@ export default function ManageStudent () {
   if (error) {
     console.log(error)
   }
-
-  console.log(data?.students)
-
-  const Classes = fetch("/api/v1/classes").then(res => res.json()).then(data =>
-    data.classes.map(c => ({
-      label: `${c.name}`,
-      value: c.id
-    }))
-  )
 
   function returnFilterValues (column) {
     const records = []
@@ -99,7 +109,7 @@ export default function ManageStudent () {
       key: "action",
       render: (_, Student) => (
         <div className="table-functions">
-          <Edit fields={Student} page={page} />
+          <Edit fields={Student} page={page} classes={classes} schools={schools} />
           <Popconfirm title="Are you sure you want to delete this student?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
@@ -123,7 +133,7 @@ export default function ManageStudent () {
       size="large"
       disabled={true}
     />
-    <Add page={page} />
+    <Add page={page} classes={classes} schools={schools} />
     <Table
       loading={isValidating}
       columns={columns}
