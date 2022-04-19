@@ -23,6 +23,13 @@ export default function ManageStudent () {
 
   console.log(data?.students)
 
+  const Classes = fetch("/api/v1/classes").then(res => res.json()).then(data =>
+    data.classes.map(c => ({
+      label: `${c.name}`,
+      value: c.id
+    }))
+  )
+
   function returnFilterValues (column) {
     const records = []
     const usedValues = []
