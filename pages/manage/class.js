@@ -19,6 +19,25 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 export default function ManageClass () {
   const { mutate } = useSWRConfig()
   const [page, setPage] = useState(1)
+  const [teachers, setTeachers] = useState([])
+  const [schools, setSchools] = useState([])
+
+  useEffect(() => {
+    fetch("/api/v1/teachers").then(res => res.json()).then(data =>
+      setTeachers(data.teachers.map(teacher => ({
+        label: `${teacher.firstName + " " + teacher.lastName}`,
+        value: teacher.id
+      })))
+    )
+
+    fetch("/api/v1/schools").then(res => res.json()).then(data =>
+      setSchools(data.schools.map(school => ({
+        label: `${school.name}`,
+        value: school.id
+      })))
+    )
+  }, [])
+
   const handlePageChange = page => {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
@@ -51,9 +70,13 @@ export default function ManageClass () {
     },
     {
       title: "Teacher",
-      dataIndex: "teacher",
-      key: "teacher",
-      render: teacher => <a>{teacher}</a>
+      dataIndex: ["teacher", "lastName"],
+      key: "teacher.lastName",
+      filters: returnFilterValues(),
+      filterMode: "tree",
+      filterSearch: true,
+      onFilter: (value, record) => record.teacher.name === value,
+      width: "30%"
     },
     {
       title: "School",
@@ -65,7 +88,7 @@ export default function ManageClass () {
       key: "action",
       render: (_, Class) => (
         <div className="table-functions">
-          <Edit fields={Class} isPUT page={page} />
+          <Edit fields={Class} isPUT page={page} teachers={teachers} schools={schools} />
           <Popconfirm title="Are you sure you want to delete this Class?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
@@ -89,13 +112,7 @@ export default function ManageClass () {
         size="large"
         disabled={true}
       />
-    <Add page={page} />
-    <AddTeacher />
-    <Select defaultValue="Year" size="large" onChange={handleChange}>
-      <Option value="Year">Filter by AAAAA</Option>
-      <Option value="Class Name">Filter by BBBBB</Option>
-      <Option value="Yiminghe">Filter by CCCCC</Option>
-    </Select>
+    <Add page={page} teachers={teachers} schools={schools} />
     <Table
       loading={isValidating}
       columns={columns}

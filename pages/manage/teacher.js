@@ -18,12 +18,42 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 export default function ManageTeacher () {
   const { mutate } = useSWRConfig()
   const [page, setPage] = useState(1)
+  const [schools, setSchools] = useState([])
+
+  useEffect(() => {
+    fetch("/api/v1/schools").then(res => res.json()).then(data =>
+      setSchools(data.schools.map(school => ({
+        label: `${school.name}`,
+        value: school.id
+      })))
+    )
+  }, [])
+
   const handlePageChange = page => {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
   const { data, error, isValidating } = useSWR(`/api/v1/teachers?page=${page}`, fetcher)
   if (error) {
     console.log(error)
+  }
+
+  console.log(data?.teachers)
+
+  function returnFilterValues (column) {
+    const records = []
+    const usedValues = []
+
+    data?.teachers.forEach(teacher => {
+      const filterBy = teacher.school.name
+      if (usedValues.includes(filterBy)) return
+      usedValues.push(filterBy)
+
+      const record = {}
+      record.text = filterBy
+      record.value = filterBy
+      records.push(record)
+    })
+    return records
   }
 
   function handleDelete (id) {
@@ -51,14 +81,19 @@ export default function ManageTeacher () {
     {
       title: "School",
       dataIndex: ["school", "name"],
-      key: "school.name"
+      key: "school.name",
+      filters: returnFilterValues("school"),
+      filterMode: "tree",
+      filterSearch: true,
+      onFilter: (value, record) => record.school.name === value,
+      width: "30%"
     },
     {
       title: "Action",
       key: "action",
       render: (_, Teacher) => (
         <div className="table-functions">
-          <Edit fields={Teacher} page={page} />
+          <Edit fields={Teacher} page={page} schools={schools} />
           <Popconfirm title="Are you sure you want to delete this teacher?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
@@ -72,23 +107,17 @@ export default function ManageTeacher () {
   return (
     <>
     <Head>
-      <title>Manage Teachers </title>
+      <title>Manage Teachers</title>
     </Head>
     <Nav />
-    <Add page={page} />
-    <Space>
-      <Select defaultValue="Year" size="large" onChange={handleChange}>
-        <Option value="Year">Filter by</Option>
-        <Option value="Teacher Name">Filter by</Option>
-        <Option value="Yiminghe">Filter by</Option>
-      </Select>
-      <Search
-        placeholder="input search text"
-        allowClear
-        enterButton="Search"
-        size="large"
-      />
-    </Space>
+    <Search
+      placeholder="Disabled for now..."
+      allowClear
+      enterButton="Search"
+      size="large"
+      disabled={true}
+    />
+    <Add page={page} schools={schools} />
     <Table
       loading={isValidating}
       columns={columns}

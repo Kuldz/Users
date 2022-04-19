@@ -30,11 +30,6 @@ export default async function teacherEmailHandler (req, res) {
                   select: {
                     name: true
                   }
-                },
-                class: {
-                  select: {
-                    name: true
-                  }
                 }
               }
             }),

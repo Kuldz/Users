@@ -3,7 +3,7 @@ import { Button, Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 import emailValidator from "../../functions/emailValidator"
 
-const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel, schools }) => {
   const [form] = Form.useForm()
   const [classes, setClasses] = useState([])
   const [schools, setSchools] = useState([])
@@ -65,16 +65,12 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
         <Form.Item name={["teacher", "schoolId"]} label="School" rules={[{ type: "number", required: true, message: "Please input a school!" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
-
-        <Form.Item name={["teacher", "classId"]} label="Class" rules={[{ type: "number", required: true, message: "Please input a class!" }]}>
-          <Select placeholder="Select class" options={classes}></Select>
-        </Form.Item>
       </Form>
     </Modal>
   )
 }
 
-const CollectionsPage = ({ page }) => {
+const CollectionsPage = ({ page, schools }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -111,11 +107,12 @@ const CollectionsPage = ({ page }) => {
         onCancel={() => {
           setVisible(false)
         }}
+        schools={schools}
       />
     </div>
   )
 }
 
 export default function teacherAdd (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
+  return <CollectionsPage page={props.page} schools={props.schools} />
 }

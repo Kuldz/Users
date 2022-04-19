@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
-const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
+const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, schools }) => {
   const [form] = Form.useForm()
   const [classes, setClasses] = useState([])
   const [schools, setSchools] = useState([])
@@ -23,10 +23,6 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
   {
     name: ["teacher", "schoolId"],
     value: field.schoolId
-  },
-  {
-    name: ["teacher", "classId"],
-    value: field.classId
   }])))
 
   if (!isPUT) {
@@ -87,16 +83,12 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
         <Form.Item name={["teacher", "schoolId"]} label="School" rules={[{ type: "number", required: true, message: "Please input a school!" }]}>
           <Select placeholder="Select school" options={schools}></Select>
         </Form.Item>
-
-        <Form.Item name={["teacher", "classId"]} label="Class" rules={[{ type: "number", required: true, message: "Please input a class!" }]}>
-          <Select placeholder="Select class" options={classes}></Select>
-        </Form.Item>
       </Form>
     </Modal>
   )
 }
 
-const CollectionsPage = ({ fields, page }) => {
+const CollectionsPage = ({ fields, page, schools }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -129,11 +121,12 @@ const CollectionsPage = ({ fields, page }) => {
         onCancel={() => {
           setVisible(false)
         }}
+        schools={schools}
       />
     </div>
   )
 }
 
 export default function teacherEdit (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
+  return <CollectionsPage fields={props.fields} page={props.page} schools={props.schools} />
 }

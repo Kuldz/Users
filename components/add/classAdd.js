@@ -4,7 +4,7 @@ import { useSWRConfig } from "swr"
 
 const { Option } = Select
 
-const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isPUT }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel, teachers, schools }) => {
   const [form] = Form.useForm()
   const [schools, setSchools] = useState([])
 
@@ -63,8 +63,8 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "teacher"]} label="Teacher">
-          <Input />
+        <Form.Item name={["class", "teacherId"]} label="Teacher" rules={[{ type: "number" }]}>
+          <Select placeholder="Select teacher" options={teachers}></Select>
         </Form.Item>
 
         <Form.Item name={["class", "schoolId"]} label="School" rules={[{ required: true, message: "Please input a school!", type: "number" }]}>
@@ -75,7 +75,7 @@ const CollectionCreateForm = ({ visible, onCreate, onEdit, onCancel, fields, isP
   )
 }
 
-const CollectionsPage = ({ fields, isPUT, page }) => {
+const CollectionsPage = ({ page, teachers, schools }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -114,11 +114,13 @@ const CollectionsPage = ({ fields, isPUT, page }) => {
         onCancel={() => {
           setVisible(false)
         }}
+        teachers={teachers}
+        schools={schools}
       />
     </div>
   )
 }
 
 export default function classAdd (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
+  return <CollectionsPage page={props.page} teachers={props.teachers} schools={props.schools} />
 }

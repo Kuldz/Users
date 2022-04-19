@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/studentAdd"
@@ -24,6 +24,23 @@ export default function ManageStudent () {
   const { data, error, isValidating } = useSWR(`/api/v1/students?page=${page}`, fetcher)
   if (error) {
     console.log(error)
+  }
+
+  function returnFilterValues (column) {
+    const records = []
+    const usedValues = []
+
+    data?.students.forEach(student => {
+      const filterBy = student.school.name
+      if (usedValues.includes(filterBy)) return
+      usedValues.push(filterBy)
+
+      const record = {}
+      record.text = filterBy
+      record.value = filterBy
+      records.push(record)
+    })
+    return records
   }
 
   function handleDelete (id) {
