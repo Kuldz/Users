@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
@@ -6,19 +6,6 @@ const { Option } = Select
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel, teachers, schools }) => {
   const [form] = Form.useForm()
-  const [schools, setSchools] = useState([])
-
-  if (!isPUT) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.schools.map(school => ({
-          label: `${school.name}`,
-          value: school.id
-        })))
-      )
-    }, [])
-  }
 
   return (
     <Modal
@@ -32,11 +19,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, teachers, schools }
           .validateFields()
           .then((values) => {
             form.resetFields()
-            if (isPUT) {
-              onEdit(values, fields.id)
-            } else {
-              onCreate(values)
-            }
+            onCreate(values)
           })
           .catch((info) => {
             console.log("Validate Failed:", info)
@@ -104,11 +87,9 @@ const CollectionsPage = ({ page, teachers, schools }) => {
           setVisible(true)
         }}
       >
-        Add
+        Add Class
       </Button>
       <CollectionCreateForm
-        isPUT={isPUT}
-        fields={fields}
         visible={visible}
         onCreate={onCreate}
         onCancel={() => {

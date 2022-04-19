@@ -20,7 +20,7 @@ export default async function teacherEmailHandler (req, res) {
       }
 
       case "GET": {
-        if (page) {
+        if (!email) {
           const [teachers, totalCount] = await prisma.$transaction([
             prisma.teacher.findMany({
               skip: parseInt((page - 1) * 10) || 0,

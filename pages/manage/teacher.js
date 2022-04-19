@@ -1,17 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/teacherAdd"
 import Edit from "../../components/edit/teacherEdit"
-import { Input, Table, Space, Select, Popconfirm } from "antd"
+import { Input, Table, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
-function handleChange (value) {
-  console.log(`selected ${value}`)
-}
-
 const { Search } = Input
-const { Option } = Select
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
@@ -77,6 +72,11 @@ export default function ManageTeacher () {
       title: "Last Name",
       dataIndex: "lastName",
       key: "lastName"
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email"
     },
     {
       title: "School",

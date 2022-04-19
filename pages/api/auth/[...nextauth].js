@@ -1,10 +1,7 @@
 /* eslint-disable no-unused-vars */
 // Temporary fix while the bcrypt functionality is a WIP
-import { reject } from "bcrypt/promises"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import fetchPassword from "../prisma/fetchPassword"
-import bcrypt from "bcrypt"
 // import prisma from "../../../client.ts"
 
 export default NextAuth({
@@ -22,31 +19,6 @@ export default NextAuth({
       },
 
       async authorize (credentials, req) {
-        console.log("made it to bcrypt")
-        const hashedPassword = await fetchPassword(credentials)
-        console.log("(From NextAuth) Data received:", hashedPassword)
-        const inputPassword = credentials.password
-        console.log("(From User) Data received:", inputPassword)
-
-        /* function compareAsync(inputPassword, hashedPassword) {
-          return new Promise(function(resolve, reject) {
-            bcrypt.compare(inputPassword, hashedPassword, function(err, result) {
-              if (result == true) {
-                console.log("bcrypt PASS")
-                resolve(result)
-              } else {
-                console.log("bcrypt FAIL")
-                reject(new Error("Invalid Credentials."))
-              }
-            });
-          })
-        }
-
-        const result = await compareAsync(inputPassword, hashedPassword)
-        console.log(result) */
-
-        console.log("made it to authorize")
-        console.log("credentials", credentials)
         try {
           console.log(process.env.NEXTAUTH_URL)
           const res = await fetch((process.env.NEXTAUTH_URL || ("https://" + process.env.VERCEL_URL)) + "/api/v1/login", {
@@ -56,12 +28,12 @@ export default NextAuth({
             },
             body: JSON.stringify(credentials)
           })
+
           if (res.status === 401) {
             throw new Error("Invalid credentials")
           }
-          console.log("After!")
+
           const user = await res.json()
-          console.log("After! 2")
           if (res.ok && user) {
             console.log("user: ", user)
             return user

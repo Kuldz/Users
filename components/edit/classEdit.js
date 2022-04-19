@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
@@ -6,19 +6,6 @@ const { Option } = Select
 
 const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, teachers, schools }) => {
   const [form] = Form.useForm()
-  const [schools, setSchools] = useState([])
-
-  if (!isPUT) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.schools.map(school => ({
-          label: `${school.name}`,
-          value: school.id
-        })))
-      )
-    }, [])
-  }
 
   // Parses the fields into a form that antd can use
   const parsedFields = [fields].map(field => (([{
@@ -118,7 +105,6 @@ const CollectionsPage = ({ fields, page, teachers, schools }) => {
         setVisible(true)
       }}>Edit</a>
       <CollectionCreateForm
-        isPUT={isPUT}
         fields={fields}
         visible={visible}
         onEdit={onEdit}

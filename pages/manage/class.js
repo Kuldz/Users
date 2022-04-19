@@ -1,18 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/classAdd"
 import Edit from "../../components/edit/classEdit"
-import AddTeacher from "../../components/add/teacherAdd"
-import { Input, Table, Select, Popconfirm } from "antd"
+import { Input, Table, Popconfirm } from "antd"
 import useSWR, { useSWRConfig } from "swr"
 
-function handleChange (value) {
-  console.log(`selected ${value}`)
-}
-
 const { Search } = Input
-const { Option } = Select
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
@@ -46,6 +40,26 @@ export default function ManageClass () {
   if (error) {
     console.log(error)
   }
+
+  function returnFilterValues () {
+    const records = []
+    const usedValues = []
+
+    data?.classes.forEach(_class => {
+      const filterBy = _class.school.name
+      if (usedValues.includes(filterBy)) return
+      usedValues.push(filterBy)
+
+      const record = {}
+      record.text = filterBy
+      record.value = filterBy
+      records.push(record)
+    })
+    return records
+  }
+
+  console.log("Filter values:", returnFilterValues())
+
   function handleDelete (id) {
     fetch("/api/v1/classes/" + id, {
       method: "DELETE"
@@ -81,7 +95,12 @@ export default function ManageClass () {
     {
       title: "School",
       dataIndex: ["school", "name"],
-      key: "school.name"
+      key: "school.name",
+      filters: returnFilterValues(),
+      filterMode: "tree",
+      filterSearch: true,
+      onFilter: (value, record) => record.school.name === value,
+      width: "30%"
     },
     {
       title: "Action",
@@ -119,15 +138,6 @@ export default function ManageClass () {
       pagination={{ position: ["bottomCenter"], current: page, total: data?.totalCount || 0, onChange: handlePageChange }}
       dataSource={data?.classes || []}
       rowKey="id"
-      onHeaderRow={(columns, index) => {
-        return {
-          onClick: () => {}
-          /*
-          https://ant.design/components/table/#onRow-usage
-          teacher header click stuff thingie whatever
-          */
-        }
-      }}
     />
     </>
   )

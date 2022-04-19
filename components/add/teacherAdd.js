@@ -1,30 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
-import emailValidator from "../../functions/emailValidator"
+import teacherEmailValidator from "../../functions/teacherEmailValidator"
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel, schools }) => {
   const [form] = Form.useForm()
-  const [classes, setClasses] = useState([])
-  const [schools, setSchools] = useState([])
-
-  if (!isPUT) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      fetch("/api/v1/classes").then(res => res.json()).then(data =>
-        setClasses(data.classes.map(c => ({
-          label: `${c.name}`,
-          value: c.id
-        })))
-      )
-      fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.schools.map(school => ({
-          label: `${school.name}`,
-          value: school.id
-        })))
-      )
-    }, [])
-  }
 
   return (
     <Modal
@@ -58,7 +38,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, schools }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name={["teacher", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: emailValidator }]}>
+        <Form.Item name={["teacher", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: teacherEmailValidator }]}>
           <Input />
         </Form.Item>
 
@@ -92,14 +72,14 @@ const CollectionsPage = ({ page, schools }) => {
   }
 
   return (
-    <div className="teacher-table-add">
+    <div className="table-add">
       <Button
         type="primary"
         onClick={() => {
           setVisible(true)
         }}
       >
-        Add
+        Add Teacher
       </Button>
       <CollectionCreateForm
         visible={visible}

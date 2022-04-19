@@ -19,6 +19,14 @@ p {
   color:#d3d3d3;
 }
 
+html {
+  --ant-primary-color: #43b683;
+  --ant-primary-color-hover: #2fda8d;
+  --ant-primary-color-active: #5ddaa2;
+  --ant-primary-color-outline: #1aff9833;
+  --ant-primary-2: #43b683;
+}
+
 /* Button */
 
   .ant-btn-primary {
@@ -31,7 +39,7 @@ p {
     text-align: center;
     padding: 0 3rem;
     position: absolute;
-    top: 13%;
+    top: 16%;
   }
 
   .ant-btn:hover {
@@ -76,6 +84,40 @@ p {
     background: #ff393d;
     border-color: #ff393d;
     color:#ffffff;
+  }
+
+  .profile-buttons {
+    display: inline-flex;
+    gap: 25px;
+  }
+
+  .ant-checkbox+span {
+    color:#ffffff;
+  }
+
+  .ant-btn-link {
+    color:#1dad6c;
+  }
+
+  .ant-checkbox-checked .ant-checkbox-inner {
+    border-color: #43b683;
+    background: #43b581;
+  }
+
+  .ant-checkbox-checked:after {
+    border: 1px solid #43b683;
+  }
+
+  .ant-checkbox-input::selection {
+    border: 1px solid #43b683;
+  }
+
+  .ant-table-filter-dropdown-tree .ant-tree-treenode .ant-tree-node-content-wrapper:hover {
+    background: #2a3644;
+  }
+
+  .ant-btn-link[disabled], .ant-btn-link[disabled]:active, .ant-btn-link[disabled]:focus, .ant-btn-link[disabled]:hover {
+    color: #ff4d4f;
   }
 
 /* Card */
@@ -274,11 +316,6 @@ p {
     border: 1px solid #161d24;
   }
 
-  .profile-buttons {
-    display: inline-flex;
-    gap: 25px;
-  }
-
   .ant-select-lg {
     display: flex;
     justify-content: center;
@@ -295,11 +332,28 @@ p {
     color: #d3d3d3;
   }
 
+  .ant-tree {
+    background: #161d24;
+  }
+
   .ant-notification-notice .anticon svg {
     color: #ff393d;
   }
 
   .ant-notification-notice-with-icon .ant-notification-notice-message {
+    color:#ffffff;
+  }
+
+  .ant-table-filter-dropdown {
+    background: #1c242e;
+    border-color: #1c242e;
+  }
+
+  .ant-tree-list {
+    background: #1c242e;
+  }
+
+  .ant-tree-title {
     color:#ffffff;
   }
 
@@ -417,7 +471,7 @@ p {
 /* Table */
 
   .ant-table-wrapper {
-    top: 17%;
+    top: 20%;
     display: flex;
     justify-content: center;
     position: absolute;

@@ -1,12 +1,10 @@
-import emailValidator from "../../functions/emailValidator"
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
+import teacherEmailValidator from "../../functions/teacherEmailValidator"
 
 const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, schools }) => {
   const [form] = Form.useForm()
-  const [classes, setClasses] = useState([])
-  const [schools, setSchools] = useState([])
 
   const parsedFields = [fields].map(field => (([{
     name: ["teacher", "firstName"],
@@ -24,24 +22,6 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, schools }) =>
     name: ["teacher", "schoolId"],
     value: field.schoolId
   }])))
-
-  if (!isPUT) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      fetch("/api/v1/classes").then(res => res.json()).then(data =>
-        setClasses(data.classes.map(c => ({
-          label: `${c.name}`,
-          value: c.id
-        })))
-      )
-      fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.schools.map(school => ({
-          label: `${school.name}`,
-          value: school.id
-        })))
-      )
-    }, [])
-  }
 
   return (
     <Modal
@@ -76,7 +56,7 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, schools }) =>
           <Input />
         </Form.Item>
 
-        <Form.Item name={["teacher", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: emailValidator }]}>
+        <Form.Item name={["teacher", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: teacherEmailValidator }]}>
           <Input />
         </Form.Item>
 
