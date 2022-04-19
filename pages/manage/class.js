@@ -84,8 +84,8 @@ export default function ManageClass () {
     },
     {
       title: "Teacher",
-      dataIndex: ["teacher", "lastName"],
-      key: "teacher.lastName",
+      dataIndex: ["teacher", "firstName"],
+      key: "teacher.firstName",
       filters: returnFilterValues(),
       filterMode: "tree",
       filterSearch: true,
