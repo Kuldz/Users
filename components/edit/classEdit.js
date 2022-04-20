@@ -1,24 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
 
 const { Option } = Select
 
-const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
+const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, teachers, schools }) => {
   const [form] = Form.useForm()
-  const [schools, setSchools] = useState([])
-
-  if (!isPUT) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.schools.map(school => ({
-          label: `${school.name}`,
-          value: school.id
-        })))
-      )
-    }, [])
-  }
 
   // Parses the fields into a form that antd can use
   const parsedFields = [fields].map(field => (([{
@@ -30,8 +17,8 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
     value: field.year
   },
   {
-    name: ["class", "teacher"],
-    value: field.teacher
+    name: ["class", "teacherId"],
+    value: field.teacherId
   },
   {
     name: ["class", "schoolId"],
@@ -78,8 +65,8 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
           </Select>
         </Form.Item>
 
-        <Form.Item name={["class", "teacher"]} label="Teacher">
-          <Input />
+        <Form.Item name={["class", "teacherId"]} label="Teacher" rules={[{ type: "number" }]}>
+          <Select placeholder="Select teacher" options={teachers}></Select>
         </Form.Item>
 
         <Form.Item name={["class", "schoolId"]} label="School" rules={[{ required: true, message: "Please input a school!", type: "number" }]}>
@@ -90,7 +77,7 @@ const CollectionCreateForm = ({ visible, onEdit, onCancel, fields, isPUT }) => {
   )
 }
 
-const CollectionsPage = ({ fields, isPUT, page }) => {
+const CollectionsPage = ({ fields, page, teachers, schools }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -118,18 +105,19 @@ const CollectionsPage = ({ fields, isPUT, page }) => {
         setVisible(true)
       }}>Edit</a>
       <CollectionCreateForm
-        isPUT={isPUT}
         fields={fields}
         visible={visible}
         onEdit={onEdit}
         onCancel={() => {
           setVisible(false)
         }}
+        teachers={teachers}
+        schools={schools}
       />
     </div>
   )
 }
 
 export default function classEdit (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
+  return <CollectionsPage fields={props.fields} page={props.page} teachers={props.teachers} schools={props.schools} />
 }

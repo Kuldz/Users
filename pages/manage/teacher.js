@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Head from "next/head"
 import Nav from "../../components/navigation"
 import Add from "../../components/add/teacherAdd"
@@ -13,6 +13,17 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 export default function ManageTeacher () {
   const { mutate } = useSWRConfig()
   const [page, setPage] = useState(1)
+  const [schools, setSchools] = useState([])
+
+  useEffect(() => {
+    fetch("/api/v1/schools").then(res => res.json()).then(data =>
+      setSchools(data.schools.map(school => ({
+        label: `${school.name}`,
+        value: school.id
+      })))
+    )
+  }, [])
+
   const handlePageChange = page => {
     setPage(page) // by setting new page number, this whole component is re-run and useSWR will fetch new data with new page number
   }
@@ -21,14 +32,14 @@ export default function ManageTeacher () {
     console.log(error)
   }
 
-  console.log(data?.students)
+  console.log(data?.teachers)
 
   function returnFilterValues (column) {
     const records = []
     const usedValues = []
 
     data?.teachers.forEach(teacher => {
-      const filterBy = (column === "school") ? teacher.school.name : teacher.class.name
+      const filterBy = teacher.school.name
       if (usedValues.includes(filterBy)) return
       usedValues.push(filterBy)
 
@@ -78,21 +89,11 @@ export default function ManageTeacher () {
       width: "30%"
     },
     {
-      title: "Class",
-      dataIndex: ["class", "name"],
-      key: "class.name",
-      filters: returnFilterValues("class"),
-      filterMode: "tree",
-      filterSearch: true,
-      onFilter: (value, record) => record.class.name === value,
-      width: "30%"
-    },
-    {
       title: "Action",
       key: "action",
       render: (_, Teacher) => (
         <div className="table-functions">
-          <Edit fields={Teacher} page={page} />
+          <Edit fields={Teacher} page={page} schools={schools} />
           <Popconfirm title="Are you sure you want to delete this teacher?"
                 onConfirm={() => handleDelete(_.id)}
                 okText="Yes" cancelText="No">
@@ -106,17 +107,17 @@ export default function ManageTeacher () {
   return (
     <>
     <Head>
-      <title>Manage Teachers </title>
+      <title>Manage Teachers</title>
     </Head>
     <Nav />
     <Search
-    placeholder="Disabled for now..."
-    allowClear
-    enterButton="Search"
-    size="large"
-    disabled={true}
+      placeholder="Disabled for now..."
+      allowClear
+      enterButton="Search"
+      size="large"
+      disabled={true}
     />
-    <Add page={page} />
+    <Add page={page} schools={schools} />
     <Table
       loading={isValidating}
       columns={columns}

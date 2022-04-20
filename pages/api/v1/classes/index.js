@@ -25,6 +25,11 @@ export default async function classIdHandler (req, res) {
             skip: parseInt((page - 1) * 10) || 0,
             take: 10,
             include: {
+              teacher: {
+                select: {
+                  firstName: true
+                }
+              },
               school: {
                 select: {
                   name: true

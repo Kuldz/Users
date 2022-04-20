@@ -43,15 +43,16 @@ model Student {
 }
 
 model Class {
-  id       Int       @id @default(autoincrement())
-  name     String
-  year     String
-  teacher  String?
-  schoolId Int
-  school   School    @relation(fields: [schoolId], references: [id])
-  students Student[]
-  teachers Teacher[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  year      String
+  teacherId Int
+  schoolId  Int
+  teacher   Teacher   @relation(fields: [teacherId], references: [id])
+  school    School    @relation(fields: [schoolId], references: [id])
+  students  Student[]
 
+  @@index([teacherId])
   @@index([schoolId])
 }
 
@@ -61,10 +62,8 @@ model Teacher {
   lastName  String
   email     String? @unique
   schoolId  Int
-  classId   Int
   school    School  @relation(fields: [schoolId], references: [id])
-  class     Class?  @relation(fields: [classId], references: [id])
+  classes   Class[]
 
   @@index([schoolId])
-  @@index([classId])
 }

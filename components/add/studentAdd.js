@@ -1,30 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Button, Modal, Form, Input, Select } from "antd"
 import { useSWRConfig } from "swr"
-import emailValidator from "../../functions/emailValidator"
+import studentEmailValidator from "../../functions/studentEmailValidator"
 
-const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel, classes, schools }) => {
   const [form] = Form.useForm()
-  const [classes, setClasses] = useState([])
-  const [schools, setSchools] = useState([])
-
-  if (!isPUT) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      fetch("/api/v1/classes").then(res => res.json()).then(data =>
-        setClasses(data.classes.map(c => ({
-          label: `${c.name}`,
-          value: c.id
-        })))
-      )
-      fetch("/api/v1/schools").then(res => res.json()).then(data =>
-        setSchools(data.schools.map(school => ({
-          label: `${school.name}`,
-          value: school.id
-        })))
-      )
-    }, [])
-  }
 
   return (
     <Modal
@@ -58,7 +38,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item name={["student", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: emailValidator }]}>
+        <Form.Item name={["student", "email"]} label="Email" rules={[{ type: "email", message: "Please input a valid email!" }, { validator: studentEmailValidator }]}>
           <Input />
         </Form.Item>
 
@@ -74,7 +54,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, isPUT }) => {
   )
 }
 
-const CollectionsPage = ({ page }) => {
+const CollectionsPage = ({ page, classes, schools }) => {
   const { mutate } = useSWRConfig()
   const [visible, setVisible] = useState(false)
 
@@ -111,11 +91,13 @@ const CollectionsPage = ({ page }) => {
         onCancel={() => {
           setVisible(false)
         }}
+        classes={classes}
+        schools={schools}
       />
     </div>
   )
 }
 
 export default function studentAdd (props) {
-  return <CollectionsPage fields={props.fields} isPUT={props.isPUT} page={props.page} />
+  return <CollectionsPage fields={props.fields} page={props.page} classes={props.classes} schools={props.schools} />
 }
