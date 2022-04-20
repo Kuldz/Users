@@ -20,7 +20,7 @@ export default async function classIdHandler (req, res) {
           where: {
             id: parseInt(id)
           },
-          data: req.body.class
+          data: req.body
         })
         Class ? res.status(200).json({ Class }) : res.status(404).json({ error: `Could not find class by ID ${id}` })
         break
