@@ -48,7 +48,7 @@ model Class {
   year      String
   teacherId Int
   schoolId  Int
-  teacher   Teacher   @relation(fields: [teacherId], references: [id])
+  teacher   Teacher?  @relation(fields: [teacherId], references: [id])
   school    School    @relation(fields: [schoolId], references: [id])
   students  Student[]
 
